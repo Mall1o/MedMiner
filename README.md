@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Med Miner 2.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Med Miner 2.0 è una web app che analizza la comorbidità di ogni singolo paziente partendo dal suo grafo. I nodi rappresentano le malattie e gli archi le prescrizioni in comune.
 
-## Available Scripts
+## Prerequisiti
 
-In the project directory, you can run:
+Assicurati di avere installato i seguenti strumenti:
 
-### `npm start`
+- Python
+- Node.js
+- npm (Node Package Manager)
+- Flask
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installazione
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
 
-### `npm test`
+1. Clona il repository:
+	```bash
+	git clone <repository-url>
+	cd <repository-directory>
+	```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Installa le dipendenze di Python:
+	```bash
+	pip install -r requirements.txt
+	```
 
-### `npm run build`
+3. Avvia il server Flask:
+	```bash
+	flask run
+	```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Vai nella directory del progetto frontend:
+	```bash
+	cd frontend
+	```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Installa le dipendenze di npm:
+	```bash
+	npm install
+	```
 
-### `npm run eject`
+3. Avvia l'app in modalità di sviluppo:
+	```bash
+	npm start
+	```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+	Apri [http://localhost:3000](http://localhost:3000) per visualizzarla nel tuo browser. La pagina si ricaricherà quando apporti modifiche. Potresti anche vedere eventuali errori di lint nella console.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Scripts Disponibili
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Nella directory del progetto, puoi eseguire:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### [`npm start`](command:_github.copilot.openSymbolFromReferences?%5B%22npm%20start%22%2C%5B%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22c%3A%5C%5CUsers%5C%5Ctulli%5C%5CDesktop%5C%5CTesi%5C%5Cprove%5C%5Cprivate_tesi%5C%5Cmedminer%5C%5CREADME.md%22%2C%22_sep%22%3A1%2C%22external%22%3A%22file%3A%2F%2F%2Fc%253A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22path%22%3A%22%2Fc%3A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22scheme%22%3A%22file%22%7D%2C%22pos%22%3A%7B%22line%22%3A8%2C%22character%22%3A9%7D%7D%5D%5D "Go to definition")
 
-## Learn More
+Esegue l'app in modalità di sviluppo.\
+Apri [http://localhost:3000](http://localhost:3000) per visualizzarla nel tuo browser.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+La pagina si ricaricherà quando apporti modifiche.\
+Potresti anche vedere eventuali errori di lint nella console.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### [`npm test`](command:_github.copilot.openSymbolFromReferences?%5B%22npm%20test%22%2C%5B%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22c%3A%5C%5CUsers%5C%5Ctulli%5C%5CDesktop%5C%5CTesi%5C%5Cprove%5C%5Cprivate_tesi%5C%5Cmedminer%5C%5CREADME.md%22%2C%22_sep%22%3A1%2C%22external%22%3A%22file%3A%2F%2F%2Fc%253A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22path%22%3A%22%2Fc%3A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22scheme%22%3A%22file%22%7D%2C%22pos%22%3A%7B%22line%22%3A16%2C%22character%22%3A9%7D%7D%5D%5D "Go to definition")
 
-### Code Splitting
+Avvia il test runner in modalità interattiva.\
+Consulta la sezione su [esecuzione dei test](https://facebook.github.io/create-react-app/docs/running-tests) per ulteriori informazioni.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### [`npm run build`](command:_github.copilot.openSymbolFromReferences?%5B%22npm%20run%20build%22%2C%5B%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22c%3A%5C%5CUsers%5C%5Ctulli%5C%5CDesktop%5C%5CTesi%5C%5Cprove%5C%5Cprivate_tesi%5C%5Cmedminer%5C%5CREADME.md%22%2C%22_sep%22%3A1%2C%22external%22%3A%22file%3A%2F%2F%2Fc%253A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22path%22%3A%22%2Fc%3A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22scheme%22%3A%22file%22%7D%2C%22pos%22%3A%7B%22line%22%3A21%2C%22character%22%3A13%7D%7D%5D%5D "Go to definition")
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Compila l'app per la produzione nella cartella [`build`](command:_github.copilot.openSymbolFromReferences?%5B%22build%22%2C%5B%7B%22uri%22%3A%7B%22%24mid%22%3A1%2C%22fsPath%22%3A%22c%3A%5C%5CUsers%5C%5Ctulli%5C%5CDesktop%5C%5CTesi%5C%5Cprove%5C%5Cprivate_tesi%5C%5Cmedminer%5C%5CREADME.md%22%2C%22_sep%22%3A1%2C%22external%22%3A%22file%3A%2F%2F%2Fc%253A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22path%22%3A%22%2Fc%3A%2FUsers%2Ftulli%2FDesktop%2FTesi%2Fprove%2Fprivate_tesi%2Fmedminer%2FREADME.md%22%2C%22scheme%22%3A%22file%22%7D%2C%22pos%22%3A%7B%22line%22%3A21%2C%22character%22%3A13%7D%7D%5D%5D "Go to definition").\
+Raggruppa correttamente React in modalità di produzione e ottimizza la build per ottenere le migliori performance.
