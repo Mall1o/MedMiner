@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
-import { account } from 'src/_mock/account';
+import { account } from './_mock/account'; //src
 
 // ----------------------------------------------------------------------
 

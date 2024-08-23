@@ -10,15 +10,15 @@ import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import ListItemButton from '@mui/material/ListItemButton';
 
-import { usePathname } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
+import { usePathname } from './routes/hooks'; //src
+import { RouterLink } from './routes/components'; //src
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from './hooks/use-responsive'; //src
 
-import { account } from 'src/_mock/account';
+import { account } from './_mock/account'; //src
 
-import Logo from 'src/components/logo';
-import Scrollbar from 'src/components/scrollbar';
+import Logo from './components/logo'; //src
+import Scrollbar from './components/scrollbar'; //src
 
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';

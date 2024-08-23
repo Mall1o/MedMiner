@@ -7,11 +7,11 @@ import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from './hooks/use-responsive'; //src
 
-import { bgBlur } from 'src/theme/css';
+import { bgBlur } from './theme/css'; //src
 
-import Iconify from 'src/components/iconify';
+import Iconify from './components/iconify'; //src
 
 import Searchbar from './common/searchbar';
 import { NAV, HEADER } from './config-layout';
