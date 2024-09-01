@@ -1,17 +1,28 @@
-// src/App.js
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import SearchBar from './components/SearchBar';
+import Footer from './components/Footer'; 
+import Home from './pages/Home';
+import './App.css';
+
+// Pagine placeholder temporanee
+const SearchPlaceholder = () => <div>Search Page Placeholder</div>;
+const GraphsPlaceholder = () => <div>Graphs Page Placeholder</div>;
 
 function App() {
-  /*const handleSearch = (query) => {
-    console.log(`Cercando: ${query}`);
-  };*/
+  
 
   return (
-    <div className="App">
+    <div className="app-container">
       <Navbar />
-      {/* Altri componenti verranno aggiunti qui */}
+      <div></div>
+      <Routes>
+        <Route path="/" element={<Home />} />  
+        <Route path="/search" element={<SearchPlaceholder />} />
+        <Route path="/graphs" element={<GraphsPlaceholder />} />
+      </Routes>
+      <div />
+      <Footer />
     </div>
   );
 }

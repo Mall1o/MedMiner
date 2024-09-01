@@ -12,7 +12,7 @@ import logo from '../assets/logo2.png';
 
 const TransparentButton = styled(Button)({
   color: '#333',
-  backgroundColor: 'rgba(255, 255, 255, 0.85)',
+  backgroundColor: 'rgba(255, 255, 255, 0.5)',
   borderRadius: '20px',
   padding: '6px 12px',
   '&:hover': {
@@ -21,13 +21,13 @@ const TransparentButton = styled(Button)({
 });
 
 const NavbarContainer = styled(AppBar)({
-  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-  boxShadow: 'none',
+  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+  boxShadow: '50%',
   borderRadius: '15px',
-  margin: '10px 0',  // Margini sopra e sotto, ma non sui lati
+  margin: '10px 0',
   padding: '5px',
-  width: '100%',  // Assicura che la navbar occupi il 100% della larghezza
-  boxSizing: 'border-box',  // Assicura che padding e border siano inclusi nella larghezza
+  width: '100%',
+  boxSizing: 'border-box',
 });
 
 const Navbar = () => {
@@ -35,17 +35,17 @@ const Navbar = () => {
     <NavbarContainer position="static">
       <Toolbar sx={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-          <a to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <img src={logo} alt="Logo" style={{ height: '40px', marginRight: '16px', borderRadius: '50%' }} />
+          <Link component={Link} to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+            <img src={logo} alt="Logo" style={{ height: '90px', marginRight: '5px', borderRadius: '50%' }} />
             <Typography variant="h6" component="div" style={{ color: '#333' }}>
               MedMiner 2.0
             </Typography>
-          </a>
+          </Link>
         </Box>
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
-          <TransparentButton>Home</TransparentButton>
-          <TransparentButton>Ricerca</TransparentButton>
-          <TransparentButton>Grafi</TransparentButton>
+          <TransparentButton component={Link} to="/">Home</TransparentButton>
+          <TransparentButton component={Link} to="/search">Ricerca</TransparentButton>
+          <TransparentButton component={Link} to="/graphs">Grafi</TransparentButton>
         </Box>
         <IconButton edge="end" color="inherit" sx={{ color: '#333' }}>
           <SearchIcon />

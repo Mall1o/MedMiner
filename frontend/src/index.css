@@ -5,13 +5,28 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #869bad;
+  background-color: #c8cbce;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+body {
+  background-image: url('./assets/background/overlay_4.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
 /* src/index.css */
 html, body {
   height: 100%;
