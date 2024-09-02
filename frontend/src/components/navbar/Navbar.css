@@ -1,0 +1,61 @@
+/* bisogna ri-modificare il file navbar.jsx con il codice commentato in Navbar.jsx */
+
+
+.navbar-toolbar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  
+  .navbar-container {
+    position: relative; /* Questo rende la navbar relativa per permetterle di sovrapporsi */
+    z-index: 1000; /* Assicura che la Navbar rimanga sopra la Sidebar */
+    width: calc(100% - 250px); /* Riduce la larghezza per tenere conto della Sidebar */
+    transition: width 0.3s ease; /* Transizione per un effetto più fluido quando la Sidebar è chiusa */
+  }
+  
+  /* Quando la sidebar è aperta, la navbar si sposta a destra */
+.sidebar-open .navbar-container {
+    margin-left: 250px;
+}
+
+  .sidebar-collapsed .navbar-container {
+    width: 100%; /* Torna a occupare tutta la larghezza quando la Sidebar è chiusa */
+  }
+  
+  .navbar-logo {
+    height: 90px;
+    margin-right: 5px;
+    border-radius: 50%;
+  }
+  
+  .navbar-title {
+    color: #333;
+  }
+  
+  .navbar-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .navbar-box-left {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .navbar-box-right {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .navbar-menu-button,
+  .navbar-search-button {
+    color: #333;
+  }

@@ -1,0 +1,109 @@
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-section {
+    display: flex;
+    flex-direction: column; /* Cambiato a column per centrare l'avatar e il testo sotto */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 60px; /* Aumentato leggermente per maggiore enfasi */
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.avatar-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.team-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.team-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.team-plan {
+    background-color: #ececec;
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.menu-section {
+    flex-grow: 1;
+}
+
+.menu-item {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.menu-item.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.menu-item:hover {
+    background-color: #ececec;
+}
+
+.badge {
+    background-color: #ff5722;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.logout-section {
+    margin-top: auto;
+    padding: 20px 0;
+    padding-left: 15px;
+    text-align: left;
+}
+
+.logout-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 0;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.logout-icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.logout-item:hover {
+    background-color: #ececec;
+}
