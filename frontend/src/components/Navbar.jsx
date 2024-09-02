@@ -45,7 +45,7 @@ const Navbar = () => {
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
           <TransparentButton component={Link} to="/">Home</TransparentButton>
           <TransparentButton component={Link} to="/search">Ricerca</TransparentButton>
-          <TransparentButton component={Link} to="/graphs">Grafi</TransparentButton>
+          <TransparentButton component={Link} to="/graph">Graph</TransparentButton>
         </Box>
         <IconButton edge="end" color="inherit" sx={{ color: '#333' }}>
           <SearchIcon />
