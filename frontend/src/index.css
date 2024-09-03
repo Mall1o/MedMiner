@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+/*body {
   background-image: url('./assets/background/overlay_4.jpg');
   background-size: cover;
   background-position: center;
@@ -21,7 +21,7 @@ body {
   margin: 0;
   height: 100%;
   font-family: Arial, sans-serif;
-}
+}*/
 
 html, body, #root {
   height: 100%;
