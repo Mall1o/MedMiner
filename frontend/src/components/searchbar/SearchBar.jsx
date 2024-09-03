@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { hideScroll } from '../../theme/css';
+
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -12,7 +14,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 3 }}>
+    <Box sx={{ ...hideScroll.y, display: 'flex', alignItems: 'center', gap: 2, mt: 3 }}>
       <TextField
         label="Cerca per nome o data"
         variant="outlined"

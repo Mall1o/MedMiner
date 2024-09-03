@@ -3,105 +3,73 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu'; // Icona per il pulsante di menu
+import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 import Button from '@mui/material/Button';
-
-const TransparentButton = styled(Button)({
-  color: '#333',
-  backgroundColor: 'rgba(255, 255, 255, 0.5)',
-  borderRadius: '20px',
-  padding: '6px 12px',
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  },
-});
-
-const NavbarContainer = styled(AppBar)({
-  backgroundColor: 'rgba(255, 255, 255, 0.4)',
-  boxShadow: '50%',
-  borderRadius: '15px',
-  margin: '10px 0',
-  padding: '5px',
-  width: '100%',
-  boxSizing: 'border-box',
-});
+import { useResponsive, useWidth } from '../../hooks/use-responsive';
+import './Navbar.css'; // Importa il file CSS
 
 const Navbar = ({ onToggleSidebar }) => {
+  const isMobile = useResponsive('down', 'sm'); // Verifica se lo schermo è piccolo
+  const currentWidth = useWidth();  // Ottieni il breakpoint attuale
+
   return (
-    <NavbarContainer position="static">
-      <Toolbar sx={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-          <IconButton edge="start" color="inherit" sx={{ color: '#333' }} onClick={onToggleSidebar}>
-            <MenuIcon /> {/* Icona del menu per aprire/chiudere la Sidebar */}
-          </IconButton>
-          <Link component={Link} to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <img src={logo} alt="Logo" style={{ height: '90px', marginRight: '5px', borderRadius: '50%' }} />
-            <Typography variant="h6" component="div" style={{ color: '#333' }}>
-              MedMiner 2.0
-            </Typography>
-          </Link>
-        </Box>
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
-          <TransparentButton component={Link} to="/">Home</TransparentButton>
-          <TransparentButton component={Link} to="/search">Ricerca</TransparentButton>
-          <TransparentButton component={Link} to="/graphs">Grafi</TransparentButton>
-        </Box>
-        <IconButton edge="end" color="inherit" sx={{ color: '#333' }}>
-          <SearchIcon />
-        </IconButton>
-      </Toolbar>
-    </NavbarContainer>
-  );
-};
-
-export default Navbar;
-
-
-/* codice con divisione logica ma che si deve aggiustare: 
-import React from 'react';
-import './Navbar.css'; // Importa il CSS per lo stile
-import { NavbarContainer, TransparentButton } from './Navbar.js'; // Importa la logica e i componenti dal file JS
-import logo from '../../assets/logo2.png';
-import { Link } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-
-const Navbar = ({ onToggleSidebar }) => {
-  return (
-    <NavbarContainer>
+    <AppBar 
+      position="static" 
+      className="navbar-container"
+      style={{
+        backgroundColor: currentWidth === 'xs' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.4)',
+        // Il colore della navbar cambia in base alla larghezza dello schermo
+      }}
+    >
       <Toolbar className="navbar-toolbar">
-        <Box className="navbar-box-left">
-          <IconButton className="navbar-menu-button" onClick={onToggleSidebar}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <IconButton 
+            edge="start" 
+            color="inherit" 
+            className="navbar-menu-button" 
+            onClick={onToggleSidebar}
+          >
             <MenuIcon />
           </IconButton>
-          <Link to="/" className="navbar-link">
-            <img src={logo} alt="Logo" className="navbar-logo" />
-            <Typography className="navbar-title">
+          <Link to="/" className="navbar-logo-link">
+            <img 
+              src={logo} 
+              alt="Logo" 
+              className={`navbar-logo ${isMobile ? 'small-logo' : ''}`} 
+            />
+            <Typography 
+              variant="h6" 
+              component="div" 
+              className={`navbar-title ${isMobile ? 'small-title' : ''}`}
+            >
               MedMiner 2.0
             </Typography>
           </Link>
         </Box>
-        <Box className="navbar-box-right">
-          <TransparentButton component={Link} to="/">Home</TransparentButton>
-          <TransparentButton component={Link} to="/search">Ricerca</TransparentButton>
-          <TransparentButton component={Link} to="/graphs">Grafi</TransparentButton>
-        </Box>
-        <IconButton className="navbar-search-button">
+
+        {/* Mostra i pulsanti di navigazione solo su schermi medi o più grandi */}
+        {!isMobile && (
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <Button component={Link} to="/" className="transparent-button">Home</Button>
+            <Button component={Link} to="/search" className="transparent-button">Ricerca</Button>
+            <Button component={Link} to="/graph" className="transparent-button">Grafi</Button>
+          </Box>
+        )}
+        
+        <IconButton 
+          edge="end" 
+          color="inherit" 
+          className="navbar-search-button"
+        >
           <SearchIcon />
         </IconButton>
       </Toolbar>
-    </NavbarContainer>
+    </AppBar>
   );
 };
 
 export default Navbar;
-*/

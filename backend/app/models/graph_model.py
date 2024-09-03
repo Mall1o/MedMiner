@@ -4,18 +4,27 @@ class GraphModel:
         self.driver = driver
 
     def get_graph(self):
-        # Crea una sessione con il driver
+    # Crea una sessione con il driver
         with self.driver.session() as session:
-            # Query per ottenere i nodi dal database
-            nodes_query = "MATCH (n) RETURN n"
+            # Query per ottenere un sottoinsieme di nodi dal database
+            nodes_query = """
+            MATCH (n)
+            WITH n LIMIT 10
+            RETURN n
+            """
             nodes_result = session.run(nodes_query)
-            # Estrae i nodi dal risultato della query
             nodes = [record["n"] for record in nodes_result]
 
-            # Query per ottenere gli archi dal database
-            relationships_query = "MATCH ()-[r]->() RETURN r"
-            relationships_result = session.run(relationships_query)
-            # Estrae gli archi dal risultato della query
+            # Ottieni i valori univoci dei nodi selezionati (ad esempio 'code' o 'uuid')
+            node_codes = [node["code"] for node in nodes]  # Sostituisci 'code' con la tua proprietà univoca
+
+            # Query per ottenere gli archi che collegano i nodi selezionati
+            relationships_query = """
+            MATCH (n)-[r]->(m)
+            WHERE n.code IN $node_codes AND m.code IN $node_codes
+            RETURN r
+            """
+            relationships_result = session.run(relationships_query, node_codes=node_codes)
             relationships = [record["r"] for record in relationships_result]
 
             # Ritorna un dizionario con i nodi e gli archi

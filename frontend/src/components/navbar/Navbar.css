@@ -1,61 +1,73 @@
-/* bisogna ri-modificare il file navbar.jsx con il codice commentato in Navbar.jsx */
+/* Navbar.css */
 
-
-.navbar-toolbar {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-  }
-  
-  .navbar-container {
-    position: relative; /* Questo rende la navbar relativa per permetterle di sovrapporsi */
-    z-index: 1000; /* Assicura che la Navbar rimanga sopra la Sidebar */
-    width: calc(100% - 250px); /* Riduce la larghezza per tenere conto della Sidebar */
-    transition: width 0.3s ease; /* Transizione per un effetto più fluido quando la Sidebar è chiusa */
-  }
-  
-  /* Quando la sidebar è aperta, la navbar si sposta a destra */
-.sidebar-open .navbar-container {
-    margin-left: 250px;
+.navbar-container {
+  box-shadow: none;
+  border-radius: 15px;
+  margin: 10px auto;
+  padding: 5px;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-  .sidebar-collapsed .navbar-container {
-    width: 100%; /* Torna a occupare tutta la larghezza quando la Sidebar è chiusa */
-  }
-  
-  .navbar-logo {
-    height: 90px;
-    margin-right: 5px;
-    border-radius: 50%;
-  }
-  
-  .navbar-title {
-    color: #333;
-  }
-  
-  .navbar-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-  
-  .navbar-box-left {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-  }
-  
-  .navbar-box-right {
-    display: flex;
-    gap: 2rem;
-  }
-  
-  .navbar-menu-button,
-  .navbar-search-button {
-    color: #333;
-  }
+.navbar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar-menu-button {
+  color: #333;
+}
+
+.navbar-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-logo {
+  height: 90px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.small-logo {
+  height: 60px;
+}
+
+.navbar-title {
+  color: #333;
+}
+
+.small-title {
+  font-size: 1.2rem;
+}
+
+.transparent-button {
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 6px 20px; /* Aggiungi più padding per un look più premium */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Aggiungi un'ombra per dare profondità */
+  transition: all 0.3s ease; /* Aggiungi una transizione per gli effetti hover */
+  border: 2px solid transparent;
+}
+
+.transparent-button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata al passaggio del mouse */
+  border: 2px solid #007bff; /* Aggiungi un bordo colorato al passaggio del mouse */
+  transform: translateY(-2px); /* Effetto di sollevamento al passaggio del mouse */
+}
+
+.navbar-search-button {
+  color: #333;
+}
+
+/* Migliora anche i link nella navbar */
+.navbar-logo-link:hover .navbar-title {
+  color: #007bff; /* Cambia colore al passaggio del mouse */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Aggiungi un'ombra al testo */
+}

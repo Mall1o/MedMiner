@@ -1,13 +1,16 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';  // Assicurati che BrowserRouter sia importato
 import App from './App';
+import './index.css';
+import ThemeProvider from './theme/index/ThemeProvider';  // Importa ThemeProvider
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+      <BrowserRouter>  {/* Avvolgi App con BrowserRouter */}
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+  </StrictMode>,
 );

@@ -1,33 +1,35 @@
 /* App.css */
-.app-container {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-*/
+
 .app-container {
   display: flex;
   flex-direction: row;
   height: 100vh;
+  overflow: hidden; /* Evita scroll in eccesso */
 }
 
 .sidebar {
-  width: 250px;  /* Mantieni la larghezza definita in sidebar.css */
+  width: 250px;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1000;
 }
 
 .main-content {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  transition: margin-left 0.3s ease;
 }
 
-.navbar {
-  width: 100%;
+.navbar-container {
+  transition: margin-left 0.3s ease, width 0.3s ease;
 }
 
-footer {
-  width: 100%;
+.app-container.sidebar-open .main-content,
+.app-container.sidebar-open .navbar-container {
+  margin-left: 250px; /* Sposta il contenuto a destra */
+}
+
+.app-container .navbar-container {
+  width: calc(100% - 250px); /* Assicura che la navbar occupi tutto lo spazio rimanente */
 }
