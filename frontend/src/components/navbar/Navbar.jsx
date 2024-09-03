@@ -19,11 +19,8 @@ const Navbar = ({ onToggleSidebar }) => {
   return (
     <AppBar 
       position="static" 
-      className="navbar-container"
-      style={{
-        backgroundColor: currentWidth === 'xs' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.4)',
-        // Il colore della navbar cambia in base alla larghezza dello schermo
-      }}
+      className={`navbar-container ${currentWidth === 'xs' ? 'navbar-xs' : ''}`}
+      sx={{ backgroundColor: 'transparent !important' }} // Garantisce che Material-UI non sovrascriva lo stile
     >
       <Toolbar className="navbar-toolbar">
         <Box sx={{ display: 'flex', alignItems: 'center' }}>

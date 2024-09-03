@@ -8,6 +8,11 @@
   max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.4) !important; /* Colore di default */
+}
+
+.navbar-container.navbar-xs {
+  background-color: rgba(255, 255, 255, 0.8) !important; /* Colore per schermi xs */
 }
 
 .navbar-toolbar {
@@ -58,7 +63,7 @@
 .transparent-button:hover {
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata al passaggio del mouse */
-  border: 2px solid #007bff; /* Aggiungi un bordo colorato al passaggio del mouse */
+  border: 2px solid #007bff; /* Aggiungi un bordo colorato al passaggio del mouse */ 
   transform: translateY(-2px); /* Effetto di sollevamento al passaggio del mouse */
 }
 
