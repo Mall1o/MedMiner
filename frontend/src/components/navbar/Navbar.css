@@ -1,5 +1,3 @@
-/* Navbar.css */
-
 .navbar-container {
   box-shadow: none;
   border-radius: 15px;
@@ -8,11 +6,7 @@
   max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.4) !important; /* Colore di default */
-}
-
-.navbar-container.navbar-xs {
-  background-color: rgba(255, 255, 255, 0.8) !important; /* Colore per schermi xs */
+  background-color: rgba(255, 255, 255, 0.6); /* Opacità */
 }
 
 .navbar-toolbar {
@@ -20,10 +14,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-}
-
-.navbar-menu-button {
-  color: #333;
 }
 
 .navbar-logo-link {
@@ -38,41 +28,32 @@
   border-radius: 50%;
 }
 
-.small-logo {
-  height: 60px;
-}
-
 .navbar-title {
   color: #333;
-}
-
-.small-title {
-  font-size: 1.2rem;
 }
 
 .transparent-button {
   color: #333;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 20px;
-  padding: 6px 20px; /* Aggiungi più padding per un look più premium */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Aggiungi un'ombra per dare profondità */
-  transition: all 0.3s ease; /* Aggiungi una transizione per gli effetti hover */
+  padding: 6px 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   border: 2px solid transparent;
 }
 
 .transparent-button:hover {
   background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata al passaggio del mouse */
-  border: 2px solid #007bff; /* Aggiungi un bordo colorato al passaggio del mouse */ 
-  transform: translateY(-2px); /* Effetto di sollevamento al passaggio del mouse */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #007bff;
+  transform: translateY(-2px);
 }
 
 .navbar-search-button {
   color: #333;
 }
 
-/* Migliora anche i link nella navbar */
 .navbar-logo-link:hover .navbar-title {
-  color: #007bff; /* Cambia colore al passaggio del mouse */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Aggiungi un'ombra al testo */
+  color: #007bff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
