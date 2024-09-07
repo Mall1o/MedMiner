@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import GraphComponent from '../components/graph/GraphComponent';
-import { fetchGraphData } from '../services/graphDataService';
-import GraphToolbar from '../components/graph/GraphToolbar';
-import Loader from '../components/Loader';
+import GraphComponent from '../../components/graph/GraphComponent';
+import { fetchGraphData } from '../../services/graphDataService';
+import GraphToolbar from '../../components/graph/GraphToolbar';
+import Loader from '../../components/Loader';
 import { Box, Container, Paper, Typography, Drawer, Divider, List, ListItem, ListItemText } from '@mui/material';
 
 const GraphPage = () => {
