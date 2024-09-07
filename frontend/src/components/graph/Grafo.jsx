@@ -62,4 +62,3 @@ function Grafo({ graphData }) {
 }
 
 export default Grafo;
-S

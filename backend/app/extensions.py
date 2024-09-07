@@ -8,7 +8,7 @@ class Neo4jDB:
         uri = app.config['NEO4J_URI']
         user = app.config['NEO4J_USERNAME']
         password = app.config['NEO4J_PASSWORD']
-        self.driver = GraphDatabase.driver(uri, auth=(user, password))
+        self.driver = GraphDatabase.driver(uri, auth=(user, password),database="tesi")
 
     def close(self):
         if self.driver:
