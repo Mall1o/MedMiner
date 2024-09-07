@@ -4,7 +4,7 @@ import Navbar from './components/navbar/Navbar.jsx';
 import Footer from './components/footer/Footer.jsx';
 import Sidebar from './components/sidebar/sidebar.jsx';
 import Home from './pages/Homepage/Home.jsx';
-import GraphPage from './pages/GraphPage';
+import GraphPage from './pages/GraphPage/GraphPage';
 import './App.css';
 
 const App = () => {
