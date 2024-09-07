@@ -4,28 +4,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import { styled } from '@mui/system';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
-
-const FooterContainer = styled(AppBar)({
-    position: 'fixed',
-    bottom: 0,
-    width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    boxShadow: '50%',
-    borderRadius: '15px 15px 0 0',
-    padding: '10px 20px',
-    boxSizing: 'border-box',
-    zIndex: 1300,  // Assicura che il footer sia sopra altri contenuti
-  });
+import './Footer.css'; // Importa il file di stile
 
 const Footer = () => {
   return (
-    <FooterContainer position="static">
-      <Toolbar sx={{ width: '100%', maxWidth: '1200px', margin: '0 auto', justifyContent: 'space-between' }}>
+    <AppBar position="static" className="footer-container" sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}>
+      <Toolbar className="footer-toolbar">
         <Box>
           <Typography variant="body2" color="textSecondary">
             © 2024 MedMiner 2.0. All rights reserved.
@@ -35,21 +23,21 @@ const Footer = () => {
           </Typography>
         </Box>
         <Box>
-          <IconButton color="inherit" sx={{ color: '#333' }} href="https://facebook.com">
+          <IconButton color="inherit" className="footer-icon" href="https://facebook.com">
             <FacebookIcon />
           </IconButton>
-          <IconButton color="inherit" sx={{ color: '#333' }} href="https://twitter.com">
+          <IconButton color="inherit" className="footer-icon" href="https://twitter.com">
             <TwitterIcon />
           </IconButton>
-          <IconButton color="inherit" sx={{ color: '#333' }} href="https://linkedin.com">
+          <IconButton color="inherit" className="footer-icon" href="https://linkedin.com">
             <LinkedInIcon />
           </IconButton>
-          <IconButton color="inherit" sx={{ color: '#333' }} href="mailto:info@medminer.com">
+          <IconButton color="inherit" className="footer-icon" href="mailto:info@medminer.com">
             <EmailIcon />
           </IconButton>
         </Box>
       </Toolbar>
-    </FooterContainer>
+    </AppBar>
   );
 };
 

@@ -1,51 +1,37 @@
 .sidebar {
     width: 250px;
-    background-color: #f8f9fa;
-    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.3); /* Trasparenza */
+    height: calc(100vh - 40px); /* Riduciamo l'altezza per far vedere i bordi */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
+    margin: 20px; /* Aggiungiamo margini per distaccare la sidebar dai bordi */
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 15px; /* Bordi smussati */
+    box-sizing: border-box;
 }
+
 
 .avatar-section {
     display: flex;
-    flex-direction: column; /* Cambiato a column per centrare l'avatar e il testo sotto */
+    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
 }
 
 .avatar {
-    width: 60px; /* Aumentato leggermente per maggiore enfasi */
+    width: 60px;
     height: 60px;
     border-radius: 50%;
-    cursor: pointer;
     margin-bottom: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-text {
     font-size: 18px;
     font-weight: bold;
     color: #333;
-}
-
-.team-section {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.team-name {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.team-plan {
-    background-color: #ececec;
-    border-radius: 12px;
-    padding: 5px 10px;
-    font-size: 14px;
-    margin-top: 5px;
 }
 
 .menu-section {
@@ -58,8 +44,11 @@
     text-decoration: none;
     padding: 10px 15px;
     margin-bottom: 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    border-radius: 20px; /* Bordi smussati */
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
 .menu-item.active {
@@ -68,7 +57,10 @@
 }
 
 .menu-item:hover {
-    background-color: #ececec;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #007bff;
+    transform: translateY(-2px);
 }
 
 .badge {
@@ -93,30 +85,22 @@
     justify-content: flex-start;
     color: #333;
     text-decoration: none;
-    padding: 8px 0;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: background-color 0.3s;
+    padding: 8px 15px;
+    border-radius: 20px; /* Bordi smussati */
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.logout-item:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #007bff;
+    transform: translateY(-2px);
 }
 
 .logout-icon {
     margin-right: 8px;
     font-size: 16px;
 }
-
-.logout-item:hover {
-    background-color: #ececec;
-}
-
-.sidebar {
-    width: 250px;
-    background-color: #f8f9fa;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease;
-  }
-  
