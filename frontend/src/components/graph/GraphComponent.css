@@ -1,0 +1,12 @@
+/* src/components/graph/GraphComponent.css */
+.graph-container {
+    height: 600px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.3); /* Sfondo trasparente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+  }
+  
