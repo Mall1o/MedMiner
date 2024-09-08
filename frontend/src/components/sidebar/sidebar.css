@@ -1,17 +1,17 @@
 .sidebar {
-    width: 250px;
-    background-color: rgba(255, 255, 255, 0.3); /* Trasparenza */
-    height: calc(100vh - 40px); /* Riduciamo l'altezza per far vedere i bordi */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    margin: 20px; /* Aggiungiamo margini per distaccare la sidebar dai bordi */
+    width: 180px;
+    position: fixed;
+    top: 20px; /* Allineata sotto la navbar */
+    left: 20px; 
+    bottom: 20px; /* Allineata sopra il footer */
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 15px; /* Bordi smussati */
-    box-sizing: border-box;
-}
-
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
 
 .avatar-section {
     display: flex;
@@ -63,20 +63,9 @@
     transform: translateY(-2px);
 }
 
-.badge {
-    background-color: #ff5722;
-    color: #fff;
-    padding: 2px 8px;
-    border-radius: 12px;
-    margin-left: 10px;
-    font-size: 12px;
-}
-
 .logout-section {
     margin-top: auto;
     padding: 20px 0;
-    padding-left: 15px;
-    text-align: left;
 }
 
 .logout-item {
@@ -86,11 +75,10 @@
     color: #333;
     text-decoration: none;
     padding: 8px 15px;
-    border-radius: 20px; /* Bordi smussati */
+    border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    border: 2px solid transparent;
 }
 
 .logout-item:hover {
@@ -98,9 +86,4 @@
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
     border: 2px solid #007bff;
     transform: translateY(-2px);
-}
-
-.logout-icon {
-    margin-right: 8px;
-    font-size: 16px;
 }

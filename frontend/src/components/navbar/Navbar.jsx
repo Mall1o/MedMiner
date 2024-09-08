@@ -13,7 +13,7 @@ import './Navbar.css'; // Importa il file CSS
 const Navbar = () => {
   return (
     <AppBar 
-      position="static" 
+      position="fixed" 
       className="navbar-container"
       sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }} //necessario per sovrascrivere il tema
     >
