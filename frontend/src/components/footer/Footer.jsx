@@ -12,7 +12,7 @@ import './Footer.css'; // Importa il file di stile
 
 const Footer = () => {
   return (
-    <AppBar position="static" className="footer-container" sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}>
+    <AppBar position="" className="footer-container" sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}>
       <Toolbar className="footer-toolbar">
         <Box>
           <Typography variant="body2" color="textSecondary">

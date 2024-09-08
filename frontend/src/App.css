@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .main-content {
@@ -23,16 +23,4 @@
 .content-wrapper::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* Rende invisibile la scrollbar */
-}
-
-
-.footer-container {
-  background-color: rgba(255, 255, 255, 0.6);
-  padding: 10px;
-  box-shadow: none;
-  border-radius: 15px;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1200px;
-  box-sizing: border-box;
 }
