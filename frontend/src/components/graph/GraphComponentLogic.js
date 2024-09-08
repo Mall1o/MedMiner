@@ -1,10 +1,9 @@
-// src/components/graph/GraphComponentLogic.js
 import { DataSet } from 'vis-data';
 import { Network } from 'vis-network';
 
-export const initializeNetwork = (networkRef, data) => {
-  // Verifica che il contenitore DOM sia pronto
-  if (!networkRef.current) {
+// Funzione per inizializzare il grafo
+export const initializeNetwork = (container, data) => {
+  if (!container) {
     console.error("Il contenitore del grafo non è pronto.");
     return;
   }
@@ -37,8 +36,6 @@ export const initializeNetwork = (networkRef, data) => {
     }))
   );
 
-  const networkData = { nodes, edges };
-
   const options = {
     nodes: {
       shape: 'dot',
@@ -48,13 +45,12 @@ export const initializeNetwork = (networkRef, data) => {
     },
     edges: { width: 2, font: { size: 10, align: 'middle' } },
     physics: { enabled: true, solver: 'forceAtlas2Based', stabilization: { iterations: 150 } },
-    interaction: { hover: true, navigationButtons: true, zoomView: true },
+    interaction: { hover: true, navigationButtons: true, zoomView: false },
   };
 
-  // Inizializza il grafo solo quando il contenitore è pronto
   try {
-    const network = new Network(networkRef.current, networkData, options);
-    networkRef.current = network; // Salva il riferimento della rete per futuri aggiornamenti
+    const network = new Network(container, { nodes, edges }, options);
+    return network; // Ritorna l'istanza della rete
   } catch (error) {
     console.error("Errore durante l'inizializzazione del grafo:", error);
   }

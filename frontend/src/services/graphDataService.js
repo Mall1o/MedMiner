@@ -1,3 +1,4 @@
+//Classe che permette il fetch dei dati
 export const fetchGraphData = async () => {
     try {
       const response = await fetch('http://localhost:5000/graph');

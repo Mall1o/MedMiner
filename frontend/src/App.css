@@ -18,8 +18,13 @@
 .content-wrapper {
   flex-grow: 1; /* Permette al contenuto di riempire lo spazio disponibile */
   padding-top: 100px; /* Spazio per la navbar */
-  overflow-y: auto; /* Abilita lo scroll se necessario */
+  overflow: scroll; /* Abilita lo scroll se necessario */
 }
+.content-wrapper::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Rende invisibile la scrollbar */
+}
+
 
 .footer-container {
   background-color: rgba(255, 255, 255, 0.6);

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import GraphComponent from '../../components/graph/GraphComponent'; // Importa il componente grafico
 import { fetchGraphData } from '../../services/graphDataService'; // Servizio per il fetch dei dati
-import Loader from '../../components/Loader'; // Se usi un Loader per il caricamento
+import Loader from '../../components/Loader'; 
 
 const GraphPage = () => {
   const [graphData, setGraphData] = useState(null); // Stato per i dati del grafo

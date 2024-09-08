@@ -11,13 +11,7 @@ def get_graph():
     graph_service = GraphService(neo4j_db.driver)
     graph = graph_service.get_graph()
     
-    # Formattazione della risposta
-    formatted_graph = {
-        "nodes": [dict(node) for node in graph["nodes"]],
-        "relationships": [dict(relationship) for relationship in graph["relationships"]]
-    }
-    
-    return jsonify(formatted_graph), 200
+    return jsonify(graph), 200
 
 @graph_bp.route('/graph/user', methods=['GET'])
 def get_user_graph():
