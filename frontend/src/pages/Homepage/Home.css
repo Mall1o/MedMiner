@@ -3,8 +3,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;  /* Imposta l'altezza minima al 100% della viewport */
-  padding: 20px;
+  min-height: 100vh;
+  padding: 10px;
   box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto;
@@ -13,58 +13,108 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-  
-  .home-header {
-    text-align: center;
-    padding: 10px;
-  }
-  
-  .home-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    flex-grow: 1;  /* Permetti al contenitore di crescere e occupare tutto lo spazio */
-  }
-  
-  .home-stats {
-    display: flex;
-    justify-content: space-around;  /* Cambiato per gestire meglio la distanza */
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 10px;
-  }
-  
-  .stat-card {
-    background-color: rgba(230, 230, 230, 0.5);
-    padding: 10px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 16px;
-    transition: transform 0.3s ease-in-out;
-    width: 180px;
-    height: 140px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .stat-card:hover {
-    transform: translateY(-5px);  /* Animazione al passaggio */
-  }
-  
+.home-header {
+  text-align: center;
+  padding: 10px;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.home-stats {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  gap: 25px;
+  margin-top: -30px;
+}
+
+.stat-card {
+  background-color: rgba(230, 230, 230, 0.5);
+  color: black;
+  padding: 10px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 16px;
+  transition: transform 0.3s ease-in-out;
+  width: 180px;
+  height: 130px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
 .home-graphs {
   display: flex;
-  justify-content: space-around;
-  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   padding: 10px;
-  margin-bottom: 0;  /* Riduci o rimuovi il margine */
+  gap: 25px;
 }
- 
-  .graph-container {
-    width: 42%;  /* Ridotto leggermente per garantire l'adattamento al layout */
-    background-color: rgba(240, 240, 240, 0.5);
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+.graph-container {
+  flex: 1 1 45%;
+  max-width: 550px;
+  max-height: 350px;
+  background-color: rgba(240, 240, 240, 0.5);
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-container h4 {
+  color: black;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Grafico a torta più grande */
+.pie-chart-container .recharts-pie {
+  transform: scale(1.5); /* Aumenta la dimensione del grafico a torta */
+}
+
+/* Media query per centrare i riquadri e disporli in verticale */
+@media (max-width: 768px) {
+  .home-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Distanza tra i riquadri */
+    margin-top: 0; /* Rimuove il margine negativo */
   }
-  
+
+  .stat-card { 
+    color: black;
+    width: 160px;
+    height: 120px; /* Riduce leggermente le dimensioni per schermi piccoli */
+  }
+
+  .home-graphs {
+    flex-direction: column;
+  }
+
+  .graph-container {
+    flex: 1 1 100%;
+    max-width: 100%;
+    max-height: 250px; /* Riduce l'altezza per schermi piccoli */
+  }
+
+  .graph-container h4 {
+    color: black;
+    font-size: 16px; /* Riduce la dimensione del testo per schermi piccoli */
+  }
+}

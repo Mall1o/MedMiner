@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar.jsx';
-import Footer from './components/footer/Footer.jsx';
 import Sidebar from './components/sidebar/sidebar.jsx';
 import Home from './pages/Homepage/Home.jsx';
 import GraphPage from './pages/GraphPage/GraphPage';
@@ -19,7 +18,6 @@ const App = () => {
             <Route path="/graph" element={<GraphPage />} />
           </Routes>
         </div>
-        <Footer />
       </div>
     </div>
   );
