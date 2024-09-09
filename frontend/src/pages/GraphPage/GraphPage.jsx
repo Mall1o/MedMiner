@@ -33,7 +33,6 @@ const GraphPage = () => {
 
   return (
     <div>
-      <h1>Visualizzazione del Grafo Paziente-Malattia-Prescrizione</h1>
       {graphData && <GraphComponent data={graphData} />} {/* Renderizza il grafo */}
     </div>
   );

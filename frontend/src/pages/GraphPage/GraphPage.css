@@ -4,20 +4,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background-color: #f4f6f9;
-    border-radius: 10px;
+    box-sizing: border-box;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
+    max-width: 1200px;
+    border-radius: 15px;
     margin: 20px auto;
-}
-
-.graph-page h1 {
-    color: #2c3e50;
-    font-family: 'Arial', sans-serif;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-align: center;
 }
 
 .graph-page .error {
