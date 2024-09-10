@@ -9,13 +9,19 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
 import Button from '@mui/material/Button';
 import './Navbar.css'; // Importa il file CSS
+import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto
 
 const Navbar = () => {
+  const { isSidebarOpen } = useSidebar(); // Usa il contesto della sidebar
+
+  // Aggiungi il log per vedere il valore di isSidebarOpen
+  console.log("Sidebar aperta?", isSidebarOpen);
+
   return (
     <AppBar 
       position="fixed" 
-      className="navbar-container"
-      sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }} //necessario per sovrascrivere il tema
+      className={`navbar-container ${isSidebarOpen ? 'navbar-sidebar-open' : 'navbar-sidebar-closed'}`}
+      sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }} // Necessario per sovrascrivere il tema
     >
       <Toolbar className="navbar-toolbar">
         <Box sx={{ display: 'flex', alignItems: 'center' }}>

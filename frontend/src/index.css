@@ -104,3 +104,23 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Nascondi la scrollbar per WebKit (Chrome, Safari) */
+.content-wrapper::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Rende invisibile la scrollbar */
+}
+
+/* Nascondi la scrollbar per Firefox */
+.content-wrapper {
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Nascondi la scrollbar in IE e Edge */
+.content-wrapper {
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+.content-wrapper {
+  overflow-y: auto; /* Abilita lo scroll solo quando necessario */
+  height: 100%; /* Assicura che riempia tutto lo spazio disponibile */
+}

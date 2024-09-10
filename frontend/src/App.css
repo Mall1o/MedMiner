@@ -2,17 +2,25 @@
 .app-container {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: auto;
   overflow: auto;
 }
 
 .main-content {
   display: flex;
-  flex-direction: column; /* Permette di avere navbar, contenuto e footer in colonna */
+  flex-direction: column;
   flex-grow: 1;
-  margin-left: 280px; /* Spazio per la sidebar */
-  padding: 20px;
+  height: 100vh; /* Assicura che l'intera altezza sia utilizzata */
   box-sizing: border-box;
+  transition: margin-left 0.3s ease; /* Aggiunge una transizione per il margine della sidebar */
+}
+
+.main-content.sidebar-open {
+  margin-left: 280px; /* Spazio per la sidebar quando aperta */
+}
+
+.main-content.sidebar-closed {
+  margin-left: 20px; /* Rimuove lo spazio per la sidebar quando chiusa */
 }
 
 .content-wrapper {

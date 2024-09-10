@@ -9,12 +9,19 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import './Footer.css'; // Importa il file di stile
+import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto
 
 const Footer = () => {
+  const { isSidebarOpen } = useSidebar(); // Ottieni lo stato della sidebar
+
   return (
-    <AppBar position="relative" className="footer-container" sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}>
+    <AppBar 
+      position="relative" 
+      className={`footer-container ${isSidebarOpen ? 'footer-sidebar-open' : 'footer-sidebar-closed'}`} 
+      sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}
+    >
       <Toolbar className="footer-toolbar">
-        <Box>
+        <Box className="footer-text">
           <Typography variant="body2" color="textSecondary">
             © 2024 MedMiner 2.0. All rights reserved.
           </Typography>
@@ -22,17 +29,41 @@ const Footer = () => {
             Contact us: info@medminer.com
           </Typography>
         </Box>
-        <Box>
-          <IconButton color="inherit" className="footer-icon" href="https://facebook.com">
+        <Box className="footer-icons">
+          <IconButton 
+            color="inherit" 
+            className="footer-icon" 
+            href="https://facebook.com"
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
             <FacebookIcon />
           </IconButton>
-          <IconButton color="inherit" className="footer-icon" href="https://twitter.com">
+          <IconButton 
+            color="inherit" 
+            className="footer-icon" 
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <TwitterIcon />
           </IconButton>
-          <IconButton color="inherit" className="footer-icon" href="https://linkedin.com">
+          <IconButton 
+            color="inherit" 
+            className="footer-icon" 
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <LinkedInIcon />
           </IconButton>
-          <IconButton color="inherit" className="footer-icon" href="mailto:info@medminer.com">
+          <IconButton 
+            color="inherit" 
+            className="footer-icon" 
+            href="mailto:info@medminer.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <EmailIcon />
           </IconButton>
         </Box>

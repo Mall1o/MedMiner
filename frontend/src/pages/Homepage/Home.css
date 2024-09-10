@@ -1,16 +1,52 @@
+/* Stili di base per la home */
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: auto;
   padding: 10px;
   box-sizing: border-box;
-  max-width: 1200px;
-  margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  max-width: 100%; /* Prende tutto lo spazio disponibile */
+  overflow: hidden; /* Nasconde eventuali overflow */
+  margin-left: 0 !important; /* Disabilita temporaneamente il margine sinistro */
+}
+
+/* Quando la sidebar è aperta */
+.home-sidebar-open {
+  width: calc(100% - 30px); /* Lascia spazio per la sidebar e margini */
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+/* Quando la sidebar è chiusa */
+.home-sidebar-closed {
+  width: calc(100% -40px); /* Margini di 80px a sinistra e destra */
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* Per schermi più piccoli, adattiamo i margini */
+@media (max-width: 1200px) {
+  .home-container {
+    width: calc(100% - 100px); /* Riduce i margini laterali */
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+/* Per schermi ancora più piccoli, margini minimi */
+@media (max-width: 768px) {
+  .home-container {
+    width: 100%; /* Prende tutto lo spazio disponibile */
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 10px; /* Aggiunge un padding per evitare contenuti attaccati ai bordi */
+  }
 }
 
 .home-header {
@@ -34,7 +70,7 @@
   margin-bottom: 20px;
   padding: 10px;
   gap: 25px;
-  margin-top: -30px;
+  flex-wrap: wrap; /* Permette di far rientrare le cards */
 }
 
 .stat-card {
@@ -54,6 +90,7 @@
   transform: translateY(-5px);
 }
 
+/* Stile per i grafici */
 .home-graphs {
   display: flex;
   justify-content: space-between;
@@ -61,6 +98,7 @@
   width: 100%;
   padding: 10px;
   gap: 25px;
+  flex-wrap: wrap; /* Si adatta su più righe se necessario */
 }
 
 .graph-container {
@@ -74,6 +112,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .graph-container h4 {
@@ -88,19 +127,18 @@
   transform: scale(1.5); /* Aumenta la dimensione del grafico a torta */
 }
 
-/* Media query per centrare i riquadri e disporli in verticale */
+/* Per schermi più piccoli, adattiamo la dimensione dei contenitori */
 @media (max-width: 768px) {
   .home-stats {
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Distanza tra i riquadri */
-    margin-top: 0; /* Rimuove il margine negativo */
+    gap: 15px;
+    margin-top: 0;
   }
 
-  .stat-card { 
-    color: black;
+  .stat-card {
     width: 160px;
-    height: 120px; /* Riduce leggermente le dimensioni per schermi piccoli */
+    height: 120px; /* Riduce la dimensione delle schede */
   }
 
   .home-graphs {
@@ -114,7 +152,6 @@
   }
 
   .graph-container h4 {
-    color: black;
     font-size: 16px; /* Riduce la dimensione del testo per schermi piccoli */
   }
 }
