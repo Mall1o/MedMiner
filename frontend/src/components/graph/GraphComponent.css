@@ -1,56 +1,98 @@
-/* src/components/graph/GraphComponent.css */
 .graph-container {
-    height: 600px;
-    width: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.3); /* Sfondo trasparente */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    position: relative;
-  }
+  height: 80vh; /* Imposta l'altezza dinamica in base alla finestra */
+  width: 100%;
+  max-width: 1200px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  margin: auto; /* Centra il contenitore */
+  display: flex;
+  align-items: center; /* Allinea verticalmente il contenuto */
+  justify-content: center; /* Allinea orizzontalmente il contenuto */
+  padding: 20px; /* Aggiungi padding per evitare che il contenuto tocchi i bordi */
+  overflow: hidden;
+}
 
-  .popup {
-    position: absolute;
-    background-color: rgb(97, 93, 93);
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    max-width: 300px; /* Aggiunge un limite alla larghezza */
-    word-wrap: break-word; /* Fa sì che il testo lungo vada a capo */
-    white-space: pre-wrap; /* Mantiene gli spazi e i ritorni a capo ma consente al testo di andare a capo */
-    overflow: hidden; /* Assicura che il contenuto non esca dai bordi */
-    cursor: pointer; /* Cambia il cursore quando si passa sopra il popup */
-  }
-  
-  .popup h3 {
-    margin: 0 0 10px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .popup pre {
-    background-color: #585b5f;
-    padding: 5px;
-    border-radius: 4px;
-    font-size: 12px;
-    max-height: 200px; /* Limita l'altezza del contenuto del popup */
-    overflow-y: auto; /* Aggiunge una barra di scorrimento se il contenuto è troppo lungo */
-  }
-  
-  .popup button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .popup button:hover {
-    background-color: #2980b9;
-  }
-  
+/* Modifica della pagina del grafo per centrare meglio l'intero contenuto */
+.graph-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 15px;
+  margin: 10vh auto; /* Riduce lo spazio verticale */
+  padding: 20px; /* Aggiunge un po' di spazio attorno alla pagina */
+  min-height: calc(100vh - 0); /* Forza il contenuto a occupare lo spazio verticale disponibile */
+}
+
+
+/* Modifica del popup per una visualizzazione migliorata */
+.popup {
+  position: absolute;
+  background-color: rgba(97, 93, 93, 0.9); /* Sfondo più scuro e semi-trasparente */
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  max-width: 300px; /* Aggiunge un limite alla larghezza */
+  word-wrap: break-word; /* Fa sì che il testo lungo vada a capo */
+  white-space: pre-wrap; /* Mantiene gli spazi e i ritorni a capo */
+  overflow: hidden; /* Assicura che il contenuto non esca dai bordi */
+  cursor: pointer; /* Cambia il cursore quando si passa sopra il popup */
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Animazione per la visualizzazione */
+  opacity: 0; /* Inizialmente nascosto */
+  transform: translateY(10px); /* Spostamento iniziale per l'animazione */
+}
+
+.popup.show {
+  opacity: 1; /* Mostra il popup quando attivato */
+  transform: translateY(0); /* Rimuove lo spostamento */
+}
+
+.popup h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #f5f5f5;
+}
+
+.popup pre {
+  background-color: #585b5f;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  max-height: 200px; /* Limita l'altezza del contenuto del popup */
+  overflow-y: auto; /* Aggiunge una barra di scorrimento se il contenuto è troppo lungo */
+  color: #ffffff;
+}
+
+.popup button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #2980b9;
+}
+
+.graph-page .error {
+  color: red;
+  font-weight: bold;
+}
+
+.graph-page .loading {
+  color: #3498db;
+  font-weight: bold;
+}

@@ -2,8 +2,11 @@ import React from 'react';
 import './Home.css';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Footer from '../../components/footer/Footer.jsx'; // Importa il Footer
+import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto
 
 const Home = () => {
+  const { isSidebarOpen } = useSidebar(); // Usa il contesto della sidebar
+
   const barData = [
     { name: 'Gen', value: 4000 },
     { name: 'Feb', value: 3000 },
@@ -22,7 +25,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home-container">
+      <div className={`home-container ${isSidebarOpen ? 'home-sidebar-open' : 'home-sidebar-closed'}`}>
         <div className="home-content">
           <section className="home-stats">
             <div className="stat-card">

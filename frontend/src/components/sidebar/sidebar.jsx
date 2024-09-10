@@ -1,30 +1,27 @@
 import React from 'react';
 import './sidebar.css';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto globale
 
 const Sidebar = () => {
-    return (
-        <div className="sidebar">
-            <div className="avatar-section">
-                <img src='/assets/images/avatars/avatar_2.jpg' alt="Avatar" className="avatar" />
-                <span className="avatar-text">Dottore</span>
-            </div>
-            <div className="menu-section">
-                <a href="#" className="menu-item active">Dashboard</a>
-                <a href="#" className="menu-item">
-                    Pazienti
-                    <span className="badge">+3</span>
-                </a>
-                <a href="#" className="menu-item">Altre pagine boh</a>
-            </div>
-            <div className="logout-section">
-                <a href="#" className="menu-item logout-item">
-                    <FaSignOutAlt className="logout-icon" />
-                    Logout
-                </a>
-            </div>
-        </div>
-    );
+  const { isSidebarOpen, toggleSidebar } = useSidebar(); // Usa lo stato globale della sidebar
+
+  return (
+    <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
+      <div className="sidebar-toggle" onClick={toggleSidebar}>
+        {isSidebarOpen ? '←' : '→'}
+      </div>
+      <div className="sidebar-content">
+        <ul className="sidebar-menu">
+          <li>📊 Dashboard</li>
+          <li>👥 Pazienti</li>
+          <li>⚕️ Malattie</li>
+          <li>💊 Prescrizioni</li>
+          <li>🤖 Modulo IA</li>
+          <li>Altre pagine boh</li>
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;

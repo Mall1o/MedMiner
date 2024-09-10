@@ -1,89 +1,94 @@
+/* Stili di base per la sidebar con trasparenza */
 .sidebar {
-    width: 180px;
     position: fixed;
-    top: 20px; /* Allineata sotto la navbar */
-    left: 20px; 
-    bottom: 20px; /* Allineata sopra il footer */
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 15px;
+    top: 20px;
+    left: 10px;
+    bottom: 20px;
+    height: auto;
+    width: 250px;
+    background-color: rgba(240, 244, 248, 0.3); /* Trasparenza */
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
-
-.avatar-section {
+    transition: transform 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.avatar {
-    width: 60px;
-    height: 60px;
+    justify-content: center; /* Centra il contenuto verticalmente */
+    align-items: center; /* Centra il contenuto orizzontalmente */
+    border-radius: 15px; /* Bordi arrotondati */
+  }
+  
+  /* Stile quando la sidebar è chiusa */
+  .sidebar.closed {
+    transform: translateX(-100%);
+  }
+  
+  /* Stile quando la sidebar è aperta */
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  /* Bottone per aprire/chiudere la sidebar */
+  .sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    right: -25px;
+    background-color: #ffffff35;
     border-radius: 50%;
-    margin-bottom: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.avatar-text {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-.menu-section {
-    flex-grow: 1;
-}
-
-.menu-item {
-    display: block;
-    color: #333;
-    text-decoration: none;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 20px; /* Bordi smussati */
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.menu-item.active {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.menu-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-    border: 2px solid #007bff;
-    transform: translateY(-2px);
-}
-
-.logout-section {
-    margin-top: auto;
-    padding: 20px 0;
-}
-
-.logout-item {
+    width: 25px;
+    height: 25px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-start;
-    color: #333;
-    text-decoration: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
 
-.logout-item:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-    border: 2px solid #007bff;
-    transform: translateY(-2px);
-}
+  
+  /* Menu della sidebar */
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Prendi tutta la larghezza disponibile */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra i pulsanti */
+  }
+  
+  .sidebar-menu li {
+    padding: 15px 30px; /* Dimensioni più piccole */
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Sfondo semi-trasparente */
+    border-radius: 15px;
+    cursor: pointer;
+    text-align: center;
+    color: #333; /* Colore scuro per le voci del menu */
+    font-weight: 500;
+    width: 80%; /* Riduci la larghezza dei pulsanti */
+  }
+  
+  .sidebar-menu li:hover {
+    background-color: rgba(224, 228, 232, 0.8); /* Cambia colore al hover */
+  }
+  
+  /* Gestione della larghezza per schermi piccoli */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+    }
+    
+    .sidebar.closed {
+      transform: translateX(-100%);
+    }
+  }
+  
+  /* Stile per il contenuto principale della pagina */
+  .main-content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .main-content.expanded {
+    margin-left: 0;
+  }
+  
