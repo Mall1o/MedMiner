@@ -13,24 +13,21 @@ def get_graph():
     
     return jsonify(graph), 200
 
-
-#roba vecchia
-
-@graph_bp.route('/graph/user', methods=['GET'])
-def get_user_graph():
-    codice_fiscale_assistito = request.args.get('codice_fiscale_assistito')
-    if not codice_fiscale_assistito:
-        return jsonify({'error': 'codice_fiscale_assistito parameter is required'}), 400
+@graph_bp.route('/graph/patient', methods=['POST'])
+def get_patient_graph():
+    codice_fiscale = request.json.get('codice_fiscale')
+    if not codice_fiscale:
+        return jsonify({'error': 'codice_fiscale parameter is required'}), 400
 
     graph_service = GraphService(neo4j_db.driver)
-    user_graph = graph_service.get_user_graph(codice_fiscale_assistito)
+    graph = graph_service.get_patient_graph(codice_fiscale)
+    
+    return jsonify(graph), 200
 
-    formatted_graph = {
-        "nodes": [dict(node) for node in user_graph["nodes"]],
-        "relationships": [dict(relationship) for relationship in user_graph["relationships"]]
-    }
 
-    return jsonify(formatted_graph), 200
+
+
+#roba vecchia
 
 @graph_bp.route('/graph/prescription_dates', methods=['GET'])
 def get_all_dates():

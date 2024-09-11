@@ -24,6 +24,7 @@ const GraphComponent = ({ data }) => {
     const network = initializeNetwork(networkRef.current, data, handlePopup);
 
     networkRef.current.networkInstance = network;
+    network.fit();
 
     return () => {
       if (networkRef.current?.networkInstance?.destroy) {

@@ -32,33 +32,37 @@ class GraphModel:
             return {"nodes": nodes, "relationships": relationships}
 
 
-
-
-
-    #Roba vecchia da aggiustare!!!!!
-    
-    
-    def get_user_graph(self, codice_fiscale_assistito):
+    def get_patient_graph(self, codice_fiscale):
         with self.driver.session() as session:
-            # Query per ottenere i nodi e le relazioni associati a un codice fiscale specifico
-            query = """
-            MATCH (n)-[r]->(m)
-            WHERE r.codice_fiscale_assistito = $codice_fiscale_assistito
-            RETURN n, r, m
+            # Query per i nodi
+            nodes_query = """
+            MATCH (p:Paziente {codice_fiscale_assistito: $codice_fiscale})-[r1:DIAGNOSTICATO_CON]->(m:Malattia),
+                (p)-[r2:RICEVE_PRESCRIZIONE]->(pr:Prescrizione)
+            RETURN elementId(p) AS patient_elementId, p, 
+                elementId(m) AS disease_elementId, m, 
+                elementId(pr) AS prescription_elementId, pr
             """
-            result = session.run(query, codice_fiscale_assistito=codice_fiscale_assistito)
+            nodes_result = session.run(nodes_query, codice_fiscale=codice_fiscale)
+            nodes = format_nodes(nodes_result)
+            
+            # Query per le relazioni
+            relationships_query = """
+            MATCH (p:Paziente {codice_fiscale_assistito: $codice_fiscale})-[r1:DIAGNOSTICATO_CON]->(m:Malattia),
+                (p)-[r2:RICEVE_PRESCRIZIONE]->(pr:Prescrizione)
+            RETURN elementId(p) AS patient_elementId, 
+                elementId(m) AS disease_elementId, 
+                elementId(pr) AS prescription_elementId, r1, r2
+            """
+            relationships_result = session.run(relationships_query, codice_fiscale=codice_fiscale)
+            relationships = format_relationships(relationships_result)
 
-            # Estrai nodi e relazioni dai risultati
-            nodes = set()
-            relationships = []
-            for record in result:
-                nodes.add(record["n"])
-                nodes.add(record["m"])
-                relationships.append(record["r"])
+            return {"nodes": nodes, "relationships": relationships}
 
-            # Converti il set in una lista e ritorna il risultato
-            return {"nodes": list(nodes), "relationships": relationships}
-        
+    
+    
+    
+    
+    #Roba vecchia da aggiustare!!!!!    
     def get_all_dates(self):
         with self.driver.session() as session:
             query = """

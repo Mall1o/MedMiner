@@ -7,8 +7,8 @@ class GraphService:
     def get_graph(self):
         return self.model.get_graph()
 
-    def get_user_graph(self, codice_fiscale_assistito):
-        return self.model.get_user_graph(codice_fiscale_assistito)
+    def get_patient_graph(self, codice_fiscale):
+        return self.model.get_patient_graph(codice_fiscale)
     
     def get_all_dates(self):
         return self.model.get_all_dates()

@@ -15,7 +15,6 @@ const PatientList = ({ onSelectPatient }) => {
     };
 
     fetchPatients();
-    console.log(patients);
   }, []);
 
   const filteredPatients = patients.filter((patient) =>{
@@ -43,7 +42,7 @@ const PatientList = ({ onSelectPatient }) => {
         </thead>
         <tbody>
           {filteredPatients.map((patient) => (
-            <tr key={patient.id} onClick={() => onSelectPatient(patient)}>
+            <tr key={patient.codice_fiscale_assistito} onClick={() => onSelectPatient(patient)}>
               <td>
                 <img src={defaultAvatar} className="avatar-img" />
               </td>
