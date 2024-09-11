@@ -18,7 +18,7 @@ const Sidebar = () => {
       </div>
       <div className="sidebar-content">
         <ul className="sidebar-menu">
-          <li><Link to="/home">🏠 Home</Link></li>
+          <li><Link to="/">🏠 Home</Link></li>
           <li><Link to="/patients">👥 Pazienti</Link></li>
           <li><Link to="/diseases">⚕️ Malattie</Link></li>
           <li><Link to="/prescriptions">💊 Prescrizioni</Link></li>

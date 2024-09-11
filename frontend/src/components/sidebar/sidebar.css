@@ -74,48 +74,77 @@
   align-items: center; /* Centra i pulsanti */
 }
 
+/* Rende l'intero bottone cliccabile, inclusi i bordi */
 .sidebar-menu li {
-  padding: 15px 30px; /* Dimensioni più piccole */
+  width: 100%; /* Riduci la larghezza dei pulsanti */
   margin: 10px 0;
-  background-color: rgba(255, 255, 255, 0.8); /* Sfondo semi-trasparente */
-  border-radius: 15px;
   cursor: pointer;
-  text-align: center;
-  color: #333; /* Colore scuro per le voci del menu */
-  font-weight: 500;
-  width: 80%; /* Riduci la larghezza dei pulsanti */
+  list-style-type: none; /* Rimuove il punto elenco */
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente */
 }
 
-.sidebar-menu li:hover {
+.sidebar-menu li a {
+  display: block; /* Fa sì che l'intero bottone sia cliccabile */
+  text-decoration: none; /* Rimuove la sottolineatura */
+  padding: 15px 30px; /* Dà spazio interno al link */
+  background-color: rgba(255, 255, 255, 0.8); /* Sfondo semi-trasparente */
+  border-radius: 15px; /* Bordo arrotondato */
+  color: #333; /* Colore del testo */
+  font-weight: 500;
+  width: 100%;
+  text-align: center; /* Centra il testo */
+  max-width: 220px; /* Limita la larghezza massima del pulsante */
+}
+
+/* Stile hover per il link */
+.sidebar-menu li a:hover {
   background-color: rgba(224, 228, 232, 0.8); /* Cambia colore al hover */
 }
 
-/* Gestione della larghezza per schermi piccoli */
+/* Stile per il link attivo */
+.sidebar-menu li a.active {
+  background-color: rgba(240, 244, 248, 1); /* Sfondo per il link attivo */
+  font-weight: 600; /* Font più spesso */
+  color: #000; /* Colore scuro per il link attivo */
+}
+
+/* Media Queries per schermi più piccoli */
 @media (max-width: 768px) {
   .sidebar {
-      width: 200px;
+    width: 200px;
   }
 
   .sidebar.closed {
-      transform: translateX(-100%);
+    transform: translateX(-100%);
   }
 
   .sidebar-logo img {
-      width: 70px; /* Riduci il logo su schermi piccoli */
+    width: 70px; /* Riduci il logo su schermi piccoli */
   }
 
   .app-name {
-      font-size: 1.1rem; /* Riduci il font del nome dell'app su schermi piccoli */
+    font-size: 1.1rem; /* Riduci il font del nome dell'app su schermi piccoli */
+  }
+
+  .sidebar-menu li a {
+    padding: 12px 20px; /* Riduce padding per schermi più piccoli */
+    max-width: 180px; /* Riduce larghezza massima dei pulsanti */
   }
 }
 
 @media (max-width: 480px) {
   .sidebar-logo img {
-      width: 60px; /* Ancora più piccolo su schermi molto stretti */
+    width: 60px; /* Ancora più piccolo su schermi molto stretti */
   }
 
   .app-name {
-      font-size: 1rem; /* Font ancora più piccolo su schermi molto stretti */
+    font-size: 1rem; /* Font ancora più piccolo su schermi molto stretti */
+  }
+
+  .sidebar-menu li a {
+    padding: 10px 15px; /* Riduce ancora padding per schermi stretti */
+    max-width: 150px; /* Riduce larghezza massima dei pulsanti su schermi stretti */
   }
 }
 
