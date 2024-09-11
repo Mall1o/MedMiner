@@ -1,11 +1,13 @@
 import React from 'react';
 import './Home.css';
+import { useHomeData } from './Home.js';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Footer from '../../components/footer/Footer.jsx'; // Importa il Footer
 import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto
 
 const Home = () => {
   const { isSidebarOpen } = useSidebar(); // Usa il contesto della sidebar
+  const stats = useHomeData();
 
   const barData = [
     { name: 'Gen', value: 4000 },
@@ -30,17 +32,17 @@ const Home = () => {
           <section className="home-stats">
             <div className="stat-card">
               <span role="img" aria-label="patients">👥</span>
-              <h3>75 K</h3>
+              <h3>{stats.pazienti}</h3>
               <p>PAZIENTI</p>
             </div>
             <div className="stat-card">
               <span role="img" aria-label="prescriptions">💊</span>
-              <h3>75 K</h3>
+              <h3>{stats.prescrizioni}</h3>
               <p>PRESCRIZIONI</p>
             </div>
             <div className="stat-card">
               <span role="img" aria-label="diseases">⚕️</span>
-              <h3>75 K</h3>
+              <h3>{stats.malattie}</h3>
               <p>MALATTIE</p>
             </div>
           </section>

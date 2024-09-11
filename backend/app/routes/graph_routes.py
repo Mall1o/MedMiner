@@ -13,6 +13,9 @@ def get_graph():
     
     return jsonify(graph), 200
 
+
+#roba vecchia
+
 @graph_bp.route('/graph/user', methods=['GET'])
 def get_user_graph():
     codice_fiscale_assistito = request.args.get('codice_fiscale_assistito')

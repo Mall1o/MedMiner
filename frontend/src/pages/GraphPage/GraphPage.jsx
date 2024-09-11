@@ -1,7 +1,7 @@
 // src/pages/GraphPage.jsx
 import React, { useState, useEffect } from 'react';
 import GraphComponent from '../../components/graph/GraphComponent'; // Importa il componente grafico
-import { fetchGraphData } from '../../services/graphDataService'; // Servizio per il fetch dei dati
+import { fetchGraphData } from '../../services/graphDataService'; 
 import Loader from '../../components/Loader'; 
 
 const GraphPage = () => {
