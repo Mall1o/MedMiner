@@ -1,20 +1,35 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Crea il contesto
 const SidebarContext = createContext();
 
-// Hook personalizzato per usare il contesto
 export const useSidebar = () => useContext(SidebarContext);
 
-// Provider del contesto della Sidebar
 export const SidebarProvider = ({ children }) => {
-  // Imposta il valore iniziale su true per aprire la sidebar all'avvio
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar aperta di default
 
-  // Funzione per togglare la sidebar
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen(prevState => !prevState);
   };
+
+  // Effetto per monitorare la dimensione dello schermo
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {  // Modifica la soglia secondo le tue esigenze
+        setIsSidebarOpen(false); // Chiude la sidebar automaticamente
+      }
+    };
+
+    // Aggiungi l'event listener
+    window.addEventListener('resize', handleResize);
+
+    // Chiama subito per controllare le dimensioni al primo render
+    handleResize();
+
+    // Cleanup l'event listener alla disconnessione del componente
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
