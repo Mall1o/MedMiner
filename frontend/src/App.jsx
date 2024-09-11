@@ -23,7 +23,7 @@ const MainLayout = () => {
     <div className="app-container">
       <Sidebar /> 
       <div className={`main-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
-        <Navbar />
+        {/*<Navbar />*/}
         <div className="content-wrapper">
           <Routes>
             <Route path="/" element={<Home />} />

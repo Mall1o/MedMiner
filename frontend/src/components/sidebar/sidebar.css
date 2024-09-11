@@ -1,94 +1,131 @@
 /* Stili di base per la sidebar con trasparenza */
 .sidebar {
-    position: fixed;
-    top: 20px;
-    left: 10px;
-    bottom: 20px;
-    height: auto;
-    width: 250px;
-    background-color: rgba(240, 244, 248, 0.3); /* Trasparenza */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra il contenuto verticalmente */
-    align-items: center; /* Centra il contenuto orizzontalmente */
-    border-radius: 15px; /* Bordi arrotondati */
-  }
-  
-  /* Stile quando la sidebar è chiusa */
-  .sidebar.closed {
-    transform: translateX(-100%);
-  }
-  
-  /* Stile quando la sidebar è aperta */
-  .sidebar.open {
-    transform: translateX(0);
-  }
-  
-  /* Bottone per aprire/chiudere la sidebar */
-  .sidebar-toggle {
-    position: absolute;
-    top: 20px;
-    right: -25px;
-    background-color: #ffffff35;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 20px;
+  left: 10px;
+  bottom: 20px;
+  height: auto;
+  width: 250px;
+  background-color: rgba(240, 244, 248, 0.3); /* Trasparenza */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Allinea il contenuto all'inizio */
+  align-items: center; /* Centra il contenuto orizzontalmente */
+  border-radius: 15px; /* Bordi arrotondati */
+}
+
+/* Aggiungi il logo della piattaforma */
+.sidebar-logo {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sidebar-logo img {
+  width: 80px;
+  height: auto;
+  transition: width 0.3s ease;
+}
+
+/* Stile per il nome dell'app sotto il logo */
+.app-name {
+  font-family: 'Poppins', sans-serif; /* Font elegante */
+  font-size: 1.3rem;
+  color: #333;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Stile quando la sidebar è chiusa */
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+/* Stile quando la sidebar è aperta */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Bottone per aprire/chiudere la sidebar */
+.sidebar-toggle {
+  position: absolute;
+  top: 20px;
+  right: -25px;
+  background-color: #ffffff35;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Menu della sidebar */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0; /* Spazio sotto il logo e nome dell'app */
+  width: 100%; /* Prendi tutta la larghezza disponibile */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra i pulsanti */
+}
+
+.sidebar-menu li {
+  padding: 15px 30px; /* Dimensioni più piccole */
+  margin: 10px 0;
+  background-color: rgba(255, 255, 255, 0.8); /* Sfondo semi-trasparente */
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  color: #333; /* Colore scuro per le voci del menu */
+  font-weight: 500;
+  width: 80%; /* Riduci la larghezza dei pulsanti */
+}
+
+.sidebar-menu li:hover {
+  background-color: rgba(224, 228, 232, 0.8); /* Cambia colore al hover */
+}
+
+/* Gestione della larghezza per schermi piccoli */
+@media (max-width: 768px) {
+  .sidebar {
+      width: 200px;
   }
 
-  
-  /* Menu della sidebar */
-  .sidebar-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%; /* Prendi tutta la larghezza disponibile */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra i pulsanti */
-  }
-  
-  .sidebar-menu li {
-    padding: 15px 30px; /* Dimensioni più piccole */
-    margin: 10px 0;
-    background-color: rgba(255, 255, 255, 0.8); /* Sfondo semi-trasparente */
-    border-radius: 15px;
-    cursor: pointer;
-    text-align: center;
-    color: #333; /* Colore scuro per le voci del menu */
-    font-weight: 500;
-    width: 80%; /* Riduci la larghezza dei pulsanti */
-  }
-  
-  .sidebar-menu li:hover {
-    background-color: rgba(224, 228, 232, 0.8); /* Cambia colore al hover */
-  }
-  
-  /* Gestione della larghezza per schermi piccoli */
-  @media (max-width: 768px) {
-    .sidebar {
-      width: 200px;
-    }
-    
-    .sidebar.closed {
+  .sidebar.closed {
       transform: translateX(-100%);
-    }
   }
-  
-  /* Stile per il contenuto principale della pagina */
-  .main-content {
-    margin-left: 250px;
-    padding: 20px;
-    transition: margin-left 0.3s ease-in-out;
+
+  .sidebar-logo img {
+      width: 70px; /* Riduci il logo su schermi piccoli */
   }
-  
-  .main-content.expanded {
-    margin-left: 0;
+
+  .app-name {
+      font-size: 1.1rem; /* Riduci il font del nome dell'app su schermi piccoli */
   }
-  
+}
+
+@media (max-width: 480px) {
+  .sidebar-logo img {
+      width: 60px; /* Ancora più piccolo su schermi molto stretti */
+  }
+
+  .app-name {
+      font-size: 1rem; /* Font ancora più piccolo su schermi molto stretti */
+  }
+}
+
+/* Stile per il contenuto principale della pagina */
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
