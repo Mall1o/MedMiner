@@ -35,12 +35,6 @@ class GraphModel:
 
 
 
-
-
-
-
-
-
     #Roba vecchia da aggiustare!!!!!
     
     
