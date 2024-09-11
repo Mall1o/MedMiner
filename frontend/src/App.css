@@ -1,18 +1,32 @@
-/* App.css */
+/* Contenitore principale */
 .app-container {
   display: flex;
   flex-direction: row;
-  height: auto;
-  overflow: auto;
+  height: 100vh; /* Altezza del viewport per tutta la pagina */
+  overflow: hidden; /* Previene lo scroll orizzontale */
 }
 
+/* Contenitore del contenuto principale */
 .main-content {
-  display: flex;
-  flex-direction: column;
   flex-grow: 1;
-  height: 100vh; /* Assicura che l'intera altezza sia utilizzata */
-  box-sizing: border-box;
-  transition: margin-left 0.3s ease; /* Aggiunge una transizione per il margine della sidebar */
+  height: 100vh;
+  overflow-y: auto; /* Permette lo scroll solo qui */
+  display: flex;
+  flex-direction: column; /* Mantiene il layout a colonna */
+}
+
+/* Wrapper per il contenuto */
+.content-wrapper {
+  flex-grow: 1;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto; /* Scroll solo per il contenuto se necessario */
+}
+
+/* Nascondi la scrollbar per i browser che supportano -webkit */
+.content-wrapper::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 .main-content.sidebar-open {
@@ -20,15 +34,5 @@
 }
 
 .main-content.sidebar-closed {
-  margin-left: 20px; /* Rimuove lo spazio per la sidebar quando chiusa */
-}
-
-.content-wrapper {
-  flex-grow: 1; /* Permette al contenuto di riempire lo spazio disponibile */
-  padding-top: 100px; /* Spazio per la navbar */
-  overflow: scroll; /* Abilita lo scroll se necessario */
-}
-.content-wrapper::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* Rende invisibile la scrollbar */
+  margin-left: 20px; /* Ridotto per sidebar chiusa */
 }
