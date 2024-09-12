@@ -9,7 +9,7 @@ const PatientPage = () => {
   const [selectedPatient, setSelectedPatient] = useState(null); // Stato per il paziente selezionato
   const [showGraph, setShowGraph] = useState(false); // Stato per gestire la visibilità del grafo
   const [graphData, setGraphData] = useState(null); // Stato per i dati del grafo
-
+  
   const handlePatientSelect = (patient) => {
     setSelectedPatient(patient); // Aggiorna il paziente selezionato
   };

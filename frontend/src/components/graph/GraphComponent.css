@@ -1,19 +1,20 @@
 .graph-container {
-  height: 80vh; /* Imposta l'altezza dinamica in base alla finestra */
-  width: 100%;
+  height: 100%; /* Usa tutta l'altezza disponibile del genitore */
+  width: 100%; /* Usa tutta la larghezza disponibile */
   max-width: 1200px;
+  max-height: 80vh; /* Limita l'altezza massima ma permette la flessibilità */
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
-  position: relative;
-  margin: auto; /* Centra il contenitore */
+  margin: auto; /* Centra il contenitore orizzontalmente */
   display: flex;
   align-items: center; /* Allinea verticalmente il contenuto */
   justify-content: center; /* Allinea orizzontalmente il contenuto */
-  padding: 20px; /* Aggiungi padding per evitare che il contenuto tocchi i bordi */
+  padding: 20px;
   overflow: hidden;
+  position: relative; /* Per il posizionamento del popup */
 }
 
 /* Modifica della pagina del grafo per centrare meglio l'intero contenuto */
@@ -23,17 +24,148 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
+  padding: 20px;
+  min-height: 100vh; /* Assicura che la pagina del grafo occupi tutta l'altezza */
+}
+
+@media (max-width: 768px) {
+  .graph-container {
+    height: 60vh; /* Riduce l'altezza su schermi più piccoli per maggiore visibilità */
+    max-width: 100%;
+  }
+  
+  .graph-page {
+    padding: 10px;
+  }
+}
+
+.graph-container {
+  height: 100%; /* Usa tutta l'altezza disponibile del genitore */
+  width: 100%; /* Usa tutta la larghezza disponibile */
   max-width: 1200px;
-  border-radius: 15px;
-  margin: 10vh auto; /* Riduce lo spazio verticale */
-  padding: 20px; /* Aggiunge un po' di spazio attorno alla pagina */
-  min-height: calc(100vh - 0); /* Forza il contenuto a occupare lo spazio verticale disponibile */
+  max-height: 80vh; /* Limita l'altezza massima ma permette la flessibilità */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  margin: auto; /* Centra il contenitore orizzontalmente */
+  display: flex;
+  align-items: center; /* Allinea verticalmente il contenuto */
+  justify-content: center; /* Allinea orizzontalmente il contenuto */
+  padding: 20px;
+  overflow: hidden;
+  position: relative; /* Per il posizionamento del popup */
+}
+
+/* Icona per la legenda */
+.legend-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Popup della legenda */
+.legend-popup {
+  color: #333;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.legend-popup h3 {
+  margin: 0;
+  font-size: 16px;;
+}
+
+.legend-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.legend-popup ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend-popup .color-box {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.patient {
+  background-color: rgba(255, 99, 132, 1);
+}
+
+.disease {
+  background-color: rgba(54, 162, 235, 1);
+}
+
+.prescription {
+  background-color: rgba(75, 192, 192, 1);
+}
+
+.diagnostic {
+  background-color: rgba(54, 162, 235, 1);
+}
+
+.receive {
+  background-color: rgba(75, 192, 192, 1);
+}
+
+/* Pulsanti di zoom */
+.zoom-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100; /* Assicura che i pulsanti siano sopra il grafo */
+  backdrop-filter: blur(10px); /* Effetto blur dietro i pulsanti */
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo semi-trasparente */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Leggera ombra */
+}
+
+.zoom-button {
+  font-size: 20px;
+  padding: 10px 20px;
+  margin: 5px 0;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.zoom-button:hover {
+  background-color: #2980b9;
+}
+
+.zoom-button:focus {
+  outline: none;
 }
 
 
-/* Modifica del popup per una visualizzazione migliorata */
+/* Popup migliorato */
 .popup {
   position: absolute;
   background-color: rgba(97, 93, 93, 0.9); /* Sfondo più scuro e semi-trasparente */

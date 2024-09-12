@@ -8,7 +8,7 @@ const GraphPage = () => {
   const [graphData, setGraphData] = useState(null); // Stato per i dati del grafo
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     const loadData = async () => {
       try {
