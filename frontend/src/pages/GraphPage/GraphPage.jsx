@@ -1,39 +1,31 @@
-// src/pages/GraphPage.jsx
-import React, { useState, useEffect } from 'react';
-import GraphComponent from '../../components/graph/GraphComponent'; // Importa il componente grafico
-import { fetchGraphData } from '../../services/graphDataService'; 
-import Loader from '../../components/Loader'; 
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // Per ottenere i parametri dell'URL
+import GraphComponent from '../../components/graph/GraphComponent'; // Il componente del grafo
+import { fetchPatientGraphData } from '../../services/graphDataService';
+import Loader from '../../components/Loader'; // Se hai un componente Loader
 
 const GraphPage = () => {
-  const [graphData, setGraphData] = useState(null); // Stato per i dati del grafo
+  const { codiceFiscale } = useParams(); // Ottieni il codice fiscale dall'URL
+  const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
+
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const data = await fetchGraphData(); // Chiama il servizio per ottenere i dati
-        if (data) {
-          setGraphData(data); // Imposta i dati nel componente
-        } else {
-          setError('Errore nel caricamento dei dati del grafo');
-        }
-      } catch (err) {
-        setError('Errore imprevisto: ' + err.message);
-      } finally {
-        setLoading(false);
-      }
+    const fetchGraphData = async () => {
+      const data = await fetchPatientGraphData(codiceFiscale);
+      setGraphData(data);
+      setLoading(false);
     };
 
-    loadData();
-  }, []);
+    fetchGraphData();
+  }, [codiceFiscale]);
 
-  if (loading) return <Loader />; // Mostra un caricamento se i dati non sono pronti
-  if (error) return <div>{error}</div>; // Mostra un messaggio d'errore se c'è un problema
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
-    <div>
-      {graphData && <GraphComponent data={graphData} />} {/* Renderizza il grafo */}
+    <div className="graph-page-container">
+      {graphData ? <GraphComponent data={graphData} /> : <p>Impossibile caricare i dati del grafo.</p>}
     </div>
   );
 };

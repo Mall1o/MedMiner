@@ -6,26 +6,3 @@
   padding: 20px;
   height: 100vh; /* Assicurati che il contenitore occupi tutta l'altezza */
 }
-
-.patient-details {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #8f8a8a;
-  border-radius: 10px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-.show-graph-btn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.show-graph-btn:hover {
-  background-color: #0056b3;
-}
