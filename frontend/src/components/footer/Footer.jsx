@@ -23,10 +23,10 @@ const Footer = () => {
       <Toolbar className="footer-toolbar">
         <Box className="footer-text">
           <Typography variant="body2" color="textSecondary">
-            © 2024 MedMiner 2.0. All rights reserved.
+            © 2024 ComorGraph All rights reserved.
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            Contact us: info@medminer.com
+            Contact us: info@comorgraph.com
           </Typography>
         </Box>
         <Box className="footer-icons">
@@ -60,7 +60,7 @@ const Footer = () => {
           <IconButton 
             color="inherit" 
             className="footer-icon" 
-            href="mailto:info@medminer.com"
+            href="mailto:info@comorgraph.com"
             target="_blank"
             rel="noopener noreferrer"
           >

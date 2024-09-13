@@ -36,7 +36,7 @@ const Navbar = () => {
               component="div" 
               className="navbar-title"
             >
-              MedMiner 2.0
+              ComorGraph
             </Typography>
           </Link>
         </Box>

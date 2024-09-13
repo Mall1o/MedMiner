@@ -8,8 +8,10 @@ import PatientPage from './pages/PatientPage/patientPage.jsx'; // Lista pazienti
 import './App.css';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
 import ScrollToTop from './hooks/ScrollToTop';
+import { useScrollToTop } from './hooks/use-scroll-to-top';
 
 const App = () => {
+  useScrollToTop(); // Hook per tornare in cima alla pagina
   return (
     <SidebarProvider>
       <ScrollToTop />
