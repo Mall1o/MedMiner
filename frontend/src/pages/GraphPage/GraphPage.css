@@ -1,10 +1,28 @@
 .graph-page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  min-height: 100vh;
-  padding: 20px;
-}
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh; /* Forza l'altezza a occupare l'intera pagina */
+    margin: 20px;
+    padding: 0;
+  }
   
+  .graph-page {
+    flex-grow: 1;
+    width: 100%;
+    height: calc(100vh - 20px); /* Forza l'altezza a occupare l'intera altezza disponibile */
+    padding: 0;
+    margin-bottom: 20px;
+  }
+  
+  .graph-container {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%; /* Forza l'altezza a occupare tutto lo spazio */
+    display: flex;
+    justify-content: center; /* Centra il grafo orizzontalmente */
+    align-items: center; /* Centra il grafo verticalmente */
+    padding: 0; /* Elimina qualsiasi padding */
+    margin: 20px; /* Elimina qualsiasi margine */
+    position: relative;
+  }
