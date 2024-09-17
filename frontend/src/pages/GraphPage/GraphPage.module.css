@@ -1,0 +1,38 @@
+.graphPageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  margin: 20px;
+  padding: 0;
+}
+
+.graphPage {
+  flex-grow: 1;
+  width: 100%;
+  height: calc(100vh - 20px);
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.graphContainer {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 20px;
+  position: relative;
+}
+
+.detailsPanel {
+  width: 25%;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

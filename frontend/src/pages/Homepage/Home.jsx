@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css';
+import styles from './Home.module.css';
 import { useHomeData } from './Home.js';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Footer from '../../components/footer/Footer.jsx'; // Importa il Footer
@@ -27,28 +27,28 @@ const Home = () => {
 
   return (
     <>
-      <div className={`home-container ${isSidebarOpen ? 'home-sidebar-open' : 'home-sidebar-closed'}`}>
-        <div className="home-content">
-          <section className="home-stats">
-            <div className="stat-card">
+      <div className={`${styles.homeContainer} ${isSidebarOpen ? styles.homeSidebarOpen : styles.homeSidebarClosed}`}>
+        <div className={styles.homeContent}>
+          <section className={styles.homeStats}>
+            <div className={styles.statCard}>
               <span role="img" aria-label="patients">👥</span>
               <h3>{stats.pazienti}</h3>
               <p>PAZIENTI</p>
             </div>
-            <div className="stat-card">
+            <div className={styles.statCard}>
               <span role="img" aria-label="prescriptions">💊</span>
               <h3>{stats.prescrizioni}</h3>
               <p>PRESCRIZIONI</p>
             </div>
-            <div className="stat-card">
+            <div className={styles.statCard}>
               <span role="img" aria-label="diseases">⚕️</span>
               <h3>{stats.malattie}</h3>
               <p>MALATTIE</p>
             </div>
           </section>
 
-          <section className="home-graphs">
-            <div className="graph-container">
+          <section className={styles.homeGraphs}>
+            <div className={styles.graphContainer}>
               <h4>Some Stats</h4>
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={barData}>
@@ -60,7 +60,7 @@ const Home = () => {
               </ResponsiveContainer>
             </div>
 
-            <div className="graph-container">
+            <div className={styles.graphContainer}>
               <h4>Some Stats</h4>
               <ResponsiveContainer width="100%" height={200}>
                 <PieChart>
@@ -78,7 +78,7 @@ const Home = () => {
       </div>
 
       {/* Footer fuori dal contenitore principale */}
-      <Footer />
+      <Footer className={styles.footer}/>
     </>
   );
 };

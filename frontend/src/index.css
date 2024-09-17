@@ -103,24 +103,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-/* Scrollbar personalizzate */
-.content-wrapper::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* Rende invisibile la scrollbar */
-}
-
-.content-wrapper {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  overflow-y: auto; /* Scroll attivato solo quando necessario */
-  height: 100%; /* Mantenuto per occupare tutto lo spazio disponibile */
-}
-
-/* Aggiungi queste regole per garantire altezza e larghezza corretta sui contenitori */
-html, body, #root, .app-container, .main-content, .content-wrapper {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}

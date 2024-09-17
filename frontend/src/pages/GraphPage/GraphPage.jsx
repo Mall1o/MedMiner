@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import GraphComponent from '../../components/graph/GraphComponent';
 import { fetchPatientGraphData } from '../../services/graphDataService';
 import Loader from '../../components/Loader';
-import './GraphPage.css';  // Importa il file di stile
+import styles from './GraphPage.module.css';  // Importa il CSS Module correttamente
+import SyntheticDataTest from '../../components/detailsPanel/DetailPanel'; // Importa il componente per i dettagli del paziente
 
 const GraphPage = () => {
   const { codiceFiscale } = useParams();
@@ -25,8 +26,17 @@ const GraphPage = () => {
   }
 
   return (
-    <div className="graph-page-container">
-      {graphData ? <GraphComponent data={graphData} /> : <p>Impossibile caricare i dati del grafo.</p>}
+    <div className={styles.graphPageContainer}>
+        {graphData ? (
+        <div className={styles.graphContainer}>
+          <GraphComponent data={graphData} />
+        </div>
+      ) : (
+        <p>Impossibile caricare i dati del grafo.</p>
+      )}
+      <div className={styles.detailsPanel}>
+        <SyntheticDataTest />
+      </div>
     </div>
   );
 };

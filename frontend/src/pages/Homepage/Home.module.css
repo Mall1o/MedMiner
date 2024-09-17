@@ -1,11 +1,12 @@
 /* Stili di base per la home */
-.home-container {
+.homeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
   height: auto;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 15px;
@@ -18,22 +19,22 @@
 }
 
 /* Quando la sidebar è aperta */
-.home-sidebar-open {
+.homeSidebarOpen {
   width: calc(100% - 30px); /* Lascia spazio per la sidebar e margini */
   margin-right: 20px;
   margin-left: 10px;
 }
 
 /* Quando la sidebar è chiusa */
-.home-sidebar-closed {
-  width: calc(100% -40px); /* Margini di 80px a sinistra e destra */
+.homeSidebarClosed {
+  width: calc(100% - 40px); /* Margini di 80px a sinistra e destra */
   margin-left: 20px;
   margin-right: 20px;
 }
 
 /* Per schermi più piccoli, adattiamo i margini */
 @media (max-width: 1200px) {
-  .home-container {
+  .homeContainer {
     width: calc(100% - 100px); /* Riduce i margini laterali */
     margin-left: 50px;
     margin-right: 50px;
@@ -42,7 +43,7 @@
 
 /* Per schermi ancora più piccoli, margini minimi */
 @media (max-width: 768px) {
-  .home-container {
+  .homeContainer {
     width: 100%; /* Prende tutto lo spazio disponibile */
     margin-left: 0;
     margin-right: 0;
@@ -50,21 +51,22 @@
   }
 }
 
-.home-header {
+.homeHeader {
   text-align: center;
   padding: 10px;
 }
 
-.home-content {
+.homeContent {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   flex-grow: 1;
+  gap: 20px;
 }
 
-.home-stats {
+.homeStats {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -74,7 +76,7 @@
   flex-wrap: wrap; /* Permette di far rientrare le cards */
 }
 
-.stat-card {
+.statCard {
   background-color: rgba(230, 230, 230, 0.5);
   color: black;
   padding: 10px;
@@ -87,14 +89,15 @@
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.stat-card:hover {
+.statCard:hover {
   transform: translateY(-5px);
 }
 
 /* Stile per i grafici */
-.home-graphs {
+.homeGraphs {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
   width: 100%;
   padding: 10px;
@@ -102,7 +105,8 @@
   flex-wrap: wrap; /* Si adatta su più righe se necessario */
 }
 
-.graph-container {
+.graphContainer {
+  justify-content: center;
   flex: 1 1 45%;
   max-width: 550px;
   max-height: 350px;
@@ -114,9 +118,10 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  margin: 20px;
 }
 
-.graph-container h4 {
+.graphContainer h4 {
   color: black;
   text-align: center;
   font-size: 18px;
@@ -124,35 +129,44 @@
 }
 
 /* Grafico a torta più grande */
-.pie-chart-container .recharts-pie {
+.pieChartContainer .rechartsPie {
   transform: scale(1.5); /* Aumenta la dimensione del grafico a torta */
 }
 
 /* Per schermi più piccoli, adattiamo la dimensione dei contenitori */
 @media (max-width: 768px) {
-  .home-stats {
+  .homeStats {
     flex-direction: column;
     align-items: center;
     gap: 15px;
     margin-top: 0;
   }
 
-  .stat-card {
+  .statCard {
     width: 160px;
     height: 120px; /* Riduce la dimensione delle schede */
   }
 
-  .home-graphs {
+  .homeGraphs {
     flex-direction: column;
   }
 
-  .graph-container {
+  .graphContainer {
     flex: 1 1 100%;
     max-width: 100%;
     max-height: 250px; /* Riduce l'altezza per schermi piccoli */
   }
 
-  .graph-container h4 {
+  .graphContainer h4 {
     font-size: 16px; /* Riduce la dimensione del testo per schermi piccoli */
   }
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+  bottom: 0;
 }
