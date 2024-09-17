@@ -1,8 +1,7 @@
 import { DataSet } from 'vis-data';
 import { Network } from 'vis-network';
 
-// Funzione per inizializzare il grafo
-export const initializeNetwork = (container, data, handlePopup) => {
+export const initializeNetwork = (container, data) => {
   if (!container) {
     console.error("Il contenitore del grafo non è pronto.");
     return;
@@ -14,67 +13,60 @@ export const initializeNetwork = (container, data, handlePopup) => {
       let icon = '';
       let color = '';
 
-      // Assegna l'icona, il colore e il testo in base al tipo di nodo
       if (node.type === 'Paziente') {
-        icon = '👤'; // Icona del paziente
-        label = `${icon} ${node.properties.codice_fiscale_assistito}`; // Mostra solo il codice fiscale del paziente
-        color = 'rgba(255, 99, 132, 0.5)'; // Colore del paziente
+        icon = '👤';
+        label = `${icon} ${node.properties.codice_fiscale_assistito}`;
+        color = 'rgba(255, 99, 132, 0.5)';
       } else if (node.type === 'Malattia') {
-        icon = '⚕️'; // Icona della malattia
-        label = `${icon} ${node.properties.codice}`; // Mostra solo il codice della malattia
-        color = 'rgba(54, 162, 235, 0.5)'; // Colore della malattia
+        icon = '⚕️';
+        label = `${icon} ${node.properties.codice}`;
+        color = 'rgba(54, 162, 235, 0.5)';
       } else if (node.type === 'Prescrizione') {
-        icon = '💊'; // Icona della prescrizione
-        label = `${icon} ${node.properties.codice}`; // Mostra solo il codice della prescrizione
-        color = 'rgba(75, 192, 192, 0.5)'; // Colore della prescrizione
+        icon = '💊';
+        label = `${icon} ${node.properties.codice}`;
+        color = 'rgba(75, 192, 192, 0.5)';
       }
 
       return {
         id: node.id,
-        label: label,  // Mostra l'icona e il codice
+        label: label,
         shape: 'dot',
         color: {
           background: color,
-          border: node.type === 'Paziente'
-            ? 'rgba(255, 99, 132, 1)' // Colore del bordo per il paziente
-            : node.type === 'Malattia'
-            ? 'rgba(54, 162, 235, 1)' // Colore del bordo per la malattia
-            : 'rgba(75, 192, 192, 1)', // Colore del bordo per la prescrizione
+          border: node.type === 'Paziente' ? 'rgba(255, 99, 132, 1)' :
+                 node.type === 'Malattia' ? 'rgba(54, 162, 235, 1)' : 'rgba(75, 192, 192, 1)',
           highlight: {
-            background: 'rgba(255, 206, 86, 0.8)', // Colore di sfondo quando evidenziato
-            border: 'rgba(255, 206, 86, 1)', // Colore del bordo quando evidenziato
+            background: 'rgba(255, 206, 86, 0.8)',
+            border: 'rgba(255, 206, 86, 1)',
           },
         },
-        font: { color: '#fff', size: 16, align: 'center' }, // Assicura che il testo sia centrato
-        borderWidth: 2, // Bordo più marcato
-        size: node.type === 'Paziente' ? 30 : 25, // Dimensione personalizzata per i nodi
+        font: { color: '#fff', size: 16, align: 'center' },
+        borderWidth: 2,
+        size: node.type === 'Paziente' ? 30 : 25,
       };
     })
   );
 
   const edges = new DataSet(
-    data.relationships.map((relationship) => {
+    data.relationships.map(relationship => {
       let color = '';
-      // Imposta il colore dell'arco in base alla relazione
       if (relationship.type === 'DIAGNOSTICATO_CON') {
-        color = 'rgba(54, 162, 235, 1)'; // Blu per DIAGNOSTICATO_CON
+        color = 'rgba(54, 162, 235, 1)';
       } else if (relationship.type === 'RICEVE_PRESCRIZIONE') {
-        color = 'rgba(75, 192, 192, 1)'; // Verde per RICEVE_PRESCRIZIONE
+        color = 'rgba(75, 192, 192, 1)';
       }
-  
+
       return {
-        id: relationship.id || `edge-${relationship.start_id}-${relationship.end_id}`, // Usa un id basato sui nodi se non esiste un id
+        id: relationship.id || `edge-${relationship.start_id}-${relationship.end_id}`,
         from: relationship.start_id,
         to: relationship.end_id,
         arrows: 'to',
-        color: { color: color }, // Applica il colore specifico
-        // Rimuovi la proprietà 'label' per non mostrare il nome della relazione
-        font: { color: '#000', size: 12 }, // Mantieni il font per eventuali altre personalizzazioni future
-        arrowStrikethrough: false, // Previene che la freccia superi il nodo trasparente
+        color: { color: color },
+        font: { color: '#000', size: 12 },
+        arrowStrikethrough: false,
       };
     })
   );
-  
 
   const options = {
     autoResize: true,
@@ -100,12 +92,12 @@ export const initializeNetwork = (container, data, handlePopup) => {
     nodes: {
       scaling: {
         min: 10,
-        max: 30, // Imposta una dimensione massima per i nodi
+        max: 30,
       },
     },
     interaction: {
       hover: true,
-      zoomView: false, // Disabilita lo zoom con la rotella
+      zoomView: false,
       dragView: true,
     },
   };
@@ -113,36 +105,22 @@ export const initializeNetwork = (container, data, handlePopup) => {
   try {
     const network = new Network(container, { nodes, edges }, options);
 
-    // Aggiungi il listener per il click su nodi e archi
-    network.on('click', function (params) {
-      if (params.nodes.length > 0) {
-        // Nodo cliccato
-        const nodeId = params.nodes[0];
-        const nodeData = data.nodes.find(node => node.id === nodeId);
-        handlePopup({
-          title: `Dettagli Nodo: ${nodeData.type}`,
-          content: `ID: ${nodeId}\nTipo: ${nodeData.type}\nProprietà: ${JSON.stringify(nodeData.properties, null, 2)}`,
-          x: params.pointer.DOM.x,
-          y: params.pointer.DOM.y,
-        });
-      } else if (params.edges.length > 0) {
-        // Arco cliccato
-        const edgeId = params.edges[0];
-        const edgeData = data.relationships.find(
-          (relationship) =>
-            `edge-${relationship.start_id}-${relationship.end_id}` === edgeId // Confronta l'ID di partenza
-        );
+    console.log("Network creato:", network);
 
-        handlePopup({
-          title: `Dettagli Arco: ${edgeData.type}`,
-          content: `Da: ${edgeData.start_id} a ${edgeData.end_id}\nTipo: ${edgeData.type}\nProprietà: ${JSON.stringify(edgeData.properties, null, 2)}`,
-          x: params.pointer.DOM.x,
-          y: params.pointer.DOM.y,
-        });
+    network.once("stabilized", () => {
+      if (typeof network.fit === 'function') {
+          network.fit({
+              animation: {
+                  duration: 500,
+                  easingFunction: "easeInOutQuad"
+              }
+          });
+      } else {
+          console.error("Il metodo 'fit' non è disponibile.");
       }
     });
 
-    return network; // Ritorna l'istanza della rete
+    return network;
   } catch (error) {
     console.error("Errore durante l'inizializzazione del grafo:", error);
   }

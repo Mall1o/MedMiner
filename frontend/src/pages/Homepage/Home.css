@@ -13,7 +13,8 @@
   transition: all 0.3s ease-in-out;
   max-width: 100%; /* Prende tutto lo spazio disponibile */
   overflow: hidden; /* Nasconde eventuali overflow */
-  margin-left: 0 !important; /* Disabilita temporaneamente il margine sinistro */
+  margin-left: 10px !important; /* Disabilita temporaneamente il margine sinistro */
+  margin-top: 25px;
 }
 
 /* Quando la sidebar è aperta */

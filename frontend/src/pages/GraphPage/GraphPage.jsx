@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Per ottenere i parametri dell'URL
-import GraphComponent from '../../components/graph/GraphComponent'; // Il componente del grafo
+import { useParams } from 'react-router-dom';
+import GraphComponent from '../../components/graph/GraphComponent';
 import { fetchPatientGraphData } from '../../services/graphDataService';
-import Loader from '../../components/Loader'; // Se hai un componente Loader
+import Loader from '../../components/Loader';
+import './GraphPage.css';  // Importa il file di stile
 
 const GraphPage = () => {
-  const { codiceFiscale } = useParams(); // Ottieni il codice fiscale dall'URL
+  const { codiceFiscale } = useParams();
   const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
 

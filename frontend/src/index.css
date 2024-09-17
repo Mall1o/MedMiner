@@ -14,34 +14,28 @@
 }
 
 body {
-  background-image: url('./assets/background/overlay_4.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
-  height: 100%;
+  height: 100%; /* Mantenuto per il layout corretto */
   font-family: Arial, sans-serif;
 }
 
 html, body, #root {
   height: 100%;
-}
-
-/* src/index.css */
-html, body {
-  height: 100%;
+  width: 100%; /* Aggiunto per garantire che anche la larghezza sia al 100% */
   margin: 0;
   padding: 0;
-  width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 #root {
-  height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 .App {
@@ -56,6 +50,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -84,9 +79,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -97,30 +94,33 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+  
   a:hover {
     color: #747bff;
   }
+  
   button {
     background-color: #f9f9f9;
   }
 }
 
-/* Nascondi la scrollbar per WebKit (Chrome, Safari) */
+/* Scrollbar personalizzate */
 .content-wrapper::-webkit-scrollbar {
   width: 0px;
   background: transparent; /* Rende invisibile la scrollbar */
 }
 
-/* Nascondi la scrollbar per Firefox */
 .content-wrapper {
   scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  overflow-y: auto; /* Scroll attivato solo quando necessario */
+  height: 100%; /* Mantenuto per occupare tutto lo spazio disponibile */
 }
 
-/* Nascondi la scrollbar in IE e Edge */
-.content-wrapper {
-  -ms-overflow-style: none;  /* IE and Edge */
-}
-.content-wrapper {
-  overflow-y: auto; /* Abilita lo scroll solo quando necessario */
-  height: 100%; /* Assicura che riempia tutto lo spazio disponibile */
+/* Aggiungi queste regole per garantire altezza e larghezza corretta sui contenitori */
+html, body, #root, .app-container, .main-content, .content-wrapper {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
