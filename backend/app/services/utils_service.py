@@ -19,5 +19,5 @@ class UtilsService:
     def get_degree_centrality_malattia_patient(self, codice_fiscale):
         return self.model.get_degree_centrality_malattia_patient(codice_fiscale)
 
-    def get_degree_centrlity_prescrizione_patient(self, codice_fiscale):
-        return self.model.get_degree_centrality_prescrizione_patient(codice_fiscale)
+    def get_degree_centrality_prescrizione_malattia(self, codice_malattia):
+        return self.model.get_degree_centrality_prescrizione_malattia(codice_malattia)

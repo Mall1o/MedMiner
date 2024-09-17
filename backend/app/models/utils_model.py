@@ -71,20 +71,20 @@ class UtilsModel:
             else:
                  return "Nessun risultato trovato."  
     
-    def get_degree_centrality_prescrizione_patient(self, codice_fiscale):
+    def get_degree_centrality_prescrizione_malattia(self, codice_malattia):
         with self.driver.session() as session:
-            #qui calcoliamo quante altre persone hanno la stessa prescrizione
+            # Qui calcoliamo quante altre malattie condividono la stessa prescrizione
             query = """
-            MATCH (p:Paziente)-[:RICEVE_PRESCRIZIONE]->(presc:Prescrizione)
-            WHERE p.codice_fiscale_assistito = $codice_fiscale_assistito
+            MATCH (m:Malattia)-[:CURATA_CON]->(presc:Prescrizione)
+            WHERE m.codice = $codice_malattia
             WITH presc
-            MATCH (presc)<-[:RICEVE_PRESCRIZIONE]-(altriPazienti:Paziente)
-            RETURN presc.codice AS nome_prescrizione, COUNT(DISTINCT altriPazienti) AS  degree_centrality
+            MATCH (presc)<-[:CURATA_CON]-(altreMalattie:Malattia)
+            RETURN presc.codice AS nome_prescrizione, COUNT(DISTINCT altreMalattie) AS degree_centrality
             ORDER BY degree_centrality DESC
             """
             
             # Esegui la query
-            result = session.run(query, codice_fiscale_assistito=codice_fiscale)
+            result = session.run(query, codice_malattia=codice_malattia)
 
             records = list(result)
             
@@ -98,4 +98,4 @@ class UtilsModel:
                     prescrizioni.append(prescrizione_info)
                 return prescrizioni
             else:
-                 return "Nessun risultato trovato."
+                return "Nessun risultato trovato."
