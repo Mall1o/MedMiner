@@ -8,7 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
-import './Footer.css'; // Importa il file di stile
+import styles from './Footer.module.css';
 import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto
 
 const Footer = () => {
@@ -17,11 +17,11 @@ const Footer = () => {
   return (
     <AppBar 
       position="relative" 
-      className={`footer-container ${isSidebarOpen ? 'footer-sidebar-open' : 'footer-sidebar-closed'}`} 
+      className={`${styles.footerContainer} ${isSidebarOpen ? styles.footerSidebarOpen : styles.footerSidebarClosed}`}
       sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}
     >
-      <Toolbar className="footer-toolbar">
-        <Box className="footer-text">
+      <Toolbar className={styles.footerToolbar}>
+        <Box className={styles.footerText}>
           <Typography variant="body2" color="textSecondary">
             © 2024 ComorGraph All rights reserved.
           </Typography>
@@ -29,10 +29,10 @@ const Footer = () => {
             Contact us: info@comorgraph.com
           </Typography>
         </Box>
-        <Box className="footer-icons">
+        <Box className={styles.footerIcons}>
           <IconButton 
             color="inherit" 
-            className="footer-icon" 
+            className={styles.footerIcons}
             href="https://facebook.com"
             target="_blank" 
             rel="noopener noreferrer"
@@ -41,7 +41,7 @@ const Footer = () => {
           </IconButton>
           <IconButton 
             color="inherit" 
-            className="footer-icon" 
+            className={styles.footerIcons}
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -50,7 +50,7 @@ const Footer = () => {
           </IconButton>
           <IconButton 
             color="inherit" 
-            className="footer-icon" 
+            className={styles.footerIcons}
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
@@ -59,7 +59,7 @@ const Footer = () => {
           </IconButton>
           <IconButton 
             color="inherit" 
-            className="footer-icon" 
+            className={styles.footerIcons}
             href="mailto:info@comorgraph.com"
             target="_blank"
             rel="noopener noreferrer"

@@ -1,0 +1,155 @@
+.sidebar {
+  position: fixed;
+  top: 20px;
+  left: 10px;
+  bottom: 20px;
+  height: auto;
+  width: 250px;
+  background-color: rgba(240, 244, 248, 0.3);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 15px;
+}
+
+.sidebarLogo {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sidebarLogo img {
+  width: 80px;
+  height: auto;
+  transition: width 0.3s ease;
+}
+
+.appName {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  color: #333;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.sidebarClosed {
+  transform: translateX(-100%);
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.sidebarToggle {
+  position: absolute;
+  top: 20px;
+  right: -25px;
+  background: linear-gradient(145deg, #ffffff70, #dfe4ea); /* Sfondo sfumato */
+  border-radius: 50%;
+  width: 35px; /* Aumenta leggermente la dimensione per un miglior click */
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata */
+  transition: background 0.3s ease, transform 0.3s ease; /* Transizioni */
+}
+
+.sidebarToggle:hover {
+  background: linear-gradient(145deg, #ffffff90, #ced6e0); /* Cambia colore al passaggio del mouse */
+  transform: scale(1.1); /* Effetto ingrandimento al passaggio del mouse */
+}
+
+.sidebarToggle:active {
+  transform: scale(0.95); /* Effetto click */
+}
+
+.sidebarMenu {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebarMenuItem {
+  width: 100%;
+  margin: 10px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebarMenuItem a {
+  display: block;
+  text-decoration: none;
+  padding: 15px 30px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  color: #333;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  max-width: 220px;
+}
+
+.sidebarMenuItem a:hover {
+  background-color: rgba(224, 228, 232, 0.8);
+}
+
+.sidebarMenuItem a.active {
+  background-color: rgba(240, 244, 248, 1);
+  font-weight: 600;
+  color: #000;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebarLogo img {
+    width: 70px;
+  }
+
+  .appName {
+    font-size: 1.1rem;
+  }
+
+  .sidebarMenuItem a {
+    padding: 12px 20px;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebarLogo img {
+    width: 60px;
+  }
+
+  .appName {
+    font-size: 1rem;
+  }
+
+  .sidebarMenuItem a {
+    padding: 10px 15px;
+    max-width: 150px;
+  }
+}
+
+/* Main content */
+.mainContent {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.mainContentExpanded {
+  margin-left: 0;
+}

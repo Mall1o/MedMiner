@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { initializeNetwork } from './GraphComponentLogic';
-import './GraphComponent.css';
+import styles from './GraphComponent.module.css';
 
 const GraphComponent = ({ data }) => {
   const networkRef = useRef(null);
@@ -68,7 +68,7 @@ const GraphComponent = ({ data }) => {
   // Funzione per gestire il click fuori dal popup
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isLegendVisible && !event.target.closest('.legend-popup') && !event.target.closest('.legend-icon')) {
+      if (isLegendVisible && !event.target.closest({legendPopup}) && !event.target.closest({legendIcon})) {
         setIsLegendVisible(false);
       }
     };
@@ -84,22 +84,22 @@ const GraphComponent = ({ data }) => {
   };
 
   return (
-    <div className="graph-page">
-      <div ref={networkRef} className="graph-container" />
-      <div className="zoom-controls">
-        <button onClick={zoomIn} className="zoom-button">+</button>
-        <button onClick={zoomOut} className="zoom-button">-</button>
+    <div className={styles.GraphPage}>
+      <div ref={networkRef} className={styles.graphContainer} />
+      <div className={styles.zoomControls}>
+        <button onClick={zoomIn} className={styles.zoomButton}>+</button>
+        <button onClick={zoomOut} className={styles.zoomButton}>-</button>
       </div>
-      <div className="legend-icon" onClick={toggleLegend}>
+      <div className={styles.legendIcon} onClick={toggleLegend}>
         ℹ️
       </div>
       {isLegendVisible && (
-        <div className="legend-popup">
+        <div className={styles.legendPopup}>
           <h3>Legenda</h3>
           <ul>
-            <li><span className="color-box patient"></span> Paziente</li>
-            <li><span className="color-box disease"></span> Malattia</li>
-            <li><span className="color-box prescription"></span> Prescrizione</li>
+            <li><span className={styles.colorBoxPatient}></span> Paziente</li>
+            <li><span className={styles.colorBoxDisease}></span> Malattia</li>
+            <li><span className={styles.colorBoxPrescription}></span> Prescrizione</li>
           </ul>
         </div>
       )}
