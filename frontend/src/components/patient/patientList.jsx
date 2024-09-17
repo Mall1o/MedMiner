@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import UtilsDataServices from '../../services/utilsDataService';
-import './patientList.css';
+import styles from './PatientList.module.css';
 import defaultAvatar from '../../assets/user_icon.png';
 
 const PatientList = () => {
@@ -49,15 +49,15 @@ const PatientList = () => {
   };
 
   return (
-    <div className="patient-list-container">
+    <div className={styles.patientListContainer}>
       <input
         type="text"
         placeholder="Search user..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="patient-search-input"
+        className={styles.patientSearchInput}
       />
-      <table className="patient-list-table">
+      <table className={styles.patientListTable}>
         <thead>
           <tr>
             <th></th>
@@ -71,13 +71,13 @@ const PatientList = () => {
           {currentPatients.map((patient) => (
             <tr key={patient.codice_fiscale_assistito}>
               <td>
-                <img src={defaultAvatar} className="avatar-img" alt="avatar" />
+                <img src={defaultAvatar} className={styles.avatarImg} alt="avatar" />
               </td>
               <td>{patient.codice_fiscale_assistito}</td>
               <td>{patient.eta_prima_diagnosi}</td>
               <td>{patient.sesso}</td>
               <td>
-                <button onClick={() => handleShowGraph(patient)} className="view-graph-btn">
+                <button onClick={() => handleShowGraph(patient)} className={styles.viewGraphBtn}>
                   Visualizza Grafo
                 </button>
               </td>
@@ -86,9 +86,9 @@ const PatientList = () => {
         </tbody>
       </table>
 
-      <div className="pagination">
-        <button onClick={paginatePrev} disabled={currentPage === 1} className="pagination-button">Indietro</button>
-        <button onClick={paginateNext} disabled={currentPage === totalPages} className="pagination-button">Avanti</button>
+      <div className={styles.pagination}>
+        <button onClick={paginatePrev} disabled={currentPage === 1} className={styles.paginationBtn}>Indietro</button>
+        <button onClick={paginateNext} disabled={currentPage === totalPages} className={styles.paginationBtn}>Avanti</button>
       </div>
     </div>
   );

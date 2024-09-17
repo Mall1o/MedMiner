@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import styles from './DetailPanel.module.css';
 
 const pieData = [
     { name: 'Group A', value: 400 },
@@ -11,8 +12,8 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const DetailsPanel = ({ details, metrics, plotData }) => {
     return (
-      <div className="details-panel">
-        <div className="details-section">
+      <div className={styles.DetailsPanel}>
+        <div className={styles.detailsSection}>
           <h3>Dettagli</h3>
           {/* Visualizza dinamicamente i dettagli */}
           {Object.keys(details).map((key) => (
@@ -20,7 +21,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
           ))}
         </div>
   
-        <div className="metrics-section">
+        <div className={styles.metricsSection}>
           <h4>Applica Metriche</h4>
           {/* Crea pulsanti per le metriche dinamicamente */}
           {metrics.map((metric) => (
@@ -31,7 +32,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
           ))}
         </div>
 
-      <div className="plot-section">
+      <div className={styles.plotSection}>
         <h4>Informazioni del Paziente</h4>
         <PieChart>
             <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} fill="#8884d8" label>

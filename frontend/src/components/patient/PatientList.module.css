@@ -1,11 +1,11 @@
-.patient-list-container {
+.patientListContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.3); /* Trasparenza simile alla home */
+  background-color: rgba(255, 255, 255, 0.3);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
@@ -13,44 +13,43 @@
   overflow: hidden;
 }
 
-
-.patient-search-input {
-  width: 60%; /* Più stretta */
+.patientSearchInput {
+  width: 60%;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 25px; /* Bordi arrotondati */
-  background-color: rgba(255, 255, 255, 0.7); /* Trasparenza leggera */
-  color: #333; /* Colore testo scuro */
-  text-align: center; /* Testo centrato */
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #333;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.patient-list-table {
+.patientListTable {
   width: 100%;
   border-collapse: collapse;
 }
 
-.patient-list-table thead {
+.patientListTable thead {
   background-color: rgba(230, 230, 230, 0.5);
 }
 
-.patient-list-table th,
-.patient-list-table td {
+.patientListTable th,
+.patientListTable td {
   padding: 12px;
   text-align: left;
   font-size: 14px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  color: #333; /* Colore scuro per il testo */
+  color: #333;
 }
 
-.patient-list-table tr:hover {
+.patientListTable tr:hover {
   background-color: rgba(96, 97, 98, 0.2);
   cursor: pointer;
 }
 
-.avatar-img {
+.avatarImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -61,10 +60,10 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  width: 200px; /* Aggiustato per pulsanti avanti/indietro */
+  width: 200px;
 }
 
-.pagination button {
+.paginationBtn {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -73,12 +72,12 @@
   cursor: pointer;
 }
 
-.pagination button:disabled {
+.paginationBtn:disabled {
   background-color: #ced4da;
   cursor: not-allowed;
 }
 
-.view-graph-btn {
+.viewGraphBtn {
   padding: 8px 16px;
   background-color: #007bff;
   color: white;
@@ -87,25 +86,23 @@
   cursor: pointer;
 }
 
-.view-graph-btn:hover {
+.viewGraphBtn:hover {
   background-color: #0056b3;
 }
 
-
 /* Media query per schermi più piccoli */
 @media (max-width: 768px) {
-  .patient-list-container {
+  .patientListContainer {
     padding: 0 10px;
   }
 
-  .view-graph-btn {
+  .viewGraphBtn {
     padding: 6px 12px;
   }
 }
 
-/* Media query per adattare la lista a schermi più piccoli */
 @media (max-width: 1200px) {
-  .patient-list-container {
+  .patientListContainer {
     width: calc(100% - 100px);
     margin-left: 50px;
     margin-right: 50px;
@@ -113,18 +110,18 @@
 }
 
 @media (max-width: 768px) {
-  .patient-list-container {
+  .patientListContainer {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     padding: 0 10px;
   }
 
-  .patient-list-table th, .patient-list-table td {
+  .patientListTable th, .patientListTable td {
     padding: 8px;
   }
 
   .pagination {
-    width: 150px; /* Aggiustamento per dispositivi mobili */
+    width: 150px;
   }
 }
