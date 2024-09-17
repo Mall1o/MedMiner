@@ -6,6 +6,22 @@ from flask_cors import CORS
 utils_bp = Blueprint('utils', __name__)
 CORS(utils_bp)
 
+@utils_bp.route('/degree-centrality/prescription/patient', methods=['GET'])
+def get_degree_centrality_prescription():
+    codice_fiscale = request.args.get('codice_fiscale')
+    service = UtilsService(neo4j_db.driver)
+    result = service.get_degree_centrlity_prescrizione_patient(codice_fiscale)
+    
+    return jsonify(result), 200
+
+@utils_bp.route('/degree-centrality/disese/patient', methods=['GET'])
+def get_degree_centrality_disease():
+    codice_fiscale = request.args.get('codice_fiscale')
+    service = UtilsService(neo4j_db.driver)
+    result = service.get_degree_centrality_malattia_patient(codice_fiscale)
+    
+    return jsonify(result), 200
+
 @utils_bp.route('/stats', methods=['GET'])
 def get_graph_stats():
     service = UtilsService(neo4j_db.driver)

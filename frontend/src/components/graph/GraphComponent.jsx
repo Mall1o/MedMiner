@@ -5,7 +5,6 @@ import './GraphComponent.css';
 
 const GraphComponent = ({ data }) => {
   const networkRef = useRef(null);
-  const [popupContent, setPopupContent] = useState(null);
   const [isLegendVisible, setIsLegendVisible] = useState(false);
 
   useEffect(() => {
@@ -14,15 +13,7 @@ const GraphComponent = ({ data }) => {
       return;
     }
 
-    const handlePopup = ({ title, content, x, y }) => {
-      setPopupContent({
-        title,
-        content,
-        position: { x, y }
-      });
-    };
-
-    const network = initializeNetwork(networkRef.current, data, handlePopup);
+    const network = initializeNetwork(networkRef.current, data);
 
     // Centra e adatta il grafo all'interno del contenitore
     if (network) {
@@ -41,9 +32,6 @@ const GraphComponent = ({ data }) => {
       }
     };
   }, [data]);
-
-  // Usa il custom hook per gestire il dragging
-  usePopupDrag(popupContent);
 
   // Funzioni per gestire lo zoom
   const zoomIn = () => {
@@ -85,21 +73,7 @@ const GraphComponent = ({ data }) => {
   return (
     <div className="graph-page">
       <div ref={networkRef} className="graph-container" />
-
-      {/* Popup per il contenuto dei nodi */}
-      {popupContent && (
-        <div
-          className="popup"
-          style={{
-            top: `${popupContent.position.y}px`,
-            left: `${popupContent.position.x}px`
-          }}
-        >
-          <h3>{popupContent.title}</h3>
-          <pre>{popupContent.content}</pre>
-          <button onClick={() => setPopupContent(null)}>Chiudi</button>
-        </div>
-      )}
+      
       
       {/* Pulsanti per lo zoom */}
       <div className="zoom-controls">
