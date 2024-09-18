@@ -52,7 +52,9 @@ export const initializeNetwork = (container, data) => {
       let color = '';
       if (relationship.type === 'DIAGNOSTICATO_CON') {
         color = 'rgba(54, 162, 235, 1)';
-      } else if (relationship.type === 'RICEVE_PRESCRIZIONE') {
+      } else if (relationship.type === 'CURATO_CON') {
+        color = 'rgba(75, 192, 192, 1)';
+      } else if (relationship.type === 'ASSOCIATO_A') {
         color = 'rgba(75, 192, 192, 1)';
       }
 
