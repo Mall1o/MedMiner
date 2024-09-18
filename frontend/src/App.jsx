@@ -6,6 +6,7 @@ import GraphPage from './pages/GraphPage/GraphPage';
 import PatientPage from './pages/PatientPage/patientPage.jsx'; // Lista pazienti
 import styles from './App.module.css';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
+import { DetailsPanelProvider } from './context/DetailsPanelContext';
 import ScrollToTop from './hooks/ScrollToTop';
 import { useScrollToTop } from './hooks/use-scroll-to-top';
 
@@ -13,8 +14,10 @@ const App = () => {
   useScrollToTop(); // Hook per tornare in cima alla pagina
   return (
     <SidebarProvider>
-      <ScrollToTop />
-      <MainLayout />
+      <DetailsPanelProvider>
+        <ScrollToTop />
+        <MainLayout />
+      </DetailsPanelProvider>
     </SidebarProvider>
   );
 };

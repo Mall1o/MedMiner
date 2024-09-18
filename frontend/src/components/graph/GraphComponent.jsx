@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { initializeNetwork } from './GraphComponentLogic';
+import { useDetailsPanel } from '../../context/DetailsPanelContext'; // Importa il contesto
 import styles from './GraphComponent.module.css';
 
-const GraphComponent = ({ data,  onNodeClick, onEdgeClick }) => {
+const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {
   const networkRef = useRef(null);
+  const { isPanelOpen, togglePanel } = useDetailsPanel(); // Usa il contesto per gestire la barra dei dettagli
   const [isLegendVisible, setIsLegendVisible] = useState(false);
 
   useEffect(() => {
@@ -23,14 +25,24 @@ const GraphComponent = ({ data,  onNodeClick, onEdgeClick }) => {
         if (event.nodes.length > 0) {
           const clickedNodeId = event.nodes[0];
           const clickedNode = data.nodes.find(node => node.id === clickedNodeId);
-          if (clickedNode && onNodeClick) {
-            onNodeClick(clickedNode); // Invia il nodo cliccato alla pagina
+          if (clickedNode) {
+            if (!isPanelOpen) {
+              togglePanel(); // Apri il pannello solo se è chiuso
+            }
+            if (onNodeClick) {
+              onNodeClick(clickedNode); // Invia il nodo cliccato alla pagina
+            }
           }
         } else if (event.edges.length > 0) {
           const clickedEdgeId = event.edges[0];
           const clickedEdge = data.relationships.find(relationship => `edge-${relationship.start_id}-${relationship.end_id}` === clickedEdgeId);
-          if (clickedEdge && onEdgeClick) {
-            onEdgeClick(clickedEdge); // Invia l'arco cliccato alla pagina
+          if (clickedEdge) {
+            if (!isPanelOpen) {
+              togglePanel(); // Apri il pannello solo se è chiuso
+            }
+            if (onEdgeClick) {
+              onEdgeClick(clickedEdge); // Invia l'arco cliccato alla pagina
+            }
           }
         }
       });
@@ -61,7 +73,7 @@ const GraphComponent = ({ data,  onNodeClick, onEdgeClick }) => {
         networkRef.current.networkInstance.destroy();
       }
     };
-  }, [data]);
+  }, [data, isPanelOpen, togglePanel]);
 
   // Funzioni per gestire lo zoom
   const zoomIn = () => {
