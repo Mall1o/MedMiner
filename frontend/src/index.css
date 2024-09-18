@@ -1,12 +1,39 @@
 :root {
+  --background-color: #003366; /* Bianco per lo sfondo principale */
+  --sidebarbackground-color: #ebe5e5; /* Grigio scuro per la sidebar */
+  --primary-text-color: #333333; /* Testo principale scuro */
+  --secondary-text-color: #777777; /* Testo secondario grigio medio */
+  --link-color: #32408c; /* Blu scuro per i link */
+  --link-hover-color: #32408c; /* Verde acqua per hover link */
+  --text-hover-color: white;
+  /* Riquadri (Box) */
+  --box-background-color: #ebe5e5; /* Grigio chiaro per i riquadri */
+  --box-border-color: #E0E0E0; /* Bordo dei riquadri */
+  --box-hover-border-color: #CCCCCC; /* Grigio per hover riquadri */
+  --box-hover-background-color: #32408c; /* Grigio ancora più chiaro per hover */
+  --box-shadow-color: rgba(0, 0, 0, 0.2); /* Ombra leggera */
+  --stat-background-color: #ffffff; /* Grigio chiaro tendente al blu per schede e grafici */
+  
+  /* Pulsanti */
+  --sidebar-button-bg: white; /* Blu scuro per i pulsanti della navbar */
+  --button-primary-bg: #32408c; /* Verde acqua per i pulsanti principali */
+  --button-primary-hover-bg: #323f8cd2; /* Hover per pulsanti principali */
+  --button-primary-active-bg: #4e63d7; /* Hover per pulsanti principali */
+
+  /* Testo nella sidebar */
+  --sidebar-text-color: #333333; /* Colore chiaro per il testo nella sidebar */
+
+  /* Colore attivo per i link */
+  --link-active-bg: #003366; /* Blu scuro per il link attivo */
+  
+  /* Colori per i grafici */
+  --chart-color-1: #2CC1AE; /* Verde acqua per i grafici */
+  --chart-color-2: #007BFF; /* Blu per i grafici */
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #e1dede;
-
+  color: var(--primary-text-color); /* Usa il colore del testo principale */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -20,6 +47,7 @@ body {
   margin: 0;
   height: 100%; /* Mantenuto per il layout corretto */
   font-family: Arial, sans-serif;
+  background-color: var(--background-color); /* Usa il bianco di sfondo */
 }
 
 html, body, #root {
@@ -47,12 +75,12 @@ html, body, #root {
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--link-color); /* Colore link principale */
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: var(--link-hover-color); /* Colore hover link */
 }
 
 body {
@@ -66,6 +94,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: var(--primary-text-color); /* Colore per gli h1 */
 }
 
 button {
@@ -75,13 +104,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--button-primary-bg); /* Colore pulsante principale */
+  color: var(--primary-text-color); /* Colore testo pulsante */
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: var(--button-primary-hover-bg); /* Colore hover pulsante */
 }
 
 button:focus,
@@ -91,15 +121,15 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--primary-text-color); /* Testo in modalità chiara */
+    background-color: var(--background-color); /* Sfondo bianco */
   }
-  
+
   a:hover {
-    color: #747bff;
+    color: var(--link-hover-color); /* Colore hover link in modalità chiara */
   }
-  
+
   button {
-    background-color: #f9f9f9;
+    background-color: var(--button-primary-bg); /* Pulsante in modalità chiara */
   }
 }

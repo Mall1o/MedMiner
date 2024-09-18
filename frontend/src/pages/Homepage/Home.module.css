@@ -8,9 +8,9 @@
   height: auto;
   padding: 20px;
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--box-background-color); /* Sfondo bianco */
   border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--box-shadow-color); /* Ombra leggera */
   transition: all 0.3s ease-in-out;
   max-width: 100%; /* Prende tutto lo spazio disponibile */
   overflow: hidden; /* Nasconde eventuali overflow */
@@ -77,21 +77,47 @@
 }
 
 .statCard {
-  background-color: rgba(230, 230, 230, 0.5);
-  color: black;
+  background-color: var(--stat-background-color); /* Usa il grigio tendente al blu */
+  color: var(--primary-text-color); /* Testo scuro */
   padding: 10px;
   border-radius: 15px;
   text-align: center;
   font-size: 16px;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease;
   width: 180px;
   height: 130px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px var(--box-shadow-color); /* Ombra leggera */
 }
 
 .statCard:hover {
+  background-color: var(--box-hover-background-color);
+  color: white;
   transform: translateY(-5px);
 }
+
+.graphContainer {
+  justify-content: center;
+  flex: 1 1 45%;
+  max-width: 550px;
+  max-height: 350px;
+  background-color: var(--stat-background-color); /* Usa il grigio tendente al blu */
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px var(--box-shadow-color); /* Ombra leggera */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 20px;
+}
+
+.graphContainer h4 {
+  color: var(--primary-text-color); /* Testo scuro */
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
 
 /* Stile per i grafici */
 .homeGraphs {
@@ -103,29 +129,6 @@
   padding: 10px;
   gap: 25px;
   flex-wrap: wrap; /* Si adatta su più righe se necessario */
-}
-
-.graphContainer {
-  justify-content: center;
-  flex: 1 1 45%;
-  max-width: 550px;
-  max-height: 350px;
-  background-color: rgba(240, 240, 240, 0.5);
-  padding: 10px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  margin: 20px;
-}
-
-.graphContainer h4 {
-  color: black;
-  text-align: center;
-  font-size: 18px;
-  margin-bottom: 10px;
 }
 
 /* Grafico a torta più grande */

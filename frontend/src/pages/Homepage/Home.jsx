@@ -55,7 +55,7 @@ const Home = () => {
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
-                  <Bar dataKey="value" fill="#82ca9d" />
+                  <Bar dataKey="value" fill="#32408C" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -64,7 +64,7 @@ const Home = () => {
               <h4>Some Stats</h4>
               <ResponsiveContainer width="100%" height={200}>
                 <PieChart>
-                  <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} fill="#8884d8" label>
+                  <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} fill="#32408C" label>
                     {pieData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}

@@ -5,7 +5,7 @@
   bottom: 20px;
   height: auto;
   width: 250px;
-  background-color: rgba(240, 244, 248, 0.3);
+  background-color: var(--sidebarbackground-color); 
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   display: flex;
@@ -14,6 +14,7 @@
   align-items: center;
   border-radius: 15px;
 }
+
 
 .sidebarLogo {
   text-align: center;
@@ -29,7 +30,7 @@
 .appName {
   font-family: 'Poppins', sans-serif;
   font-size: 1.3rem;
-  color: #333;
+  color: var(--sidebar-text-color); /* Colore chiaro per il nome dell'app */
   margin-top: 8px;
   text-align: center;
 }
@@ -46,21 +47,23 @@
   position: absolute;
   top: 20px;
   right: -25px;
-  background: linear-gradient(145deg, #ffffff70, #dfe4ea); /* Sfondo sfumato */
+  background: var(--sidebar-background-color);
   border-radius: 50%;
-  width: 35px; /* Aumenta leggermente la dimensione per un miglior click */
+  width: 35px;
   height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata */
-  transition: background 0.3s ease, transform 0.3s ease; /* Transizioni */
+  transition: background 0.3s ease, transform 0.3s ease;
+  color: white;
 }
 
 .sidebarToggle:hover {
-  background: linear-gradient(145deg, #ffffff90, #ced6e0); /* Cambia colore al passaggio del mouse */
-  transform: scale(1.1); /* Effetto ingrandimento al passaggio del mouse */
+  background: var(--link-hover-color); /* Cambia colore al passaggio del mouse con il colore del link */
+  color: white;
+  transform: scale(1.1);
 }
 
 .sidebarToggle:active {
@@ -89,23 +92,32 @@
   display: block;
   text-decoration: none;
   padding: 15px 30px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--sidebar-button-bg); /* Sfondo bianco per i menu item */
   border-radius: 15px;
-  color: #333;
+  color: var(--primary-text-color); /* Colore del testo */
   font-weight: 500;
   width: 100%;
   text-align: center;
   max-width: 220px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .sidebarMenuItem a:hover {
-  background-color: rgba(224, 228, 232, 0.8);
+  background-color: var(--button-primary-bg); /* Colore hover del pulsante */
+  color: var(--text-hover-color); /* Testo chiaro durante l'hover */
+  transform: translateY(-2px); /* Effetto sollevato durante l'hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra al passaggio del mouse */
+}
+
+.sidebarMenuItem a:active {
+  background-color: var(--button-primary-hover-bg); /* Colore quando attivato */
+  transform: translateY(0); /* Rimuove l'effetto sollevato quando cliccato */
 }
 
 .sidebarMenuItem a.active {
-  background-color: rgba(240, 244, 248, 1);
+  background-color: var(--sidebar-background-color); /* Colore blu scuro per l'item attivo */
   font-weight: 600;
-  color: #000;
+  color: var(--sidebar-text-color); /* Colore chiaro per l'item attivo */
 }
 
 /* Media Queries */
