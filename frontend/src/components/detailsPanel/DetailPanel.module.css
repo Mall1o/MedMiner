@@ -1,20 +1,57 @@
-
 .detailsPanel {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  bottom: 20px;
+  height: auto;
+  width: 300px; /* Larghezza fissa per il pannello */
   background-color: var(--box-background-color);
-  border-radius: 10px;
-  flex-grow: 1; /* Rendi questo 1 per dare meno spazio alla sidebar */
-  width: 300px; /* Definisci una larghezza fissa */
-  padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
+  transition: transform 0.3s ease-in-out;
+}
+
+.panelOpen {
+  transform: translateX(0); /* Aperto, visibile */
+}
+
+.panelClosed {
+  transform: translateX(100%); /* Chiuso, fuori schermo */
+}
+
+.panelToggle {
+  position: absolute;
+  top: 20px;
+  left: -25px;
+  background: var(--sidebar-background-color);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
+  color: white;
+}
+
+.panelToggle:hover {
+  background: var(--link-hover-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.panelToggle:active {
+  transform: scale(0.95);
 }
 
 .detailsSection,
-.metricsSection,
-.plotSection {
+.metricsSection {
   margin-bottom: 20px;
 }
 
@@ -37,8 +74,4 @@
 .metricsSection button:active {
   background-color: var(--button-primary-active-bg);
   color: white;
-}
-
-.plotSection {
-  margin-top: 20px;
 }

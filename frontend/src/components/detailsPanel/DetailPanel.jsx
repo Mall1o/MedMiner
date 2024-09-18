@@ -1,12 +1,16 @@
 import React from 'react';
 import styles from './DetailPanel.module.css';
+import { useDetailsPanel } from '../../context/DetailsPanelContext'; // Importa il contesto del pannello
 
 const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
   
   // Se i dettagli non sono disponibili, mostra un messaggio predefinito
   if (!details || Object.keys(details).length === 0) {
     return (
-      <div className={styles.detailsPanel}>
+      <div className={`${styles.detailsPanel} ${isPanelOpen ? styles.panelOpen : styles.panelClosed}`}>
+        <div className={styles.panelToggle} onClick={togglePanel}>
+          {isPanelOpen ? '→' : '←'}
+        </div>
         <p>Seleziona un nodo o un arco per vedere i dettagli.</p>
       </div>
     );
@@ -23,12 +27,12 @@ const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
   const filteredKeys = Object.keys(data).filter(key => key !== 'id' && key !== 'start_id' && key !== 'end_id');
 
   return (
-    <div className={styles.detailsPanel}>
+    <div className={`${styles.detailsPanel} ${isPanelOpen ? styles.panelOpen : styles.panelClosed}`}>
+      <div className={styles.panelToggle} onClick={togglePanel}>
+        {isPanelOpen ? '→' : '←'}
+      </div>
       <div className={styles.detailsSection}>
-        {/* Impostare il tipo come titolo */}
         <h3>{isNode ? 'Nodo - ' + data.tipo : isEdge ? 'Arco' : 'Dettagli'}</h3>
-
-        {/* Mostra i dettagli dinamicamente, escludendo 'id', 'start_id' e 'end_id' */}
         {filteredKeys.length > 0 ? (
           filteredKeys.map((key) => {
             const value = data[key];
@@ -54,7 +58,6 @@ const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
         )}
       </div>
 
-      {/* Sezione delle metriche */}
       <div className={styles.metricsSection}>
         <h4>Applica Metriche</h4>
         <div className={styles.metricItem}>
