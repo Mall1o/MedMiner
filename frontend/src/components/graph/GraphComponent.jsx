@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { initializeNetwork } from './GraphComponentLogic';
 import styles from './GraphComponent.module.css';
 
-const GraphComponent = ({ data }) => {
+const GraphComponent = ({ data,  onNodeClick, onEdgeClick }) => {
   const networkRef = useRef(null);
   const [isLegendVisible, setIsLegendVisible] = useState(false);
 
@@ -17,6 +17,23 @@ const GraphComponent = ({ data }) => {
 
     if (network) {
       networkRef.current.networkInstance = network;
+
+      // Aggiungi gestione click sui nodi e sugli archi
+      network.on('click', (event) => {
+        if (event.nodes.length > 0) {
+          const clickedNodeId = event.nodes[0];
+          const clickedNode = data.nodes.find(node => node.id === clickedNodeId);
+          if (clickedNode && onNodeClick) {
+            onNodeClick(clickedNode); // Invia il nodo cliccato alla pagina
+          }
+        } else if (event.edges.length > 0) {
+          const clickedEdgeId = event.edges[0];
+          const clickedEdge = data.relationships.find(relationship => `edge-${relationship.start_id}-${relationship.end_id}` === clickedEdgeId);
+          if (clickedEdge && onEdgeClick) {
+            onEdgeClick(clickedEdge); // Invia l'arco cliccato alla pagina
+          }
+        }
+      });
 
       // Forza il ridimensionamento del canvas
       const updateCanvasSize = () => {

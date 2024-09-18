@@ -1,98 +1,72 @@
 import React from 'react';
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import styles from './DetailPanel.module.css';
 
-const pieData = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-  ];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const DetailsPanel = ({ details, metrics = [] }) => {
+  // Log dei dettagli ricevuti per debugging
+  console.log('Dettagli ricevuti:', details);
 
-  const DetailsPanel = ({ details, metrics, plotData }) => {
+  // Se i dettagli non sono disponibili, mostra un messaggio predefinito
+  if (!details || Object.keys(details).length === 0) {
     return (
       <div className={styles.DetailsPanel}>
-        <div className={styles.detailsSection}>
-          <h3>Dettagli</h3>
-          {/* Visualizza dinamicamente i dettagli */}
-          {Object.keys(details).map((key) => (
-            <p key={key}><strong>{key}:</strong> {details[key]}</p>
-          ))}
-        </div>
-  
-        <div className={styles.metricsSection}>
-          <h4>Applica Metriche</h4>
-          {/* Crea pulsanti per le metriche dinamicamente */}
-          {metrics.map((metric) => (
-            <div key={metric.name} className="metric-item">
-              <button onClick={metric.onClick}>{metric.name}</button>
-              <span>{metric.description}</span>
-            </div>
-          ))}
-        </div>
+        <p>Seleziona un nodo o un arco per vedere i dettagli.</p>
+      </div>
+    );
+  }
 
-      <div className={styles.plotSection}>
-        <h4>Informazioni del Paziente</h4>
-        <PieChart>
-            <Pie data={pieData} cx="50%" cy="50%" outerRadius={80} fill="#8884d8" label>
-            {pieData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-            ))}
-            </Pie>
-            <Tooltip />
-        </PieChart>
+  // Determina se stiamo mostrando un nodo o un arco
+  const isNode = details.type === 'Nodo';
+  const isEdge = details.type === 'Arco';
+
+  // Estrarre i dati del nodo o dell'arco (gestione robusta dei dettagli)
+  const data = isNode ? details.nodeData || {} : details;
+
+  // Escludere chiavi specifiche come 'id', 'start_id', 'end_id'
+  const filteredKeys = Object.keys(data).filter(key => key !== 'id' && key !== 'start_id' && key !== 'end_id');
+
+  return (
+    <div className={styles.DetailsPanel}>
+      <div className={styles.detailsSection}>
+        {/* Impostare il tipo come titolo */}
+        <h3>{isNode ? 'Nodo - ' + data.tipo : isEdge ? 'Arco' : 'Dettagli'}</h3>
+
+        {/* Mostra i dettagli dinamicamente, escludendo 'id', 'start_id' e 'end_id' */}
+        {filteredKeys.length > 0 ? (
+          filteredKeys.map((key) => {
+            const value = data[key];
+            return (
+              <p key={key}>
+                <strong>{key}:</strong>{' '}
+                {typeof value === 'object' && value !== null ? (
+                  <ul>
+                    {Object.entries(value).map(([subKey, subValue]) => (
+                      <li key={subKey}>
+                        <strong>{subKey}:</strong> {subValue}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  value
+                )}
+              </p>
+            );
+          })
+        ) : (
+          <p>Dettagli non disponibili.</p>
+        )}
+      </div>
+
+      {/* Sezione delle metriche */}
+      <div className={styles.metricsSection}>
+        <h4>Applica Metriche</h4>
+        {/* Metrica statica con descrizione */}
+        <div className={styles.metricItem}>
+          <button onClick={() => alert('Metrica non implementata ancora!')}>Metrica Statica</button>
+          <span>Descrizione della metrica statica, da implementare in futuro.</span>
+        </div>
       </div>
     </div>
   );
 };
 
-
-// Component with synthetic data for testing
-const SyntheticDataTest = () => {
-    // Dati sintetici del paziente
-    const patientDetails = {
-      name: 'Mario Rossi',
-      age: 56,
-      diagnosis: 'Diabete Tipo 2',
-      lastVisit: '2024-09-10',
-      prescriptions: 'Insulina, Metformina',
-    };
-  
-    // Metriche sintetiche con funzioni di esempio
-    const metrics = [
-      {
-        name: 'Degree Centrality',
-        description: 'Numero di collegamenti diretti con altri nodi.',
-        onClick: () => alert('Degree Centrality calcolata!'),
-      },
-      {
-        name: 'Betweenness Centrality',
-        description: 'Misura di centralità basata sul numero di volte in cui un nodo è su percorsi più brevi.',
-        onClick: () => alert('Betweenness Centrality calcolata!'),
-      },
-      {
-        name: 'K-core',
-        description: 'Identifica i nodi più centrali in base alla loro connessione con gli altri.',
-        onClick: () => alert('K-core calcolato!'),
-      },
-    ];
-  
-    // Dati sintetici per il plot del paziente
-    const plotData = {
-      labels: ['Diabete', 'Ipertensione', 'Dislipidemia'],
-      datasets: [
-        {
-          label: 'Comorbidità',
-          data: [40, 30, 30],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        },
-      ],
-    };
-  
-    return (
-      <DetailsPanel details={patientDetails} metrics={metrics} plotData={plotData} />
-    );
-  };
-  
-  export default SyntheticDataTest;
+export default DetailsPanel;

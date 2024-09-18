@@ -4,12 +4,14 @@ import GraphComponent from '../../components/graph/GraphComponent';
 import { fetchPatientGraphData } from '../../services/graphDataService';
 import Loader from '../../components/Loader';
 import styles from './GraphPage.module.css';  // Importa il CSS Module correttamente
-import SyntheticDataTest from '../../components/detailsPanel/DetailPanel'; // Importa il componente per i dettagli del paziente
+import DetailsPanel from '../../components/detailsPanel/DetailPanel'; // Importa il componente per i dettagli del paziente
 
 const GraphPage = () => {
   const { codiceFiscale } = useParams();
   const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedDetails, setSelectedDetails] = useState(null);
+
 
   useEffect(() => {
     const fetchGraphData = async () => {
@@ -21,6 +23,22 @@ const GraphPage = () => {
     fetchGraphData();
   }, [codiceFiscale]);
 
+  // Funzione per gestire il click su un nodo
+  const handleNodeClick = (nodeData) => {
+    setSelectedDetails({
+      type: 'Nodo',
+      ...nodeData
+    });
+  };
+
+  // Funzione per gestire il click su un arco
+  const handleEdgeClick = (edgeData) => {
+    setSelectedDetails({
+      type: 'Arco',
+      ...edgeData
+    });
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -29,13 +47,17 @@ const GraphPage = () => {
     <div className={styles.graphPageContainer}>
         {graphData ? (
         <div className={styles.graphContainer}>
-          <GraphComponent data={graphData} />
+          <GraphComponent
+            data={graphData}
+            onNodeClick={handleNodeClick}
+            onEdgeClick={handleEdgeClick}
+          />
         </div>
       ) : (
         <p>Impossibile caricare i dati del grafo.</p>
       )}
       <div className={styles.detailsPanel}>
-        <SyntheticDataTest />
+        <DetailsPanel details={selectedDetails} />
       </div>
     </div>
   );

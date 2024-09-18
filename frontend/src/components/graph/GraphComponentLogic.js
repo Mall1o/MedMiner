@@ -107,7 +107,6 @@ export const initializeNetwork = (container, data) => {
   try {
     const network = new Network(container, { nodes, edges }, options);
 
-    console.log("Network creato:", network);
 
     network.once("stabilized", () => {
       if (typeof network.fit === 'function') {
