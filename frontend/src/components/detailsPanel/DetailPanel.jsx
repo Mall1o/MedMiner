@@ -8,7 +8,7 @@ const DetailsPanel = ({ details, metrics = [] }) => {
   // Se i dettagli non sono disponibili, mostra un messaggio predefinito
   if (!details || Object.keys(details).length === 0) {
     return (
-      <div className={styles.DetailsPanel}>
+      <div className={styles.detailsPanel}>
         <p>Seleziona un nodo o un arco per vedere i dettagli.</p>
       </div>
     );
