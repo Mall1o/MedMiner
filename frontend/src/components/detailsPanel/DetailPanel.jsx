@@ -25,7 +25,7 @@ const DetailsPanel = ({ details, metrics = [] }) => {
   const filteredKeys = Object.keys(data).filter(key => key !== 'id' && key !== 'start_id' && key !== 'end_id');
 
   return (
-    <div className={styles.DetailsPanel}>
+    <div className={styles.detailsPanel}>
       <div className={styles.detailsSection}>
         {/* Impostare il tipo come titolo */}
         <h3>{isNode ? 'Nodo - ' + data.tipo : isEdge ? 'Arco' : 'Dettagli'}</h3>
