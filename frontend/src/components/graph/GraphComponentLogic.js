@@ -40,7 +40,7 @@ export const initializeNetwork = (container, data) => {
             border: 'rgba(255, 206, 86, 1)',
           },
         },
-        font: { color: '#fff', size: 16, align: 'center' },
+        font: { color: '#000', size: 16, align: 'center' }, //colore text
         borderWidth: 2,
         size: node.type === 'Paziente' ? 30 : 25,
       };

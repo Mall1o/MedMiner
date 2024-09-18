@@ -85,7 +85,7 @@ const GraphComponent = ({ data }) => {
 
   return (
     <div className={styles.GraphPage}>
-      <div ref={networkRef} className={styles.graphContainer} />
+      <div ref={networkRef} className={styles.graphContainer} style={{ height: "100%" }} />
       <div className={styles.zoomControls}>
         <button onClick={zoomIn} className={styles.zoomButton}>+</button>
         <button onClick={zoomOut} className={styles.zoomButton}>-</button>

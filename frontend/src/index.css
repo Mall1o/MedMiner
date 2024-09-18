@@ -19,6 +19,9 @@
   --button-primary-bg: #32408c; /* Verde acqua per i pulsanti principali */
   --button-primary-hover-bg: #323f8cd2; /* Hover per pulsanti principali */
   --button-primary-active-bg: #4e63d7; /* Hover per pulsanti principali */
+  --button-zoom-bg: white;
+  /*--button-zoom-hover-bg: #91f0d5;
+  --button-zoom-active-bg: #4e63d7;*/
 
   /* Testo nella sidebar */
   --sidebar-text-color: #333333; /* Colore chiaro per il testo nella sidebar */

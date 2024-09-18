@@ -12,7 +12,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const DetailsPanel = ({ details, metrics, plotData }) => {
     return (
-      <div className={styles.DetailsPanel}>
+      <div className={styles.detailsPanel}>
         <div className={styles.detailsSection}>
           <h3>Dettagli</h3>
           {/* Visualizza dinamicamente i dettagli */}
