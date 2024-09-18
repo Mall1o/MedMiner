@@ -3,7 +3,7 @@ import styles from './DetailPanel.module.css';
 import { useDetailsPanel } from '../../context/DetailsPanelContext'; // Importa il contesto del pannello
 
 const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
-  
+  const { isPanelOpen, togglePanel } = useDetailsPanel(); // Usa lo stato del pannello
   // Se i dettagli non sono disponibili, mostra un messaggio predefinito
   if (!details || Object.keys(details).length === 0) {
     return (
