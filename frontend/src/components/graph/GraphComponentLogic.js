@@ -9,6 +9,13 @@ export const initializeNetwork = (container, data) => {
 
   const nodes = new DataSet(
     data.nodes.map(node => {
+
+      // Verifica che il nodo esista e abbia un tipo
+      if (!node || !node.type) {
+        console.error("Nodo mancante o senza tipo:", node);
+        return null; // Non restituire nodi invalidi
+      }
+
       let label = '';
       let icon = '';
       let color = '';
@@ -42,13 +49,18 @@ export const initializeNetwork = (container, data) => {
         },
         font: { color: '#000', size: 16, align: 'center' }, //colore text
         borderWidth: 2,
-        size: node.type === 'Paziente' ? 30 : 25,
+        size: node.size || 25,
       };
-    })
+    }).filter(node => node !== null) // Rimuovi nodi nulli
   );
 
   const edges = new DataSet(
     data.relationships.map(relationship => {
+      if (!relationship || !relationship.type) {
+        console.error("Relazione mancante o senza tipo:", relationship);
+        return null; // Non restituire relazioni non valide
+      }
+
       let color = '';
       if (relationship.type === 'DIAGNOSTICATO_CON') {
         color = 'rgba(54, 162, 235, 1)';
@@ -57,9 +69,7 @@ export const initializeNetwork = (container, data) => {
       } else if (relationship.type === 'ASSOCIATO_A') {
         color = 'rgba(75, 192, 192, 1)';
       }
-      else if (relationship.type === 'ASSOCIATO_A') {
-        color = 'rgba(255, 99, 132, 1)';
-      }
+      
 
       return {
         id: relationship.id || `edge-${relationship.start_id}-${relationship.end_id}`,
@@ -70,7 +80,7 @@ export const initializeNetwork = (container, data) => {
         font: { color: '#000', size: 12 },
         arrowStrikethrough: false,
       };
-    })
+    }).filter(edge => edge !== null) // Rimuovi relazioni non valide
   );
 
   const options = {

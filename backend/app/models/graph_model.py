@@ -56,9 +56,11 @@ class GraphModel:
             relationships_query = """
             MATCH (p:Paziente {codice_fiscale_assistito: $codice_fiscale})-[r1:DIAGNOSTICATO_CON]->(m:Malattia)
             OPTIONAL MATCH (m)-[r2:CURATA_CON {codice_fiscale_assistito: $codice_fiscale}]->(pr:Prescrizione)
+            OPTIONAL MATCH (m)-[r3:ASSOCIATA_A{codice_fiscale_assistito: $codice_fiscale}]-(other_m:Malattia)
             RETURN elementId(p) AS patient_elementId, 
                 elementId(m) AS disease_elementId, 
-                elementId(pr) AS prescription_elementId, r1, r2
+                elementId(pr) AS prescription_elementId, 
+                elementId(other_m) AS other_disease_elementId, r1, r2, r3
             """
             relationships_result = session.run(relationships_query, codice_fiscale=codice_fiscale)
             relationships = format_relationships(relationships_result)

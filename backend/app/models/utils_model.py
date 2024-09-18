@@ -99,3 +99,42 @@ class UtilsModel:
                 return prescrizioni
             else:
                 return "Nessun risultato trovato."
+            
+    def get_betweenness_malattia(self):
+        with self.driver.session() as session:
+            # Proietta il grafo
+            session.run("""
+            CALL gds.graph.project(
+                'malattiaGraph',
+                'Malattia',
+                {
+                ASSOCIATA_A: {
+                    type: 'ASSOCIATA_A'
+                }
+                }
+            )
+            """)
+            # Qui calcoliamo la betweenness delle malattie
+            result = session.run("""
+                CALL gds.betweenness.stream('malattiaGraph')
+                YIELD nodeId, score
+                RETURN gds.util.asNode(nodeId).codice AS id, score
+                """)
+
+            # Droppa la proiezione
+            session.run("CALL gds.graph.drop('malattiaGraph')")
+            
+            records = list(result)
+            
+            if records:
+                risultati = []
+                for record in records:
+                    malattia_info = {
+                        "icd9cm": record['id'],
+                        "betweeness": record['score']
+                    }
+                    risultati.append(malattia_info)
+                return risultati
+            else:
+                return "Nessun risultato trovato."
+            

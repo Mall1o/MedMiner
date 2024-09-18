@@ -43,7 +43,7 @@ def format_relationships(relationships_result):
     for record in relationships_result:
         diagnosticato_key = (record.get("patient_elementId"), record.get("disease_elementId"), "DIAGNOSTICATO_CON")
         curata_key = (record.get("disease_elementId"), record.get("prescription_elementId"), "CURATA_CON")
-        associata_key = (record.get("disease_elementId"), record.get("disease_elementId"), "ASSOCIATA_A")
+        associata_key = (record.get("disease_elementId"), record.get("other_disease_elementId"), "ASSOCIATA_A")
         
         if diagnosticato_key[0] and diagnosticato_key[1] and diagnosticato_key not in added_relationships:
             if record.get("r1"):  # Verifica se esiste 'r1'
@@ -65,14 +65,18 @@ def format_relationships(relationships_result):
                 })
                 added_relationships.add(curata_key)
 
-        if associata_key[0] and associata_key[1] and associata_key not in added_relationships:
-            if record.get("r3"):  # Verifica se esiste 'r3'
-                relationships.append({
-                    "start_id": record["disease_elementId"],
-                    "end_id": record["disease_elementId"],
-                    "type": "ASSOCIATA_A",
-                    "properties": dict(record["r3"])
-                })
-                added_relationships.add(associata_key)
+        if associata_key[0] and associata_key[1]:
+            
+            normalized_key = tuple(sorted([record["disease_elementId"], record["other_disease_elementId"]]))
+            
+            if normalized_key not in added_relationships:
+                if record.get("r3"):  # Verifica se esiste 'r3'
+                    relationships.append({
+                        "start_id": record["disease_elementId"],
+                        "end_id": record["other_disease_elementId"],
+                        "type": "ASSOCIATA_A",
+                        "properties": dict(record["r3"])
+                    })
+                    added_relationships.add(normalized_key)
     
     return relationships

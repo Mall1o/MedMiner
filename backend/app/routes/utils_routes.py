@@ -44,3 +44,9 @@ def get_patient_list():
     
     return jsonify(patient_list), 200
 
+@utils_bp.route('/betweenness/disease', methods=['GET'])
+def get_betweenness_disease():
+    service = UtilsService(neo4j_db.driver)
+    result = service.get_betweenness_malattia()
+    
+    return jsonify(result), 200

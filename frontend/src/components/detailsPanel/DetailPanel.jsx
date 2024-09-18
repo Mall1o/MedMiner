@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from './DetailPanel.module.css';
 
-const DetailsPanel = ({ details, metrics = [] }) => {
-  // Log dei dettagli ricevuti per debugging
-  console.log('Dettagli ricevuti:', details);
-
+const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
+  
   // Se i dettagli non sono disponibili, mostra un messaggio predefinito
   if (!details || Object.keys(details).length === 0) {
     return (
@@ -59,10 +57,11 @@ const DetailsPanel = ({ details, metrics = [] }) => {
       {/* Sezione delle metriche */}
       <div className={styles.metricsSection}>
         <h4>Applica Metriche</h4>
-        {/* Metrica statica con descrizione */}
         <div className={styles.metricItem}>
-          <button onClick={() => alert('Metrica non implementata ancora!')}>Metrica Statica</button>
-          <span>Descrizione della metrica statica, da implementare in futuro.</span>
+          <button onClick={applyBetweenness}>
+            {isBetweennessApplied ? 'Ripristina' : 'Calcola Betweenness'}
+          </button>
+          <span>{isBetweennessApplied ? 'Ripristina lo stato originale del grafo' : 'Calcola la betweenness centrality dei nodi.'}</span>
         </div>
       </div>
     </div>
