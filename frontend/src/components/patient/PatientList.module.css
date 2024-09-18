@@ -5,7 +5,7 @@
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--box-background-color);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
@@ -17,9 +17,9 @@
   width: 60%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255);
   border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255);
   color: #333;
   text-align: center;
   margin-left: auto;
@@ -32,7 +32,7 @@
 }
 
 .patientListTable thead {
-  background-color: rgba(230, 230, 230, 0.5);
+  background-color: rgba(147, 147, 147,0.5)
 }
 
 .patientListTable th,
@@ -41,7 +41,7 @@
   text-align: left;
   font-size: 14px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  color: #333;
+  color: var(--primary-text-color);
 }
 
 .patientListTable tr:hover {
@@ -65,11 +65,23 @@
 
 .paginationBtn {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: var(--button-primary-bg);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.paginationBtn:hover {
+  background-color: #323f8cd2;
+  border: none;
+  color: white;
+}
+
+.paginationBtn:active {
+  background-color: var(--button-primary-active-bg);
+  border: none;
+  color: white;
 }
 
 .paginationBtn:disabled {
@@ -79,15 +91,21 @@
 
 .viewGraphBtn {
   padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--sidebar-button-bg);
+  color: var(--primary-text-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .viewGraphBtn:hover {
-  background-color: #0056b3;
+  background-color: var(--button-primary-bg);
+  color: white;
+}
+
+.viewGraphBtn:active {
+  background-color: var(--button-primary-active-bg);
+  color: white;
 }
 
 /* Media query per schermi più piccoli */

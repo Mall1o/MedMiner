@@ -18,7 +18,7 @@ const Footer = () => {
     <AppBar 
       position="relative" 
       className={`${styles.footerContainer} ${isSidebarOpen ? styles.footerSidebarOpen : styles.footerSidebarClosed}`}
-      sx={{ backgroundColor: 'rgba(255, 255, 255, 0.3)' }}
+      sx={{ backgroundColor: 'rgb(235, 229, 229)' }}
     >
       <Toolbar className={styles.footerToolbar}>
         <Box className={styles.footerText}>
