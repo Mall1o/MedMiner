@@ -19,8 +19,8 @@ class UtilsService:
     def get_degree_centrality_malattia(self):
         return self.model.get_degree_centrality_malattia()
 
-    def get_degree_centrality_prescrizione_malattia(self, codice_malattia):
-        return self.model.get_degree_centrality_prescrizione_malattia(codice_malattia)
+    def get_degree_centrality_prescrizione_malattia(self):
+        return self.model.get_degree_centrality_prescrizione_malattia()
     
     def get_betweenness_malattia(self):
         return self.model.get_betweenness_malattia() 
