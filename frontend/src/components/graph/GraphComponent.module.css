@@ -1,13 +1,20 @@
 .graphContainer {
   width: 100%;
-  height: 100%; /* Assicurarsi che occupi l'altezza totale */
-  max-width: 95%;
-  min-height: 100%; /* Cambia questa regola in altezza fissa */
-  position: relative;
+  height: 100%;
+  max-width: none; /* Rimuove eventuali limitazioni */
+  min-height: 100%; /* Assicura che occupi tutto lo spazio disponibile */
   display: flex;
   background-color: var(--box-background-color);
   border-radius: 15px;
   box-shadow: 0 4px 6px var(--box-shadow-color);
+}
+
+.graphPage {
+  width: 100%;
+  height: calc(100vh - 80px); /* Altezza piena meno la navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -15,13 +22,6 @@
     height: 70%; /* Ridurre l'altezza sui dispositivi mobili */
   }
 }
-
-.graphPage {
-  width: 100%; /* Imposta il width al 100% */
-  height: calc(100vh - 80px); /* Imposta l'altezza sottraendo lo spazio della navbar */
-}
-
-
 .legendIcon {
   position: absolute;
   color: var(--box-background-color);

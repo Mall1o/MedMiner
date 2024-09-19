@@ -46,26 +46,7 @@ const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {
           }
         }
       });
-
-      // Forza il ridimensionamento del canvas
-      const updateCanvasSize = () => {
-        const canvas = networkRef.current.querySelector('canvas');
-        if (canvas) {
-          canvas.width = networkRef.current.clientWidth;
-          canvas.height = networkRef.current.clientHeight;
-        }
-        if (networkRef.current.networkInstance) {
-          networkRef.current.networkInstance.redraw();
-        }
-      };
-
-      updateCanvasSize(); // Prima chiamata per forzare il ridimensionamento iniziale
-
-      window.addEventListener('resize', updateCanvasSize); // Aggiungi listener di resize
-
-      return () => {
-        window.removeEventListener('resize', updateCanvasSize);
-      };
+      
     }
 
     return () => {
@@ -73,7 +54,37 @@ const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {
         networkRef.current.networkInstance.destroy();
       }
     };
-  }, [data, isPanelOpen, togglePanel]);
+  }, [data]);
+
+  useEffect(() => {
+    if (networkRef.current?.networkInstance) {
+      const network = networkRef.current.networkInstance;
+  
+      // Sposta il grafo di 300px verso sinistra o riposiziona al centro
+      if (isPanelOpen) {
+        // Sposta leggermente a sinistra mantenendo la posizione dinamica
+        const currentViewPosition = network.getViewPosition();
+        network.moveTo({
+          position: { x: currentViewPosition.x + 100, y: currentViewPosition.y }, // Applica offset dinamico
+          animation: {
+            duration: 300,
+            easingFunction: "easeInOutQuad"
+          }
+        });
+      } else {
+        // Centra il grafo in base alla vista corrente
+        network.fit({
+          animation: {
+            duration: 300,
+            easingFunction: "easeInOutQuad"
+          }
+        });
+      }
+    }
+  }, [isPanelOpen]);
+  
+  
+  
 
   // Funzioni per gestire lo zoom
   const zoomIn = () => {
@@ -97,15 +108,20 @@ const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {
   // Funzione per gestire il click fuori dal popup
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (isLegendVisible && !event.target.closest({legendPopup}) && !event.target.closest({legendIcon})) {
+      const legendPopup = document.querySelector(`.${styles.legendPopup}`);
+      const legendIcon = document.querySelector(`.${styles.legendIcon}`);
+      
+      if (isLegendVisible && !legendPopup.contains(event.target) && !legendIcon.contains(event.target)) {
         setIsLegendVisible(false);
       }
     };
+  
     document.addEventListener('click', handleClickOutside);
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, [isLegendVisible]);
+  
 
   // Funzione per togglare la visualizzazione della legenda
   const toggleLegend = () => {
@@ -113,7 +129,7 @@ const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {
   };
 
   return (
-    <div className={styles.GraphPage}>
+    <div className={styles.graphPage}>
       <div ref={networkRef} className={styles.graphContainer} style={{ height: "100%" }} />
       <div className={styles.zoomControls}>
         <button onClick={zoomIn} className={styles.zoomButton}>+</button>
