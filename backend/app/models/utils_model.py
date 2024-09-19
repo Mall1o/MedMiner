@@ -46,8 +46,8 @@ class UtilsModel:
         with self.driver.session() as session:
             #qui calcoliamo quante altre persone hanno la stessa malattia
             query = """
-            MATCH (m:Malattia)-[:ASSOCIATA_A]-(altreMalattie:Malattia)
-            WITH m, COUNT(altreMalattie) AS degree_centrality
+            MATCH (m:Malattia)-[:DIAGNOSTICATO_CON]-(p:Paziente)
+            WITH m, COUNT(p) AS degree_centrality
             UNWIND labels(m) AS etichetta
             WITH etichetta, degree_centrality
             WHERE etichetta <> 'Malattia'
