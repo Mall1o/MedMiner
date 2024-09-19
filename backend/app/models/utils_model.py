@@ -42,20 +42,21 @@ class UtilsModel:
             result = session.run(query)
             return result.single()["prescriptionCount"]
     
-    def get_degree_centrality_malattia_patient(self, codice_fiscale):
+    def get_degree_centrality_malattia(self):
         with self.driver.session() as session:
             #qui calcoliamo quante altre persone hanno la stessa malattia
             query = """
-            MATCH (p:Paziente)-[:DIAGNOSTICATO_CON]->(m:Malattia)
-            WHERE p.codice_fiscale_assistito = $codice_fiscale_assistito
-            WITH m
-            MATCH (m)<-[:DIAGNOSTICATO_CON]-(altriPazienti:Paziente)
-            RETURN m.codice AS nome_malattia, COUNT(altriPazienti) AS degree_centrality
+            MATCH (m:Malattia)-[:ASSOCIATA_A]-(altreMalattie:Malattia)
+            WITH m, COUNT(altreMalattie) AS degree_centrality
+            UNWIND labels(m) AS etichetta
+            WITH etichetta, degree_centrality
+            WHERE etichetta <> 'Malattia'
+            RETURN etichetta, SUM(degree_centrality) AS degree_centrality
             ORDER BY degree_centrality DESC
             """
             
             # Esegui la query
-            result = session.run(query, codice_fiscale_assistito=codice_fiscale)
+            result = session.run(query)
 
             records = list(result)
             
@@ -63,7 +64,7 @@ class UtilsModel:
                 malattie = []
                 for record in records:
                     malattia_info = {
-                        "codice_malattia": record['nome_malattia'],
+                        "codice_malattia": record['etichetta'],
                         "degree_centrality": record['degree_centrality']
                     }
                     malattie.append(malattia_info)

@@ -42,6 +42,19 @@ class UtilsDataServices {
         }
     }
 
+    async getDegreeGroupMalattia() {
+        try {
+            const response = await fetch(`http://localhost:5000/degree-centrality/disese`);
+            if (!response.ok) {
+                throw new Error('Errore nel recupero della lista degree');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
 }
 
 export default UtilsDataServices;

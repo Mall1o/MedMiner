@@ -4,24 +4,13 @@ import { useDetailsPanel } from '../../context/DetailsPanelContext'; // Importa 
 
 const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
   const { isPanelOpen, togglePanel } = useDetailsPanel(); // Usa lo stato del pannello
-  // Se i dettagli non sono disponibili, mostra un messaggio predefinito
-  if (!details || Object.keys(details).length === 0) {
-    return (
-      <div className={`${styles.detailsPanel} ${isPanelOpen ? styles.panelOpen : styles.panelClosed}`}>
-        <div className={styles.panelToggle} onClick={togglePanel}>
-          {isPanelOpen ? '→' : '←'}
-        </div>
-        <p>Seleziona un nodo o un arco per vedere i dettagli.</p>
-      </div>
-    );
-  }
 
-  // Determina se stiamo mostrando un nodo o un arco
-  const isNode = details.type === 'Nodo';
-  const isEdge = details.type === 'Arco';
+  // Determina se i dettagli sono per un nodo o un arco
+  const isNode = details?.type === 'Nodo';
+  const isEdge = details?.type === 'Arco';
 
   // Estrarre i dati del nodo o dell'arco (gestione robusta dei dettagli)
-  const data = isNode ? details.nodeData || {} : details;
+  const data = isNode ? details.nodeData || {} : details || {};
 
   // Escludere chiavi specifiche come 'id', 'start_id', 'end_id'
   const filteredKeys = Object.keys(data).filter(key => key !== 'id' && key !== 'start_id' && key !== 'end_id');
@@ -31,6 +20,8 @@ const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
       <div className={styles.panelToggle} onClick={togglePanel}>
         {isPanelOpen ? '→' : '←'}
       </div>
+
+      {/* Sezione dei dettagli */}
       <div className={styles.detailsSection}>
         <h3>{isNode ? 'Nodo - ' + data.tipo : isEdge ? 'Arco' : 'Dettagli'}</h3>
         {filteredKeys.length > 0 ? (
@@ -54,17 +45,18 @@ const DetailsPanel = ({ details, applyBetweenness, isBetweennessApplied }) => {
             );
           })
         ) : (
-          <p>Dettagli non disponibili.</p>
+          <p>Seleziona un nodo o un arco per vedere i dettagli.</p>
         )}
       </div>
 
+      {/* Sezione metriche, visibile sempre */}
       <div className={styles.metricsSection}>
         <h4>Applica Metriche</h4>
         <div className={styles.metricItem}>
           <button onClick={applyBetweenness}>
             {isBetweennessApplied ? 'Ripristina' : 'Calcola Betweenness'}
           </button>
-          <span>{isBetweennessApplied ? 'Ripristina lo stato originale del grafo' : 'Calcola la betweenness centrality dei nodi.'}</span>
+          <span>{isBetweennessApplied ? 'Ripristina lo stato originale del grafo' : 'Misura il numero di volte che un nodo funge da "ponte" tra altri nodi.'}</span>
         </div>
       </div>
     </div>

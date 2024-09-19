@@ -14,11 +14,10 @@ def get_degree_centrality_prescription():
     
     return jsonify(result), 200
 
-@utils_bp.route('/degree-centrality/disese/patient', methods=['GET'])
+@utils_bp.route('/degree-centrality/disese', methods=['GET'])
 def get_degree_centrality_disease():
-    codice_fiscale = request.args.get('codice_fiscale')
     service = UtilsService(neo4j_db.driver)
-    result = service.get_degree_centrality_malattia_patient(codice_fiscale)
+    result = service.get_degree_centrality_malattia()
     
     return jsonify(result), 200
 
