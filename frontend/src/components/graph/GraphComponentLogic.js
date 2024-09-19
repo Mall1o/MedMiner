@@ -1,6 +1,5 @@
 import { DataSet } from 'vis-data';
 import { Network } from 'vis-network';
-import { useDetailsPanel } from '../../context/DetailsPanelContext';
 export const initializeNetwork = (container, data) => {
   if (!container) {
     console.error("Il contenitore del grafo non è pronto.");
