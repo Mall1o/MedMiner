@@ -85,20 +85,23 @@ class UtilsModel:
             else:
                  return "Nessun risultato trovato."  
     
-    def get_degree_centrality_prescrizione_malattia(self, codice_malattia):
+    def get_degree_centrality_prescrizione_malattia(self):
         with self.driver.session() as session:
-            # Qui calcoliamo quante altre malattie condividono la stessa prescrizione
+            # Qui calcoliamo la prescrizione più frequente per una malattia
             query = """
-            MATCH (m:Malattia)-[:CURATA_CON]->(presc:Prescrizione)
-            WHERE m.codice = $codice_malattia
-            WITH presc
-            MATCH (presc)<-[:CURATA_CON]-(altreMalattie:Malattia)
-            RETURN presc.codice AS nome_prescrizione, COUNT(DISTINCT altreMalattie) AS degree_centrality
-            ORDER BY degree_centrality DESC
+            MATCH (m:Malattia)-[r:CURATA_CON]->(p:Prescrizione)
+            WITH p, m, COUNT(p) AS prescrizione_count
+            UNWIND labels(m) AS etichetta
+            WITH etichetta, p, prescrizione_count
+            WHERE etichetta <> 'Malattia'
+            WITH etichetta, p, SUM(prescrizione_count) AS totale_prescrizioni
+            ORDER BY etichetta, totale_prescrizioni DESC
+            WITH etichetta, COLLECT({prescrizione: p.codice, count: totale_prescrizioni}) AS prescrizioni
+            RETURN etichetta, prescrizioni[0].prescrizione AS prescrizione_piu_frequente, prescrizioni[0].count AS frequenza
             """
             
             # Esegui la query
-            result = session.run(query, codice_malattia=codice_malattia)
+            result = session.run(query)
 
             records = list(result)
             
@@ -106,8 +109,9 @@ class UtilsModel:
                 prescrizioni = []
                 for record in records:
                     prescrizione_info = {
-                        "codice_prescrizione": record['nome_prescrizione'],
-                        "degree_centrality": record['degree_centrality']
+                        "etichetta": record['etichetta'],
+                        "codice_prescrizione": record['prescrizione_piu_frequente'],
+                        "frequenza": record['frequenza']
                     }
                     prescrizioni.append(prescrizione_info)
                 return prescrizioni
