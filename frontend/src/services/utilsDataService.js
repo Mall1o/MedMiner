@@ -28,6 +28,20 @@ class UtilsDataServices {
         }
     }
 
+    async getPrescriptions() {
+        try {
+            const response = await fetch(`http://localhost:5000/prescriptions`);
+            if (!response.ok) {
+                throw new Error('Errore nel recupero della lista prescrizioni');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+
     async getBetweenessMalattia() {
         try {
             const response = await fetch(`http://localhost:5000/betweenness/disease`);

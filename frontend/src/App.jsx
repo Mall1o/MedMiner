@@ -4,6 +4,7 @@ import Sidebar from './components/sidebar/sidebar.jsx';
 import Home from './pages/Homepage/Home.jsx';
 import GraphPage from './pages/GraphPage/GraphPage';
 import PatientPage from './pages/PatientPage/patientPage.jsx'; // Lista pazienti
+import PrescriptionPage from './pages/PrescriptionPage/prescriptionPage.jsx'; // Lista prescrizioni
 import styles from './App.module.css';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
 import { DetailsPanelProvider } from './context/DetailsPanelContext';
@@ -34,6 +35,7 @@ const MainLayout = () => {
             <Route path="/" element={<Home />} />
             <Route path="/graph/:codiceFiscale" element={<GraphPage />} /> {/* Percorso dinamico */}
             <Route path="/patients" element={<PatientPage />} /> {/* Lista dei pazienti */}
+            <Route path="/prescriptions" element={<PrescriptionPage />} /> {/* Lista delle prescrizioni */}
           </Routes>
         </div>
       </div>

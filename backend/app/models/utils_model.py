@@ -15,6 +15,19 @@ class UtilsModel:
                 patients_list.append(dict(node))  # Converte il nodo in un dizionario
             return patients_list
 
+    def get_prescription_list(self):
+        with self.driver.session() as session:
+            query = """
+            MATCH (pr:Prescrizione)
+            RETURN pr
+            """
+            result = session.run(query)
+            prescriptions_list = []
+            for record in result:
+                node = record["pr"]
+                prescriptions_list.append(dict(node))
+            return prescriptions_list
+        
     def get_patient_count(self):
         with self.driver.session() as session:
             query = """

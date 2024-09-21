@@ -41,42 +41,50 @@ def format_relationships(relationships_result):
     relationships = []
     
     for record in relationships_result:
-        diagnosticato_key = (record.get("patient_elementId"), record.get("disease_elementId"), "DIAGNOSTICATO_CON")
-        curata_key = (record.get("disease_elementId"), record.get("prescription_elementId"), "CURATA_CON")
-        associata_key = (record.get("disease_elementId"), record.get("other_disease_elementId"), "ASSOCIATA_A")
+        # ID separati per una gestione più pulita
+        patient_id = record.get("patient_elementId")
+        disease_id = record.get("disease_elementId")
+        prescription_id = record.get("prescription_elementId")
+        other_disease_id = record.get("other_disease_elementId")
         
-        if diagnosticato_key[0] and diagnosticato_key[1] and diagnosticato_key not in added_relationships:
+        diagnosticato_key = (patient_id, disease_id, "DIAGNOSTICATO_CON")
+        curata_key = (disease_id, prescription_id, "CURATA_CON")
+        associata_key = (disease_id, other_disease_id, "ASSOCIATA_A")
+        
+        # Gestione della relazione DIAGNOSTICATO_CON
+        if patient_id and disease_id and diagnosticato_key not in added_relationships:
             if record.get("r1"):  # Verifica se esiste 'r1'
                 relationships.append({
-                    "start_id": record["patient_elementId"],
-                    "end_id": record["disease_elementId"],
+                    "start_id": patient_id,
+                    "end_id": disease_id,
                     "type": "DIAGNOSTICATO_CON",
                     "properties": dict(record["r1"])
                 })
                 added_relationships.add(diagnosticato_key)
         
-        if curata_key[0] and curata_key[1] and curata_key not in added_relationships:
+        # Gestione della relazione CURATA_CON
+        if disease_id and prescription_id and curata_key not in added_relationships:
             if record.get("r2"):  # Verifica se esiste 'r2'
                 relationships.append({
-                    "start_id": record["disease_elementId"],
-                    "end_id": record["prescription_elementId"],
+                    "start_id": disease_id,
+                    "end_id": prescription_id,
                     "type": "CURATA_CON",
                     "properties": dict(record["r2"])
                 })
                 added_relationships.add(curata_key)
 
-        if associata_key[0] and associata_key[1]:
-            
-            normalized_key = tuple(sorted([record["disease_elementId"], record["other_disease_elementId"]]))
-            
+        # Gestione della relazione ASSOCIATA_A
+        if disease_id and other_disease_id:
+            normalized_key = tuple(sorted([disease_id, other_disease_id]))  # Normalizzazione per evitare duplicati
             if normalized_key not in added_relationships:
                 if record.get("r3"):  # Verifica se esiste 'r3'
                     relationships.append({
-                        "start_id": record["disease_elementId"],
-                        "end_id": record["other_disease_elementId"],
+                        "start_id": disease_id,
+                        "end_id": other_disease_id,
                         "type": "ASSOCIATA_A",
                         "properties": dict(record["r3"])
                     })
                     added_relationships.add(normalized_key)
     
     return relationships
+

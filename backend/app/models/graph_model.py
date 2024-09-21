@@ -66,3 +66,27 @@ class GraphModel:
             relationships = format_relationships(relationships_result)
 
             return {"nodes": nodes, "relationships": relationships}
+    
+    def get_prescription_graph(self, codice_prescrizione):
+        with self.driver.session() as session:
+            # Query per i nodi: Malattia -> Prescrizione (Distintamente)
+            nodes_query = """
+            MATCH (m:Malattia)-[:CURATA_CON]->(pr:Prescrizione {codice: $codice_prescrizione})
+            WITH DISTINCT m, pr
+            RETURN elementId(m) AS disease_elementId, m, 
+                elementId(pr) AS prescription_elementId, pr
+            """
+            nodes_result = session.run(nodes_query, codice_prescrizione=codice_prescrizione)
+            nodes = format_nodes(nodes_result)
+            
+            # Query per le relazioni: Prescrizione -> Malattia con counter
+            relationships_query = """
+            MATCH (m:Malattia)-[r:CURATA_CON]->(pr:Prescrizione {codice: $codice_prescrizione})
+            RETURN elementId(m) AS disease_elementId, 
+                elementId(pr) AS prescription_elementId, 
+                COUNT(r) AS NumeroDiCure
+            """
+            relationships_result = session.run(relationships_query, codice_prescrizione=codice_prescrizione)
+            relationships = format_relationships(relationships_result)
+
+            return {"nodes": nodes, "relationships": relationships}

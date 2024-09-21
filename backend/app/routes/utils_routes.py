@@ -49,3 +49,10 @@ def get_betweenness_disease():
     result = service.get_betweenness_malattia()
     
     return jsonify(result), 200
+
+@utils_bp.route('/prescriptions', methods=['GET'])
+def get_prescription_list():
+    service = UtilsService(neo4j_db.driver)
+    prescription_list = service.get_prescription_list()
+    
+    return jsonify(prescription_list), 200

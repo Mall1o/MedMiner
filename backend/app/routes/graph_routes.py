@@ -24,3 +24,15 @@ def get_patient_graph():
     
     return jsonify(graph), 200
 
+@graph_bp.route('/graph/prescription', methods=['GET'])
+def get_prescription_graph():
+    codice_prescrizione = request.args.get('codice_prescrizione')
+    print(codice_prescrizione)
+    if not codice_prescrizione:
+        return jsonify({'error': 'codice_prescrizione parameter is required'}), 400
+
+    graph_service = GraphService(neo4j_db.driver)
+    graph = graph_service.get_prescription_graph(codice_prescrizione)
+    
+    return jsonify(graph), 200
+

@@ -31,3 +31,23 @@ export const fetchPatientGraphData = async (codiceFiscale) => {
     return null;
   }
 };  
+
+// Funzione per il fetch dei dati per una singola prescrizione
+export const fetchPrescriptionGraphData = async (prescriptionCode) => {
+    try {
+      const response = await fetch('http://localhost:5000/graph/prescription', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ codice_prescrizione: prescriptionCode }), // Invio del codice prescrizione
+      });
+      if (!response.ok) {
+        throw new Error('Errore nel recupero dei dati del grafo');
+      }
+      return await response.json(); // Ritorna i dati del grafo come JSON
+    } catch (error) {
+      console.error('Errore nel caricamento dei dati:', error);
+      return null;
+    }
+  };

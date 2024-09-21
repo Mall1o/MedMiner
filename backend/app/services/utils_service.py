@@ -16,6 +16,9 @@ class UtilsService:
     def get_patient_list(self):
         return self.model.get_patient_list()
     
+    def get_prescription_list(self):
+        return self.model.get_prescription_list()
+    
     def get_degree_centrality_malattia(self):
         return self.model.get_degree_centrality_malattia()
 
