@@ -33,7 +33,7 @@ const MainLayout = () => {
         <div className={styles.contentWrapper}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/graph/:codiceFiscale" element={<GraphPage />} /> {/* Percorso dinamico */}
+            <Route path="/graph/:tipo/:codice" element={<GraphPage />} /> {/* Percorso dinamico */}
             <Route path="/patients" element={<PatientPage />} /> {/* Lista dei pazienti */}
             <Route path="/prescriptions" element={<PrescriptionPage />} /> {/* Lista delle prescrizioni */}
           </Routes>

@@ -45,7 +45,7 @@ const PatientList = () => {
   };
 
   const handleShowGraph = (patient) => {
-    navigate(`/graph/${patient.codice_fiscale_assistito}`); // Reindirizza alla pagina del grafo
+    navigate(`/graph/${'paziente'}/${patient.codice_fiscale_assistito}`); // Reindirizza alla pagina del grafo
   };
 
   return (

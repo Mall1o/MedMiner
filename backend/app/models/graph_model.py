@@ -1,4 +1,4 @@
-from ..utils.json_formatter import format_nodes, format_relationships
+from ..utils.json_formatter import format_nodes, format_relationships, format_curata_relationships
 
 class GraphModel:
     def __init__(self, driver):
@@ -82,11 +82,14 @@ class GraphModel:
             # Query per le relazioni: Prescrizione -> Malattia con counter
             relationships_query = """
             MATCH (m:Malattia)-[r:CURATA_CON]->(pr:Prescrizione {codice: $codice_prescrizione})
+            WITH m, pr, r.descrizione_prescrizione AS descrizione_prescrizione, COUNT(r) AS NumeroDiCure
             RETURN elementId(m) AS disease_elementId, 
                 elementId(pr) AS prescription_elementId, 
-                COUNT(r) AS NumeroDiCure
+                descrizione_prescrizione, 
+                NumeroDiCure
+            ORDER BY descrizione_prescrizione
             """
             relationships_result = session.run(relationships_query, codice_prescrizione=codice_prescrizione)
-            relationships = format_relationships(relationships_result)
+            relationships = format_curata_relationships(relationships_result)
 
             return {"nodes": nodes, "relationships": relationships}

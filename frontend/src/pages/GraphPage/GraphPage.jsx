@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GraphComponent from '../../components/graph/GraphComponent';
-import { fetchPatientGraphData } from '../../services/graphDataService';
+import { fetchPatientGraphData, fetchPrescriptionGraphData } from '../../services/graphDataService';
 import UtilsDataServices from '../../services/utilsDataService';
 import Loader from '../../components/Loader';
 import styles from './GraphPage.module.css';  // Importa il CSS Module correttamente
 import DetailsPanel from '../../components/detailsPanel/DetailPanel'; // Importa il componente per i dettagli del paziente
 
 const GraphPage = () => {
-  const { codiceFiscale } = useParams();
+  const { codice, tipo } = useParams();
   const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedDetails, setSelectedDetails] = useState(null);
@@ -18,14 +18,21 @@ const GraphPage = () => {
 
   useEffect(() => {
     const fetchGraphData = async () => {
-      const data = await fetchPatientGraphData(codiceFiscale);
+      let data;
+
+      if (tipo === 'paziente') {
+        data = await fetchPatientGraphData(codice);  // Codice fiscale
+      } else if (tipo === 'prescrizione') {
+        data = await fetchPrescriptionGraphData(codice);  // Codice prescrizione
+      }
+
       setGraphData(data);
-      setOriginalGraphData(data); // Salva lo stato originale del grafo
+      setOriginalGraphData(data); 
       setLoading(false);
     };
 
     fetchGraphData();
-  }, [codiceFiscale]);
+  }, [codice, tipo]);
 
   // Funzione per gestire il click su un nodo
   const handleNodeClick = (nodeData) => {
@@ -98,7 +105,7 @@ const GraphPage = () => {
       <DetailsPanel
           details={selectedDetails}
           applyBetweenness={applyBetweenness}
-          isBetweennessApplied={betweennessApplied} // Passa lo stato al pannello
+          isBetweennessApplied={betweennessApplied}
       />
       </div>
     </div>

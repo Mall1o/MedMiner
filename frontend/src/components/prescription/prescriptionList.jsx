@@ -44,7 +44,7 @@ const PrescriptionList = () => {
     };
 
     const handleShowGraph = (prescription) => {
-        navigate(`/graph/${prescription.codice}`); // Reindirizza alla pagina del grafo
+        navigate(`/graph/${'prescrizione'}/${prescription.codice}`); // Reindirizza alla pagina del grafo
     };
 
     return (

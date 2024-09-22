@@ -49,7 +49,6 @@ def format_relationships(relationships_result):
         
         diagnosticato_key = (patient_id, disease_id, "DIAGNOSTICATO_CON")
         curata_key = (disease_id, prescription_id, "CURATA_CON")
-        associata_key = (disease_id, other_disease_id, "ASSOCIATA_A")
         
         # Gestione della relazione DIAGNOSTICATO_CON
         if patient_id and disease_id and diagnosticato_key not in added_relationships:
@@ -87,4 +86,33 @@ def format_relationships(relationships_result):
                     added_relationships.add(normalized_key)
     
     return relationships
+
+def format_curata_relationships(relationships_result):
+    added_relationships = set()
+    relationships = []
+    
+    for record in relationships_result:
+        disease_id = record.get("disease_elementId")
+        prescription_id = record.get("prescription_elementId")
+        numero_di_cure = record.get("NumeroDiCure")  # Conteggio delle relazioni
+        descrizione_prescrizione = record.get("descrizione_prescrizione")  # Descrizione della prescrizione
+        
+        # Chiave per evitare duplicati
+        curata_key = (disease_id, prescription_id, "CURATA_CON")
+        
+        # Gestione della relazione CURATA_CON
+        if disease_id and prescription_id and curata_key not in added_relationships:
+            relationships.append({
+                "start_id": disease_id,
+                "end_id": prescription_id,
+                "type": "CURATA_CON",
+                "properties": {
+                    "NumeroDiCure": numero_di_cure,  # Numero di cure
+                    "DescrizionePrescrizione": descrizione_prescrizione  # Descrizione della prescrizione
+                }
+            })
+            added_relationships.add(curata_key)
+
+    return relationships
+
 
