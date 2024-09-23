@@ -115,4 +115,29 @@ def format_curata_relationships(relationships_result):
 
     return relationships
 
+def format_associata_relationships(relationships_result):
+    added_relationships = set()  # Set per evitare duplicati
+    relationships = []  # Lista finale delle relazioni
+
+    for record in relationships_result:
+        disease_id = record.get("disease_elementId")
+        disease2_id = record.get("disease2_elementId")
+        somma_counter = record.get("SommaCounter")  # Somma dei contatori delle relazioni
+
+        # Chiave per evitare duplicati
+        associata_key = (disease_id, disease2_id, "ASSOCIATA_A")
+        
+        # Gestione della relazione ASSOCIATA_A
+        if disease_id and disease2_id and associata_key not in added_relationships:
+            relationships.append({
+                "start_id": disease_id,
+                "end_id": disease2_id,
+                "type": "ASSOCIATA_A",
+                "properties": {
+                    "SommaCounter": somma_counter  # Somma del contatore delle relazioni
+                }
+            })
+            added_relationships.add(associata_key)
+
+    return relationships
 

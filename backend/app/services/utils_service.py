@@ -27,3 +27,9 @@ class UtilsService:
     
     def get_betweenness_malattia(self):
         return self.model.get_betweenness_malattia() 
+    
+    def get_disease_group_list(self):
+        return self.model.get_disease_group_list()
+    
+    def get_disease_group(self, group_name):
+        return self.model.get_disease_group(group_name)

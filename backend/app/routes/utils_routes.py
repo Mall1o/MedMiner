@@ -55,3 +55,22 @@ def get_prescription_list():
     prescription_list = service.get_prescription_list()
     
     return jsonify(prescription_list), 200
+
+@utils_bp.route('/diseases_groups', methods=['GET'])
+def get_disease_group_list():
+    service = UtilsService(neo4j_db.driver)
+    disease_group_list = service.get_disease_group_list()
+    
+    return jsonify(disease_group_list), 200
+
+@utils_bp.route('/diseases', methods=['POST'])
+def get_disease_group():
+    group_name = request.json.get('gruppo')
+    if not group_name:
+        return jsonify({'error': 'Missing group name'}), 400
+    
+    service = UtilsService(neo4j_db.driver)
+    disease_group = service.get_disease_group(group_name)
+    print(disease_group)
+    return jsonify(disease_group), 200
+

@@ -1,0 +1,9 @@
+.diseasePageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100vh; /* Assicurati che il contenitore occupi tutta l'altezza */
+  }
+  

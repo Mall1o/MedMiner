@@ -93,3 +93,32 @@ class GraphModel:
             relationships = format_curata_relationships(relationships_result)
 
             return {"nodes": nodes, "relationships": relationships}
+    
+    def get_disease_graph(self, codice_malattia):
+        with self.driver.session() as session:
+            # Query per i nodi: Malattia -> Malattia (Distintamente)
+            nodes_query = """
+            MATCH (m:Malattia {codice: $codice_malattia})-[:ASSOCIATA_A]->(m2:Malattia)
+            WITH DISTINCT m, m2
+            RETURN elementId(m) AS disease_elementId, 
+                m.codice AS codiceMalattia, 
+                m.descrizione AS descrizioneMalattia,
+                elementId(m2) AS disease2_elementId, 
+                m2.codice AS codiceMalattia2, 
+                m2.descrizione AS descrizioneMalattia2
+            """
+            nodes_result = session.run(nodes_query, codice_malattia=codice_malattia)
+            nodes = format_nodes(nodes_result)
+            
+            # Query per le relazioni tra malattie: Aggrega il count di tutte le relazioni duplicate tra malattie distinte
+            relationships_query = """
+            MATCH (m:Malattia {codice: $codice_malattia})-[r:ASSOCIATA_A]->(m2:Malattia)
+            WITH m, m2, SUM(r.count) AS total_count
+            RETURN elementId(m) AS disease_elementId, 
+                elementId(m2) AS disease2_elementId, 
+                total_count AS SommaCounter
+            """
+            relationships_result = session.run(relationships_query, codice_malattia=codice_malattia)
+            relationships = format_curata_relationships(relationships_result)
+
+            return {"nodes": nodes, "relationships": relationships}
