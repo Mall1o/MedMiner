@@ -27,7 +27,7 @@ const GraphPage = () => {
       } else if (tipo === 'malattia') {
         data = await fetchDiseaseGraphData(codice);  // Codice malattia
       }
-
+      console.log(data);
       setGraphData(data);
       setOriginalGraphData(data); 
       setLoading(false);

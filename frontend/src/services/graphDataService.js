@@ -59,7 +59,7 @@ export const fetchPrescriptionGraphData = async (prescriptionCode) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ malattia: disease }), // Invio del codice prescrizione
+        body: JSON.stringify({ codice_malattia: disease }), // Invio del codice prescrizione
       });
       if (!response.ok) {
         throw new Error('Errore nel recupero dei dati del grafo');

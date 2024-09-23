@@ -35,15 +35,15 @@ def get_prescription_graph():
     
     return jsonify(graph), 200
 
-@graph_bp.route('/graph/disease', methods=['GET'])
+@graph_bp.route('/graph/disease', methods=['POST'])
 def get_disease_graph():
-    codice_malattia = request.args.get('codice_malattia')
+    codice_malattia = request.json.get('codice_malattia')
     if not codice_malattia:
         return jsonify({'error': 'codice_malattia parameter is required'}), 400
 
     graph_service = GraphService(neo4j_db.driver)
     graph = graph_service.get_disease_graph(codice_malattia)
-    
+    print(graph)
     return jsonify(graph), 200
 
 

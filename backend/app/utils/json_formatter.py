@@ -39,6 +39,7 @@ def format_nodes(nodes_result):
 def format_disease_nodes(nodes_result):
     nodes = []  # Lista per contenere i nodi formattati
     added_diseases = set()  # Set per tenere traccia delle malattie già aggiunte
+    added_prescriptions = set()  # Set per tenere traccia delle prescrizioni già aggiunte
 
     # Itera attraverso i risultati della query
     for record in nodes_result:
@@ -68,7 +69,19 @@ def format_disease_nodes(nodes_result):
             })
             added_diseases.add(disease2_elementId)
 
+        # Verifica se la prescrizione 'pr' è già stata aggiunta
+        prescription_elementId = record.get("prescription_elementId")
+        if prescription_elementId and prescription_elementId not in added_prescriptions:
+            if record.get("pr"):  # Verifica se esiste 'pr'
+                nodes.append({
+                    "id": prescription_elementId,
+                    "type": "Prescrizione",
+                    "properties": dict(record["pr"])
+                })
+                added_prescriptions.add(prescription_elementId)
+
     return nodes
+
 
 
 def format_relationships(relationships_result):
@@ -150,18 +163,21 @@ def format_curata_relationships(relationships_result):
 
     return relationships
 
-def format_associata_relationships(relationships_result):
+def format_disease_relationships(relationships_result):
     added_relationships = set()  # Set per evitare duplicati
     relationships = []  # Lista finale delle relazioni
 
     for record in relationships_result:
         disease_id = record.get("disease_elementId")
         disease2_id = record.get("disease2_elementId")
-        somma_counter = record.get("SommaCounter")  # Somma dei contatori delle relazioni
+        somma_counter = record.get("SommaCounter")  # Somma dei contatori delle relazioni ASSOCIATA_A
+        prescription_id = record.get("prescription_elementId")
+        descrizione_prescrizione = record.get("descrizione_prescrizione")  # Descrizione della prescrizione
+        numero_di_cure = record.get("NumeroDiCure")  # Numero di cure per CURATA_CON
 
-        # Chiave per evitare duplicati
+        # Chiave per evitare duplicati per la relazione ASSOCIATA_A
         associata_key = (disease_id, disease2_id, "ASSOCIATA_A")
-        
+
         # Gestione della relazione ASSOCIATA_A
         if disease_id and disease2_id and associata_key not in added_relationships:
             relationships.append({
@@ -174,5 +190,18 @@ def format_associata_relationships(relationships_result):
             })
             added_relationships.add(associata_key)
 
+        # Gestione della relazione CURATA_CON (se esiste una prescrizione)
+        if disease_id and prescription_id:
+            relationships.append({
+                "start_id": disease_id,
+                "end_id": prescription_id,
+                "type": "CURATA_CON",
+                "properties": {
+                    "descrizione_prescrizione": descrizione_prescrizione,
+                    "NumeroDiCure": numero_di_cure
+                }
+            })
+
     return relationships
+
 

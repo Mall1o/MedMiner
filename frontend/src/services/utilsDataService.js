@@ -69,7 +69,6 @@ class UtilsDataServices {
                 throw new Error('Errore nel recupero della lista malattie');
             }
             const data = await response.json();
-            console.log(data);
             return data;
         } catch (error) {
             console.error(error);

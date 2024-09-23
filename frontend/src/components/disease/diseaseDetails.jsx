@@ -19,7 +19,6 @@ const DiseaseDetails = () => {
         const fetchDiseases = async () => {
             const utilsService = new UtilsDataServices();
             const data = await utilsService.getDiseases(gruppo);  // Fetch basata sul gruppo
-            console.log(data);
             setDiseases(data);
         };
 
