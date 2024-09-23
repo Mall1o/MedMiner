@@ -36,6 +36,41 @@ def format_nodes(nodes_result):
 
     return nodes
 
+def format_disease_nodes(nodes_result):
+    nodes = []  # Lista per contenere i nodi formattati
+    added_diseases = set()  # Set per tenere traccia delle malattie già aggiunte
+
+    # Itera attraverso i risultati della query
+    for record in nodes_result:
+        # Verifica se la prima malattia 'm' è già stata aggiunta
+        disease_elementId = record.get("disease_elementId")
+        if disease_elementId and disease_elementId not in added_diseases:
+            nodes.append({
+                "id": disease_elementId,
+                "type": "Malattia",
+                "properties": {
+                    "codice": record.get("codiceMalattia"),
+                    "descrizione": record.get("descrizioneMalattia")
+                }
+            })
+            added_diseases.add(disease_elementId)
+
+        # Verifica se la seconda malattia 'm2' è già stata aggiunta
+        disease2_elementId = record.get("disease2_elementId")
+        if disease2_elementId and disease2_elementId not in added_diseases:
+            nodes.append({
+                "id": disease2_elementId,
+                "type": "Malattia",
+                "properties": {
+                    "codice": record.get("codiceMalattia2"),
+                    "descrizione": record.get("descrizioneMalattia2")
+                }
+            })
+            added_diseases.add(disease2_elementId)
+
+    return nodes
+
+
 def format_relationships(relationships_result):
     added_relationships = set()
     relationships = []

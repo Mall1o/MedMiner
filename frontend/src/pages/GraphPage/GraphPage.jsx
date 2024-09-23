@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GraphComponent from '../../components/graph/GraphComponent';
-import { fetchPatientGraphData, fetchPrescriptionGraphData } from '../../services/graphDataService';
+import { fetchPatientGraphData, fetchPrescriptionGraphData, fetchDiseaseGraphData } from '../../services/graphDataService';
 import UtilsDataServices from '../../services/utilsDataService';
 import Loader from '../../components/Loader';
 import styles from './GraphPage.module.css';  // Importa il CSS Module correttamente
@@ -24,6 +24,8 @@ const GraphPage = () => {
         data = await fetchPatientGraphData(codice);  // Codice fiscale
       } else if (tipo === 'prescrizione') {
         data = await fetchPrescriptionGraphData(codice);  // Codice prescrizione
+      } else if (tipo === 'malattia') {
+        data = await fetchDiseaseGraphData(codice);  // Codice malattia
       }
 
       setGraphData(data);

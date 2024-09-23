@@ -11,6 +11,10 @@ const DiseaseDetails = () => {
     const [diseasesPerPage] = useState(7);  // Fissa il numero di malattie per pagina
     const navigate = useNavigate();
 
+    const handleShowGraph = (disease) => {
+        navigate(`/graph/${'malattia'}/${disease.codice}`);
+    };
+
     useEffect(() => {
         const fetchDiseases = async () => {
             const utilsService = new UtilsDataServices();
@@ -59,7 +63,7 @@ const DiseaseDetails = () => {
                             <td>{disease.codice}</td>
                             <td>{disease.descrizione}</td>
                             <td>
-                                <button onClick={() => navigate(`/graph/${disease.codice}`)}>
+                                <button onClick={() => handleShowGraph(disease)}>
                                     Visualizza Grafo
                                 </button>
                             </td>

@@ -51,3 +51,22 @@ export const fetchPrescriptionGraphData = async (prescriptionCode) => {
       return null;
     }
   };
+
+  export const fetchDiseaseGraphData = async (disease) => {
+    try {
+      const response = await fetch('http://localhost:5000/graph/disease', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ malattia: disease }), // Invio del codice prescrizione
+      });
+      if (!response.ok) {
+        throw new Error('Errore nel recupero dei dati del grafo');
+      }
+      return await response.json(); // Ritorna i dati del grafo come JSON
+    } catch (error) {
+      console.error('Errore nel caricamento dei dati:', error);
+      return null;
+    }
+  }

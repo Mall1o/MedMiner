@@ -1,4 +1,4 @@
-from ..utils.json_formatter import format_nodes, format_relationships, format_curata_relationships
+from ..utils.json_formatter import format_nodes, format_relationships, format_curata_relationships, format_disease_nodes, format_associata_relationships
 
 class GraphModel:
     def __init__(self, driver):
@@ -107,8 +107,10 @@ class GraphModel:
                 m2.codice AS codiceMalattia2, 
                 m2.descrizione AS descrizioneMalattia2
             """
+            print(nodes_query)
             nodes_result = session.run(nodes_query, codice_malattia=codice_malattia)
-            nodes = format_nodes(nodes_result)
+            print(nodes_result)
+            nodes = format_disease_nodes(nodes_result)
             
             # Query per le relazioni tra malattie: Aggrega il count di tutte le relazioni duplicate tra malattie distinte
             relationships_query = """
@@ -119,6 +121,6 @@ class GraphModel:
                 total_count AS SommaCounter
             """
             relationships_result = session.run(relationships_query, codice_malattia=codice_malattia)
-            relationships = format_curata_relationships(relationships_result)
+            relationships = format_associata_relationships(relationships_result)
 
             return {"nodes": nodes, "relationships": relationships}
