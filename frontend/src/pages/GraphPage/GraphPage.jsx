@@ -6,6 +6,7 @@ import UtilsDataServices from '../../services/utilsDataService';
 import Loader from '../../components/Loader';
 import styles from './GraphPage.module.css';  // Importa il CSS Module correttamente
 import DetailsPanel from '../../components/detailsPanel/DetailPanel'; // Importa il componente per i dettagli del paziente
+import SliderComponent from '../../components/slider/SliderComponent'; // Importa il componente per il filtro delle date
 
 const GraphPage = () => {
   const { codice, tipo } = useParams();
@@ -13,9 +14,9 @@ const GraphPage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedDetails, setSelectedDetails] = useState(null);
   const [originalGraphData, setOriginalGraphData] = useState(null); // Stato per mantenere i dati originali
+  const [OriginalGraphDataFiltered, setOriginalGraphDataFiltered] = useState(null); // Stato per mantenere i dati originali filtrati
   const [betweennessApplied, setBetweennessApplied] = useState(false); // Stato per il cambio di bottone
-
-
+  
   useEffect(() => {
     const fetchGraphData = async () => {
       let data;
@@ -26,8 +27,10 @@ const GraphPage = () => {
         data = await fetchPrescriptionGraphData(codice);  // Codice prescrizione
       }
 
-      setGraphData(data);
-      setOriginalGraphData(data); 
+      setGraphData(data); 
+      setOriginalGraphDataFiltered(data);
+      setOriginalGraphData(data); // Salva i dati originali
+
       setLoading(false);
     };
 
@@ -49,6 +52,57 @@ const GraphPage = () => {
       ...edgeData
     });
   };
+
+  const handleDateChange = (selectedDate) => {
+    if (OriginalGraphDataFiltered && OriginalGraphDataFiltered.relationships) {
+      
+      // Filtra solo gli archi di tipo "CURATA_CON" basandoti sulla data
+      const filteredEdges = OriginalGraphDataFiltered.relationships.map((edge) => {
+        // Controlla se l'arco è di tipo "CURATA_CON"
+        if (edge.type === 'CURATA_CON') {
+          // Estrai l'anno dalla stringa "data_prescrizione"
+          const edgeYear = parseInt(edge.properties.data_prescrizione.substring(0, 4)); // Estrai i primi 4 caratteri e converti in intero
+  
+          // Confronta l'anno dell'arco con l'anno selezionato
+          if (edgeYear <= selectedDate) {
+            return edge; // Mantieni l'arco se l'anno è successivo o uguale all'anno selezionato
+          } else {
+            return null; // Escludi l'arco se l'anno è precedente all'anno selezionato
+          }
+        } else if(edge.type === 'DIAGNOSTICATO_CON'){
+          // Estrai l'anno dalla stringa "data_diagnosi"
+          const edgeYear = parseInt(edge.properties.data_prima_diagnosi.substring(0, 4)); // Estrai i primi 4 caratteri e converti in intero
+  
+          // Confronta l'anno dell'arco con l'anno selezionato
+          if (edgeYear <= selectedDate) {
+            return edge; // Mantieni l'arco se l'anno è successivo o uguale all'anno selezionato
+          } else {
+            return null; // Escludi l'arco se l'anno è precedente all'anno selezionato
+          }
+        } else{
+          return edge; 
+        }
+      }).filter(Boolean); // Rimuovi i valori nulli (gli archi esclusi)
+
+       // Crea una mappa dei nodi che hanno ancora archi collegati
+    const connectedNodes = new Set();
+    filteredEdges.forEach(edge => {
+      connectedNodes.add(edge.start_id); // Nodo di partenza dell'arco
+      connectedNodes.add(edge.end_id);   // Nodo di arrivo dell'arco
+    });
+
+    // Filtra i nodi che sono ancora connessi
+    const filteredNodes = OriginalGraphDataFiltered.nodes.filter(node => connectedNodes.has(node.id));
+
+    // Aggiorna i dati del grafo con nodi e archi filtrati
+    setGraphData({
+      ...graphData,
+      nodes: filteredNodes,      // Nodi rimasti connessi
+      relationships: filteredEdges, // Archi filtrati
+    });
+    }
+  };
+  
 
   // Funzione per applicare la betweenness centrality
   const applyBetweenness = async () => {
@@ -90,6 +144,7 @@ const GraphPage = () => {
 
   return (
     <div className={styles.graphPageContainer}>
+      <SliderComponent onDateChange={handleDateChange} />
         {graphData ? (
         <div className={styles.graphContainer}>
           <GraphComponent

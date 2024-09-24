@@ -27,7 +27,7 @@ def get_patient_graph():
 @graph_bp.route('/graph/prescription', methods=['POST'])
 def get_prescription_graph():
     codice_prescrizione = request.json.get('codice_prescrizione')
-    print(codice_prescrizione)
+    
     if not codice_prescrizione:
         return jsonify({'error': 'codice_prescrizione parameter is required'}), 400
 

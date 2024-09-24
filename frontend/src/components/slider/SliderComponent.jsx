@@ -1,31 +1,27 @@
-import React from 'react';
-import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css'; // Assicurati di importare lo stile
+import React, { useState } from 'react';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
-const SliderComponent = ({ onChange, minDate, maxDate, defaultMinDate, defaultMaxDate }) => {
-  const handleChange = (value) => {
-    const [minTimestamp, maxTimestamp] = value;
+const SliderComponent = ({ onDateChange }) => {
+  const [value, setValue] = useState(2020); // Un esempio di data iniziale (2020)
 
-    // Converti i timestamp di nuovo in oggetti Date per passare la data corretta
-    const minDateSelected = new Date(minTimestamp);
-    const maxDateSelected = new Date(maxTimestamp);
-
-    onChange([minDateSelected, maxDateSelected]);
+  const handleSliderChange = (newValue) => {
+    setValue(newValue);
+    if (onDateChange) {
+      onDateChange(newValue); // Invia la data selezionata al genitore
+    }
   };
 
   return (
     <div>
-      <Range
-        min={minDate.getTime()} // Converti le date in timestamp
-        max={maxDate.getTime()}
-        defaultValue={[defaultMinDate.getTime(), defaultMaxDate.getTime()]}
-        onChange={handleChange}
-        tipFormatter={(value) => new Date(value).toLocaleDateString()} // Mostra le date come stringhe nel tooltip
+      <Slider
+        min={2000}
+        max={2024}
+        value={value}
+        onChange={handleSliderChange}
+        step={1}
       />
-      <div>
-        <span>{minDate.toLocaleDateString()}</span>
-        <span style={{ float: 'right' }}>{maxDate.toLocaleDateString()}</span>
-      </div>
+      <p>Data selezionata: {value}</p>
     </div>
   );
 };
