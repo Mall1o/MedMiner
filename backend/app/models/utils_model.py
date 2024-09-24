@@ -156,3 +156,49 @@ class UtilsModel:
             else:
                 return "Nessun risultato trovato."
             
+    def get_disease_group_list(self):
+        with self.driver.session() as session:
+            query = """
+            MATCH (m:Malattia)
+            WITH DISTINCT [label IN labels(m) WHERE label <> 'Malattia'] AS additional_labels, m.descrizione AS Descrizione
+            UNWIND additional_labels AS Gruppo
+            RETURN DISTINCT Gruppo, Descrizione
+            ORDER BY Gruppo
+
+            """
+            result = session.run(query)
+            disease_groups = []
+            if result:
+                for record in result:
+                    disease_info = {
+                        "gruppo": record["Gruppo"],
+                        "descrizione": record["Descrizione"]
+                        
+                    }
+                    disease_groups.append(disease_info)
+                return disease_groups
+            else:
+                return "Nessun risultato trovato."
+
+    def get_disease_group(self, group_name):
+        with self.driver.session() as session:
+            query = """
+            MATCH (m:Malattia)
+            WHERE $group_name IN labels(m)
+            RETURN m.codice AS CodiceMalattia, m.descrizione AS DescrizioneMalattia
+
+            """
+            
+            result = session.run(query, group_name=group_name)
+            print(query)
+            diseases_list = []
+            if result:
+                for record in result:
+                    diseases_info={
+                        "codice": record["CodiceMalattia"],
+                        "descrizione": record["DescrizioneMalattia"]
+                    }
+                    diseases_list.append(diseases_info)
+                return diseases_list  
+            else:
+                return "Nessun risultato trovato."   

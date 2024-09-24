@@ -42,6 +42,41 @@ class UtilsDataServices {
         }
     }
 
+    async getDiseasesGroup() {
+        try {
+            const response = await fetch(`http://localhost:5000/diseases_groups`);
+            if (!response.ok) {
+                throw new Error('Errore nel recupero della lista gruppo malattie');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+
+    async getDiseases(gruppoMalattia) {
+        try {
+            const response = await fetch(`http://localhost:5000/diseases`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ gruppo: gruppoMalattia }),  // Assicurati che il nome del campo corrisponda a quello nel backend
+            });
+            if (!response.ok) {
+                throw new Error('Errore nel recupero della lista malattie');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+    
+
     async getBetweenessMalattia() {
         try {
             const response = await fetch(`http://localhost:5000/betweenness/disease`);

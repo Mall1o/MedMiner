@@ -5,6 +5,8 @@ import Home from './pages/Homepage/Home.jsx';
 import GraphPage from './pages/GraphPage/GraphPage';
 import PatientPage from './pages/PatientPage/patientPage.jsx'; // Lista pazienti
 import PrescriptionPage from './pages/PrescriptionPage/prescriptionPage.jsx'; // Lista prescrizioni
+import DiseasePage from './pages/DiseasePage/diseasePage.jsx'; // Lista malattie
+import DiseaseDetails from './pages/DiseasePage/diseaseDetailsPage.jsx'; // Dettagli malattie
 import styles from './App.module.css';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
 import { DetailsPanelProvider } from './context/DetailsPanelContext';
@@ -36,6 +38,8 @@ const MainLayout = () => {
             <Route path="/graph/:tipo/:codice" element={<GraphPage />} /> {/* Percorso dinamico */}
             <Route path="/patients" element={<PatientPage />} /> {/* Lista dei pazienti */}
             <Route path="/prescriptions" element={<PrescriptionPage />} /> {/* Lista delle prescrizioni */}
+            <Route path="/diseases_group" element={<DiseasePage />} /> {/* Lista delle malattie */}
+            <Route path="/diseases/:gruppo" element={<DiseaseDetails />} />
           </Routes>
         </div>
       </div>

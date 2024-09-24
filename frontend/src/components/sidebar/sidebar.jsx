@@ -20,7 +20,7 @@ const Sidebar = () => {
         <ul className={styles.sidebarMenu}>
           <li className={styles.sidebarMenuItem}><Link to="/">🏠 Home</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/patients">👥 Pazienti</Link></li>
-          <li className={styles.sidebarMenuItem}><Link to="/diseases">⚕️ Malattie</Link></li>
+          <li className={styles.sidebarMenuItem}><Link to="/diseases_group">⚕️ Malattie</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/prescriptions">💊 Prescrizioni</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/ai-module">🤖 Modulo IA</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/other-pages">...</Link></li>
