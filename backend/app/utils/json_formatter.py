@@ -35,54 +35,52 @@ def format_nodes(nodes_result):
                 added_prescriptions.add(record["prescription_elementId"])
 
     return nodes
-
 def format_disease_nodes(nodes_result):
     nodes = []  # Lista per contenere i nodi formattati
     added_diseases = set()  # Set per tenere traccia delle malattie già aggiunte
     added_prescriptions = set()  # Set per tenere traccia delle prescrizioni già aggiunte
 
-    # Itera attraverso i risultati della query
     for record in nodes_result:
-        # Verifica se la prima malattia 'm' è già stata aggiunta
-        disease_elementId = record.get("disease_elementId")
-        if disease_elementId and disease_elementId not in added_diseases:
+        # Gestione della malattia (disease1_elementId e disease2_elementId)
+        disease1_elementId = record.get("disease1_elementId")
+        codice_malattia_input = record.get("codice_malattia_input")
+        if disease1_elementId and disease1_elementId not in added_diseases:
             nodes.append({
-                "id": disease_elementId,
+                "id": disease1_elementId,
                 "type": "Malattia",
                 "properties": {
-                    "codice": record.get("codiceMalattia"),
-                    "descrizione": record.get("descrizioneMalattia")
+                    "codice": codice_malattia_input
                 }
             })
-            added_diseases.add(disease_elementId)
+            added_diseases.add(disease1_elementId)
 
-        # Verifica se la seconda malattia 'm2' è già stata aggiunta
+        # Gestione della malattia associata (disease2_elementId)
         disease2_elementId = record.get("disease2_elementId")
+        codice_malattia_associata = record.get("codice_malattia_associata")
         if disease2_elementId and disease2_elementId not in added_diseases:
             nodes.append({
                 "id": disease2_elementId,
                 "type": "Malattia",
                 "properties": {
-                    "codice": record.get("codiceMalattia2"),
-                    "descrizione": record.get("descrizioneMalattia2")
+                    "codice": codice_malattia_associata
                 }
             })
             added_diseases.add(disease2_elementId)
 
-        # Verifica se la prescrizione 'pr' è già stata aggiunta
+        # Gestione delle prescrizioni (prescription_elementId)
         prescription_elementId = record.get("prescription_elementId")
+        codice_prescrizione = record.get("codice_prescrizione")
         if prescription_elementId and prescription_elementId not in added_prescriptions:
-            if record.get("pr"):  # Verifica se esiste 'pr'
-                nodes.append({
-                    "id": prescription_elementId,
-                    "type": "Prescrizione",
-                    "properties": dict(record["pr"])
-                })
-                added_prescriptions.add(prescription_elementId)
+            nodes.append({
+                "id": prescription_elementId,
+                "type": "Prescrizione",
+                "properties": {
+                    "codice": codice_prescrizione
+                }
+            })
+            added_prescriptions.add(prescription_elementId)
 
     return nodes
-
-
 
 def format_relationships(relationships_result):
     added_relationships = set()
@@ -162,46 +160,47 @@ def format_curata_relationships(relationships_result):
             added_relationships.add(curata_key)
 
     return relationships
-
 def format_disease_relationships(relationships_result):
     added_relationships = set()  # Set per evitare duplicati
     relationships = []  # Lista finale delle relazioni
 
     for record in relationships_result:
-        disease_id = record.get("disease_elementId")
-        disease2_id = record.get("disease2_elementId")
-        somma_counter = record.get("SommaCounter")  # Somma dei contatori delle relazioni ASSOCIATA_A
-        prescription_id = record.get("prescription_elementId")
-        descrizione_prescrizione = record.get("descrizione_prescrizione")  # Descrizione della prescrizione
-        numero_di_cure = record.get("NumeroDiCure")  # Numero di cure per CURATA_CON
+        # Gestione delle relazioni tra malattie (ASSOCIATA_A)
+        disease1_elementId = record.get("disease1_elementId")
+        disease2_elementId = record.get("disease2_elementId")
+        numero_associazioni = record.get("numero_associazioni")
+        
+        associata_key = (disease1_elementId, disease2_elementId, "ASSOCIATA_A")
 
-        # Chiave per evitare duplicati per la relazione ASSOCIATA_A
-        associata_key = (disease_id, disease2_id, "ASSOCIATA_A")
-
-        # Gestione della relazione ASSOCIATA_A
-        if disease_id and disease2_id and associata_key not in added_relationships:
+        if disease1_elementId and disease2_elementId and associata_key not in added_relationships:
             relationships.append({
-                "start_id": disease_id,
-                "end_id": disease2_id,
+                "start_id": disease1_elementId,
+                "end_id": disease2_elementId,
                 "type": "ASSOCIATA_A",
                 "properties": {
-                    "SommaCounter": somma_counter  # Somma del contatore delle relazioni
+                    "numero_associazioni": numero_associazioni
                 }
             })
             added_relationships.add(associata_key)
 
-        # Gestione della relazione CURATA_CON (se esiste una prescrizione)
-        if disease_id and prescription_id:
+        # Gestione delle relazioni tra malattia e prescrizione (CURATA_CON)
+        disease_elementId = record.get("disease_elementId")  # Cambiato per gestire l'elementId della malattia
+        prescription_elementId = record.get("prescription_elementId")
+        numero_prescrizioni = record.get("numero_prescrizioni")
+        descrizione_piu_frequente = record.get("descrizione_piu_frequente")
+        
+        curata_key = (disease_elementId, prescription_elementId, "CURATA_CON")
+
+        if disease_elementId and prescription_elementId and curata_key not in added_relationships:
             relationships.append({
-                "start_id": disease_id,
-                "end_id": prescription_id,
+                "start_id": disease_elementId,
+                "end_id": prescription_elementId,
                 "type": "CURATA_CON",
                 "properties": {
-                    "descrizione_prescrizione": descrizione_prescrizione,
-                    "NumeroDiCure": numero_di_cure
+                    "numero_prescrizioni": numero_prescrizioni,
+                    "descrizione_piu_frequente": descrizione_piu_frequente
                 }
             })
+            added_relationships.add(curata_key)
 
     return relationships
-
-

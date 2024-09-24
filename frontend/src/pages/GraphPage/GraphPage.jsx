@@ -24,9 +24,10 @@ const GraphPage = () => {
         data = await fetchPatientGraphData(codice);  // Codice fiscale
       } else if (tipo === 'prescrizione') {
         data = await fetchPrescriptionGraphData(codice);  // Codice prescrizione
-      } else if (tipo === 'malattia') {
+      } else if (tipo === 'disease') {
         data = await fetchDiseaseGraphData(codice);  // Codice malattia
       }
+      
       console.log(data);
       setGraphData(data);
       setOriginalGraphData(data); 

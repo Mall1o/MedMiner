@@ -96,35 +96,42 @@ class GraphModel:
     
     def get_disease_graph(self, codice_malattia):
         with self.driver.session() as session:
-            # Query per i nodi: Malattia -> Malattia (Distintamente)
-            nodes_query = """
-            MATCH (m:Malattia {codice: $codice_malattia})-[:ASSOCIATA_A]-(m2:Malattia)
-            OPTIONAL MATCH (m)-[:CURATA_CON]->(pr:Prescrizione)
-            WITH DISTINCT m, m2, pr
-            RETURN elementId(m) AS disease_elementId, 
-                m.codice AS codiceMalattia, 
-                m.descrizione AS descrizioneMalattia,
-                elementId(m2) AS disease2_elementId, 
-                m2.codice AS codiceMalattia2, 
-                m2.descrizione AS descrizioneMalattia2,
-                elementId(pr) AS prescription_elementId, 
-                pr 
-            """
-            nodes_result = session.run(nodes_query, codice_malattia=codice_malattia)
-            nodes = format_disease_nodes(nodes_result)
             
-            # Query per le relazioni tra malattie: Aggrega il count di tutte le relazioni duplicate tra malattie distinte
-            relationships_query = """
+            # Parte 1: Query per i nodi delle malattie associate
+            nodes_query1 = """
             MATCH (m:Malattia {codice: $codice_malattia})-[r:ASSOCIATA_A]-(m2:Malattia)
-            OPTIONAL MATCH (m)-[r1:CURATA_CON]->(pr:Prescrizione)
-            WITH DISTINCT m, m2, pr, r1.descrizione_prescrizione AS descrizione_prescrizione, SUM(r.count) AS total_count, COUNT(DISTINCT r1) AS NumeroDiCure
-            RETURN elementId(m) AS disease_elementId, 
-                elementId(m2) AS disease2_elementId, 
-                total_count AS SommaCounter,
-                elementId(pr) AS prescription_elementId, 
-                descrizione_prescrizione, 
-                NumeroDiCure
+            RETURN elementId(m) AS disease1_elementId, m.codice AS codice_malattia_input,
+                elementId(m2) AS disease2_elementId, m2.codice AS codice_malattia_associata
             """
-            relationships_result = session.run(relationships_query, codice_malattia=codice_malattia)
-            relationships = format_disease_relationships(relationships_result)
-            return {"nodes": nodes, "relationships": relationships}
+            nodes_result1 = session.run(nodes_query1, codice_malattia=codice_malattia)  # Parametro passato correttamente
+            nodes1 = format_disease_nodes(nodes_result1)
+
+            # Parte 2: Query per i nodi delle prescrizioni
+            nodes_query2 = """
+            MATCH (m:Malattia {codice: $codice_malattia})-[r:CURATA_CON]->(p:Prescrizione)
+            RETURN elementId(p) AS prescription_elementId, p.codice AS codice_prescrizione
+            """
+            nodes_result2 = session.run(nodes_query2, codice_malattia=codice_malattia)  # Parametro passato correttamente
+            nodes2 = format_disease_nodes(nodes_result2)
+            
+            # Parte 1: Query per le relazioni tra malattie
+            relationships_query1 = """
+            MATCH (m:Malattia {codice: $codice_malattia})-[r:ASSOCIATA_A]-(m2:Malattia)
+            RETURN elementId(m) AS disease1_elementId, elementId(m2) AS disease2_elementId, SUM(r.count) AS numero_associazioni
+            """
+            relationships_result1 = session.run(relationships_query1, codice_malattia=codice_malattia)  # Parametro passato correttamente
+            relationships1 = format_disease_relationships(relationships_result1)
+
+            # Parte 2: Query per le relazioni tra malattia e prescrizioni
+            relationships_query2 = """
+            MATCH (m:Malattia {codice: $codice_malattia})-[r:CURATA_CON]->(p:Prescrizione)
+            RETURN elementId(m) AS disease_elementId, elementId(p) AS prescription_elementId, COUNT(r) AS numero_prescrizioni, 
+                COLLECT(r.descrizione_prescrizione)[0] AS descrizione_piu_frequente
+            """
+            relationships_result2 = session.run(relationships_query2, codice_malattia=codice_malattia)  # Parametro passato correttamente
+            relationships2 = format_disease_relationships(relationships_result2)
+
+            return {
+                "nodes": nodes1+nodes2, 
+                "relationships": relationships1+relationships2
+            }

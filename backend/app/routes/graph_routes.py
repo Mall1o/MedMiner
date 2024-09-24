@@ -40,10 +40,9 @@ def get_disease_graph():
     codice_malattia = request.json.get('codice_malattia')
     if not codice_malattia:
         return jsonify({'error': 'codice_malattia parameter is required'}), 400
-
+    
     graph_service = GraphService(neo4j_db.driver)
     graph = graph_service.get_disease_graph(codice_malattia)
-    print(graph)
     return jsonify(graph), 200
 
 

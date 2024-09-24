@@ -12,7 +12,7 @@ const DiseaseDetails = () => {
     const navigate = useNavigate();
 
     const handleShowGraph = (disease) => {
-        navigate(`/graph/${'malattia'}/${disease.codice}`);
+        navigate(`/graph/${'disease'}/${disease.codice}`);
     };
 
     useEffect(() => {
