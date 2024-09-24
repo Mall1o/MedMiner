@@ -1,28 +1,34 @@
-.graphPageContainer {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100vh;
-  margin: 20px;
-  padding: 0;
-}
+  .graphPageContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    margin: 20px;
+    padding: 0;
+  }
 
-.graphPage {
-  flex-grow: 1;
-  width: 100%;
-  height: calc(100vh - 20px);
-  padding: 0;
-  margin-bottom: 20px;
-}
+  .graphPage {
+    flex-grow: 1;
+    width: 100%;
+    height: calc(100vh - 20px);
+    padding: 0;
+    margin-bottom: 20px;
+  }
 
-.graphContainer {
-  flex-grow: 3;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 20px;
-  position: relative;
-}
+  .graphContainer {
+    flex-grow: 3;
+    width: 95%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 20px;
+    position: relative;
+  }
+
+  .sliderContainer {
+    margin-top: 20px; /* Aggiungi uno spazio tra il grafo e lo slider */
+    width: 95%;    /* Assicurati che lo slider non prenda tutta la larghezza */
+    align-self: center; /* Centra lo slider */
+  }

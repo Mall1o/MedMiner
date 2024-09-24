@@ -146,7 +146,6 @@ const GraphPage = () => {
 
   return (
     <div className={styles.graphPageContainer}>
-      <SliderComponent onDateChange={handleDateChange} />
         {graphData ? (
         <div className={styles.graphContainer}>
           <GraphComponent
@@ -164,6 +163,9 @@ const GraphPage = () => {
           applyBetweenness={applyBetweenness}
           isBetweennessApplied={betweennessApplied}
       />
+      </div>
+      <div className={styles.sliderContainer}>
+        <SliderComponent onDateChange={handleDateChange} />
       </div>
     </div>
   );
