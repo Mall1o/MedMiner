@@ -81,10 +81,10 @@ const PrescriptionList = () => {
                 </tbody>
             </table>
             <div className={styles.paginationContainer}>
-                <button onClick={paginatePrev} className={styles.paginationButton}>
+                <button onClick={paginatePrev} className={styles.paginationBtn}>
                     Prev
                 </button>
-                <button onClick={paginateNext} className={styles.paginationButton}>
+                <button onClick={paginateNext} className={styles.paginationBtn}>
                     Next
                 </button>
             </div>
