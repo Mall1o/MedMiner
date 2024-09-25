@@ -9,7 +9,11 @@ export default class GraphFilter {
         } else if (edge.type === 'DIAGNOSTICATO_CON') {
           const edgeYear = parseInt(edge.properties.data_prima_diagnosi.substring(0, 4));
           return edgeYear <= selectedDate ? edge : null;
-        } else {
+        } else if (edge.type === 'ASSOCIATA_A') {
+          const edgeYear = parseInt(edge.properties.data_ultima_associazione.substring(0, 4));
+          return edgeYear <= selectedDate ? edge : null;
+
+        } else {  
           return edge;
         }
       }).filter(Boolean);

@@ -142,26 +142,42 @@ def format_curata_relationships(relationships_result):
     for record in relationships_result:
         disease_id = record.get("disease_elementId")
         prescription_id = record.get("prescription_elementId")
-        numero_di_cure = record.get("NumeroDiCure")  # Conteggio delle relazioni
-        descrizione_prescrizione = record.get("descrizione_prescrizione")  # Descrizione della prescrizione
-        
-        # Chiave per evitare duplicati
-        curata_key = (disease_id, prescription_id, "CURATA_CON")
+        other_disease_id = record.get("other_disease_elementId")
+        descrizione_prescrizione = record.get("descrizione_prescrizione")
+        numero_di_cure = record.get("NumeroDiCure")
+        associata_relationship = record.get("r1")  # Relazione ASSOCIATA_A opzionale
         
         # Gestione della relazione CURATA_CON
+        curata_key = (disease_id, prescription_id, "CURATA_CON")
+        
         if disease_id and prescription_id and curata_key not in added_relationships:
             relationships.append({
                 "start_id": disease_id,
                 "end_id": prescription_id,
                 "type": "CURATA_CON",
                 "properties": {
-                    "NumeroDiCure": numero_di_cure,  # Numero di cure
-                    "DescrizionePrescrizione": descrizione_prescrizione  # Descrizione della prescrizione
+                    "NumeroDiCure": numero_di_cure,
+                    "DescrizionePrescrizione": descrizione_prescrizione
                 }
             })
             added_relationships.add(curata_key)
+        
+        # Gestione della relazione ASSOCIATA_A se esiste
+        if disease_id and other_disease_id and associata_relationship:
+            associata_key = (disease_id, other_disease_id, "ASSOCIATA_A")
+            
+            if associata_key not in added_relationships:
+                relationships.append({
+                    "start_id": disease_id,
+                    "end_id": other_disease_id,
+                    "type": "ASSOCIATA_A",
+                    "properties": dict(associata_relationship)  # Aggiunge tutte le proprietà della relazione
+                })
+                added_relationships.add(associata_key)
 
     return relationships
+
+
 def format_disease_relationships(relationships_result):
     added_relationships = set()  # Set per evitare duplicati
     relationships = []  # Lista finale delle relazioni

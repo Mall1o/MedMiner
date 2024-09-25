@@ -82,9 +82,12 @@ class GraphModel:
             # Query per le relazioni: Prescrizione -> Malattia con counter
             relationships_query = """
             MATCH (m:Malattia)-[r:CURATA_CON]->(pr:Prescrizione {codice: $codice_prescrizione})
-            WITH m, pr, r.descrizione_prescrizione AS descrizione_prescrizione, COUNT(r) AS NumeroDiCure
+                OPTIONAL MATCH (m)-[r1:ASSOCIATA_A {codice_prescrizione: $codice_prescrizione}]->(other_m:Malattia)
+            WITH m, pr, r.descrizione_prescrizione AS descrizione_prescrizione, COUNT(r) AS NumeroDiCure, other_m, r1
             RETURN elementId(m) AS disease_elementId, 
-                elementId(pr) AS prescription_elementId, 
+                elementId(pr) AS prescription_elementId,
+                elementId(other_m) AS other_disease_elementId,
+                r1, 
                 descrizione_prescrizione, 
                 NumeroDiCure
             ORDER BY descrizione_prescrizione
