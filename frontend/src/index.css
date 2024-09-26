@@ -43,13 +43,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/font/Montserrat-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/font/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/font/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+
 body {
+  font-family: 'Montserrat', sans-serif;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
   height: 100%; /* Mantenuto per il layout corretto */
-  font-family: Arial, sans-serif;
   background-color: var(--background-color); /* Usa il bianco di sfondo */
 }
 
@@ -77,6 +95,7 @@ html, body, #root {
 }
 
 a {
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   color: var(--link-color); /* Colore link principale */
   text-decoration: inherit;
@@ -94,11 +113,17 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  color: var(--primary-text-color); /* Colore per gli h1 */
+h1, h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; /* Usa SemiBold */
+  color: var(--primary-text-color); /* Colore testo principale */
 }
+
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Usa Light */
+}
+
 
 button {
   border-radius: 8px;
