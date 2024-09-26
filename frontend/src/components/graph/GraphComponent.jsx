@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { initializeNetwork } from './GraphComponentLogic';
-import { useDetailsPanel } from '../../context/DetailsPanelContext'; // Importa il contesto
+import { useDetailsPanel } from '../../context/DetailsPanelContext';
 import styles from './GraphComponent.module.css';
 
 const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {

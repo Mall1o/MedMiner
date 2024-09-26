@@ -19,6 +19,8 @@ const GraphPage = () => {
   const [betweennessApplied, setBetweennessApplied] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [betweennessData, setBetweennessData] = useState(null); // Dati di betweenness caricati
+  const [dateRange, setDateRange] = useState({ min: 2000, max: 2024 }); // Stato per il range di date
+
 
   useEffect(() => {
     const fetchGraphData = async () => {
@@ -34,6 +36,32 @@ const GraphPage = () => {
 
       setGraphData(data);
       setOriginalGraphData(data);
+
+      // Trova la data minima e massima dinamicamente senza salvare tutte le date
+      let minDate = Infinity;
+      let maxDate = -Infinity;
+
+      data.relationships.forEach((rel) => {
+        let year;
+        if (rel.properties.data_prescrizione) {
+          year = parseInt(rel.properties.data_prescrizione.substring(0, 4)); // Estrai l'anno
+        } else if (rel.properties.data_prima_diagnosi) {
+          year = parseInt(rel.properties.data_prima_diagnosi.substring(0, 4)); // Estrai l'anno
+        }
+
+        if (year) {
+          // Aggiorna il min e max dinamicamente
+          if (year < minDate) minDate = year;
+          if (year > maxDate) maxDate = year;
+        }
+      });
+
+      // Se nessuna data valida è trovata, imposta i valori di default
+      if (minDate === Infinity) minDate = 2000;
+      if (maxDate === -Infinity) maxDate = 2024;
+
+      setDateRange({ min: minDate, max: maxDate });
+
       setLoading(false);
     };
 
@@ -124,7 +152,7 @@ const GraphPage = () => {
       </div>
       {tipo === 'paziente' && (
         <div className={styles.sliderContainer}>
-          <SliderComponent onDateChange={handleDateChange} />
+          <SliderComponent onDateChange={handleDateChange} minDate={dateRange.min} maxDate={dateRange.max}/>
         </div>
       )}
     </div>
