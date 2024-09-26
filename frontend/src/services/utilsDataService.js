@@ -118,6 +118,69 @@ class UtilsDataServices {
             return [];
         }
     }
+
+     // Funzione per caricare il file CSV
+     async uploadFile(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch('http://localhost:5000/upload-file', {
+                method: 'POST',
+                body: formData,
+            });
+            if (!response.ok) {
+                throw new Error('Errore durante il caricamento del file CSV');
+            }
+            const data = await response.json();
+            return data.filePath;  // Restituisce il percorso del file caricato
+        } catch (error) {
+            console.error('Errore nel caricamento del file CSV:', error);
+            return null;
+        }
+    }
+
+    // Funzione per creare il database
+    async createDatabase(dbName) {
+        try {
+            const response = await fetch('http://localhost:5000/create-database', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ dbName }),
+            });
+            if (!response.ok) {
+                throw new Error('Errore durante la creazione del database');
+            }
+            const data = await response.json();
+            return data.message;
+        } catch (error) {
+            console.error('Errore durante la creazione del database:', error);
+            return null;
+        }
+    }
+
+    // Funzione per caricare il CSV nel database creato
+    async loadCsvToDatabase(dbName, filePath) {
+        try {
+            const response = await fetch('http://localhost:5000/load-csv', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ dbName, filePath }),
+            });
+            if (!response.ok) {
+                throw new Error('Errore durante il caricamento del file CSV nel database');
+            }
+            const data = await response.json();
+            return data.message;
+        } catch (error) {
+            console.error('Errore durante il caricamento del file CSV nel database:', error);
+            return null;
+        }
+    }
 }
 
 export default UtilsDataServices;

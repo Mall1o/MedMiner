@@ -23,7 +23,7 @@ const Sidebar = () => {
           <li className={styles.sidebarMenuItem}><Link to="/diseases_group">⚕️ Malattie</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/prescriptions">💊 Prescrizioni</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/ai-module">🤖 Modulo IA</Link></li>
-          <li className={styles.sidebarMenuItem}><Link to="/other-pages">...</Link></li>
+          <li className={styles.sidebarMenuItem}><Link to="/load-csv">...</Link></li>
         </ul>
       </div>
     </div>

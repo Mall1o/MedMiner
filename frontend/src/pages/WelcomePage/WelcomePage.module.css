@@ -1,0 +1,87 @@
+.welcomeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .title {
+    font-size: 3rem;
+    color: white;
+  }
+  
+  .logo {
+    width: 150px; 
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin-bottom: 50px;
+  }
+  
+  .button {
+    background-color: var(--sidebar-button-bg);
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 150px;
+    text-align: center;
+  }
+
+  .botton:hover {
+    color: white;
+    background-color: var(--bytton-primary-hover-bg);
+  }
+
+  .button:active {
+    color: white;
+    background-color: var(--button-primary-active-bg);
+  }
+  
+  .csvButton {
+    background-color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+
+  .csvButton:hover {
+    color: white;
+    background-color: green;
+  }
+  .csvButton:active {
+    color: white;
+    background-color: darkgreen;
+  }
+  
+  .selectDatabase {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+  }
+  
+  .selectDatabase ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .selectDatabase li {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  

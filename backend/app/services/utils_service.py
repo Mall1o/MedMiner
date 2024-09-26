@@ -1,3 +1,7 @@
+import os
+import shutil
+import time
+from werkzeug.utils import secure_filename
 from ..models.utils_model import UtilsModel
 
 class UtilsService:
@@ -33,3 +37,23 @@ class UtilsService:
     
     def get_disease_group(self, group_name):
         return self.model.get_disease_group(group_name)
+
+    def create_and_switch_database(self, db_name):
+        # Creazione del nuovo database
+        self.model.create_database(db_name)
+        # Cambia al nuovo database
+        self.switch_database(db_name)
+
+    def switch_database(self, db_name):
+        from ..extensions import neo4j_db
+        neo4j_db.switch_database(db_name)
+
+    def load_csv_to_neo4j(self, file_path, db_name):
+        # Assicura che stiamo usando il database corretto prima di caricare il CSV
+        self.switch_database(db_name)
+        return self.model.load_csv_to_neo4j(file_path, db_name)
+    
+    def get_unique_filename(self,filename):
+        timestamp = int(time.time())  # Usa il timestamp per creare un nome unico
+        filename_base, filename_ext = os.path.splitext(secure_filename(filename))
+        return f"{filename_base}_{timestamp}{filename_ext}"
