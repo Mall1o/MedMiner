@@ -1,87 +1,81 @@
-.welcomeContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  
-  .title {
-    font-size: 3rem;
-    color: white;
-  }
-  
-  .logo {
-    width: 150px; 
-    height: auto;
-    margin-top: 20px;
-  }
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: space-around;
-    width: 60%;
-    margin-bottom: 50px;
-  }
-  
-  .button {
-    background-color: var(--sidebar-button-bg);
-    border: none;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    width: 150px;
-    text-align: center;
-  }
+/* Ingrandimento Logo e Titolo */
+.fullPageHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-color);
+}
 
-  .botton:hover {
-    color: white;
-    background-color: var(--bytton-primary-hover-bg);
-  }
+.title {
+  font-size: 6rem;
+  color: white;
+  margin-bottom: 20px;
+}
 
-  .button:active {
-    color: white;
-    background-color: var(--button-primary-active-bg);
-  }
-  
-  .csvButton {
-    background-color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 10px;
-  }
+.fullPageLogo {
+  width: 300px;
+  height: auto;
+}
 
-  .csvButton:hover {
-    color: white;
-    background-color: green;
-  }
-  .csvButton:active {
-    color: white;
-    background-color: darkgreen;
-  }
-  
-  .selectDatabase {
-    background-color: white;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: left;
-  }
-  
-  .selectDatabase ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .selectDatabase li {
-    margin: 10px 0;
-    cursor: pointer;
-  }
-  
+/* Stile del carosello */
+.carouselContainer {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+  opacity: 0; /* Inizia nascosto */
+  transform: translateY(50px); /* Posizione iniziale di scivolamento */
+  transition: opacity 1s ease, transform 1s ease; /* Transizione fluida */
+}
+
+.visible {
+  opacity: 1; /* Diventa visibile */
+  transform: translateY(0); /* Scivola verso l'alto */
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(50px); /* Posizione nascosta verso il basso */
+}
+
+/* Stile delle card */
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  height: 300px;
+  width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Ingrandisce leggermente al passaggio del mouse */
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.card button {
+  background-color: var(--button-primary);
+  color: var(--button-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: var(--button-primary-hover);
+}

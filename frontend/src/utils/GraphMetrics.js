@@ -1,5 +1,3 @@
-// utils/GraphMetrics.js
-
 export default class GraphMetrics {
     static async applyBetweenness(graphData, betweennessData) {
       return graphData.nodes.map(node => {
