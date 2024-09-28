@@ -165,7 +165,7 @@ class UtilsModel:
         with self.driver.session() as session:
             query = """
             MATCH (m:Malattia)
-            WITH DISTINCT [label IN labels(m) WHERE label <> 'Malattia'] AS additional_labels, m.descrizione AS Descrizione
+            WITH DISTINCT [label IN labels(m) WHERE label <> 'Malattia'] AS additional_labels, m.descrizione_malattia AS Descrizione
             UNWIND additional_labels AS Gruppo
             RETURN DISTINCT Gruppo, Descrizione
             ORDER BY Gruppo
@@ -190,7 +190,7 @@ class UtilsModel:
             query = """
             MATCH (m:Malattia)
             WHERE $group_name IN labels(m)
-            RETURN m.codice AS CodiceMalattia, m.descrizione AS DescrizioneMalattia
+            RETURN m.codice AS CodiceMalattia, m.descrizione_malattia AS DescrizioneMalattia
 
             """
             
@@ -200,7 +200,7 @@ class UtilsModel:
                 for record in result:
                     diseases_info={
                         "codice": record["CodiceMalattia"],
-                        "descrizione": record["DescrizioneMalattia"]
+                        "descrizione_malattia": record["DescrizioneMalattia"]
                     }
                     diseases_list.append(diseases_info)
                 return diseases_list  
