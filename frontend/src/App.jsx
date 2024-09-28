@@ -14,16 +14,19 @@ import { SidebarProvider, useSidebar } from './context/SidebarContext';
 import { DetailsPanelProvider } from './context/DetailsPanelContext';
 import ScrollToTop from './hooks/ScrollToTop';
 import { useScrollToTop } from './hooks/use-scroll-to-top';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const App = () => {
   useScrollToTop(); // Hook per tornare in cima alla pagina
   return (
-    <SidebarProvider>
-      <DetailsPanelProvider>
-        <ScrollToTop />
-        <MainLayout />
-      </DetailsPanelProvider>
-    </SidebarProvider>
+    <ErrorBoundary>
+      <SidebarProvider>
+        <DetailsPanelProvider>
+          <ScrollToTop />
+          <MainLayout />
+        </DetailsPanelProvider>
+      </SidebarProvider>
+    </ErrorBoundary>
   );
 };
 
