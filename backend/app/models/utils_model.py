@@ -355,3 +355,9 @@ class UtilsModel:
                 print(f"Query {i} eseguita con successo.")
 
         return "Tutte le query eseguite con successo."
+    
+    def get_db_list(self):
+        with self.driver.session(database="system") as session:
+            result = session.run("SHOW DATABASES YIELD name")
+            databases = [record["name"] for record in result]
+            return databases

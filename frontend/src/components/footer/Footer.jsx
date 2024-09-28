@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import EmailIcon from '@mui/icons-material/Email';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import styles from './Footer.module.css';
 import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto
 
@@ -33,38 +33,11 @@ const Footer = () => {
           <IconButton 
             color="inherit" 
             className={styles.footerIcons}
-            href="https://facebook.com"
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <FacebookIcon />
-          </IconButton>
-          <IconButton 
-            color="inherit" 
-            className={styles.footerIcons}
-            href="https://twitter.com"
+            href="https://github.com/Mall1o/PrivateTesi"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <TwitterIcon />
-          </IconButton>
-          <IconButton 
-            color="inherit" 
-            className={styles.footerIcons}
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LinkedInIcon />
-          </IconButton>
-          <IconButton 
-            color="inherit" 
-            className={styles.footerIcons}
-            href="mailto:info@comorgraph.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <EmailIcon />
+            <GitHubIcon />
           </IconButton>
         </Box>
       </Toolbar>

@@ -32,7 +32,7 @@
 .mainContentSidebarClosed {
   margin-left: 20px;
 }
-/* App.module.css */
+
 .appContainer {
   display: flex;
   flex-direction: row;
