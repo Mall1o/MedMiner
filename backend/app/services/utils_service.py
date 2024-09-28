@@ -57,3 +57,6 @@ class UtilsService:
         timestamp = int(time.time())  # Usa il timestamp per creare un nome unico
         filename_base, filename_ext = os.path.splitext(secure_filename(filename))
         return f"{filename_base}_{timestamp}{filename_ext}"
+
+    def get_db_list(self):
+        return self.model.get_db_list()

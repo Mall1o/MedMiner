@@ -13,17 +13,19 @@ const Sidebar = () => {
         {isSidebarOpen ? '←' : '→'}
       </div>
       <div className={styles.sidebarLogo}>
-        <img src={logo} alt="Logo" />
+        <Link to="/">
+        <img src={logo} alt="Logo" /> 
+        </Link>
         <h1 className={styles.appName}>ComorGraph</h1>
       </div>
       <div className="sidebar-content">
         <ul className={styles.sidebarMenu}>
-          <li className={styles.sidebarMenuItem}><Link to="/">🏠 Home</Link></li>
+          <li className={styles.sidebarMenuItem}><Link to="/dashboard">📈 Dashboard</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/patients">👥 Pazienti</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/diseases_group">⚕️ Malattie</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/prescriptions">💊 Prescrizioni</Link></li>
           <li className={styles.sidebarMenuItem}><Link to="/ai-module">🤖 Modulo IA</Link></li>
-          <li className={styles.sidebarMenuItem}><Link to="/load-csv">...</Link></li>
+          <li className={styles.sidebarMenuItem}><Link to="/load-csv">💾 Carica CSV</Link></li>
         </ul>
       </div>
     </div>

@@ -44,9 +44,9 @@ const GraphPage = () => {
       data.relationships.forEach((rel) => {
         let year;
         if (rel.properties.data_prescrizione) {
-          year = parseInt(rel.properties.data_prescrizione.substring(0, 4)); // Estrai l'anno
+          year = parseInt(rel.properties.data_prescrizione.substring(0, 4));
         } else if (rel.properties.data_prima_diagnosi) {
-          year = parseInt(rel.properties.data_prima_diagnosi.substring(0, 4)); // Estrai l'anno
+          year = parseInt(rel.properties.data_prima_diagnosi.substring(0, 4));
         }
 
         if (year) {

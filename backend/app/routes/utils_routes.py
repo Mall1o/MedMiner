@@ -142,3 +142,10 @@ def upload_file():
     except Exception as e:
         print(f"Errore nel caricamento del file: {e}")
         return jsonify({'error': str(e)}), 500
+
+@utils_bp.route('/db-list', methods=['GET'])
+def get_db_list():
+    service = UtilsService(neo4j_db.driver)
+    db_list = service.get_db_list()
+    
+    return jsonify(db_list), 200
