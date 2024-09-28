@@ -1,146 +1,137 @@
-.diseaseListContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: var(--box-background-color);
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-    max-width: 100%;
-    overflow: hidden;
+.diseaseListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: var(--box-background-color);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  max-width: 1200px; /* Limita la larghezza massima */
+  margin: 0 auto; /* Centra il contenitore */
+  overflow: hidden;
 }
 
 .diseaseSearchInput {
-    width: 60%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255);
-    border-radius: 25px;
-    background-color: rgba(255, 255, 255);
-    color: #333;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.5); /* Border più visibile */
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.9); /* Leggero trasparente */
+  color: #333;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  transition: border 0.3s ease-in-out;
+}
+
+.diseaseSearchInput:focus {
+  border: 1px solid var(--button-primary-bg); /* Cambia colore al focus */
+  outline: none; /* Rimuovi l'outline */
 }
 
 .diseaseListTable {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; 
 }
 
 .diseaseListTable thead {
-    background-color: rgba(147, 147, 147,0.5)
+  background-color: rgba(147, 147, 147, 0.5);
 }
 
 .diseaseListTable th,
 .diseaseListTable td {
-    padding: 12px;
-    text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    color: var(--primary-text-color);
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--primary-text-color);
 }
 
 .diseaseListTable tr:hover {
-    background-color: rgba(96, 97, 98, 0.2);
-    cursor: pointer;
+  background-color: rgba(96, 97, 98, 0.2);
+  cursor: pointer;
 }
 
-.avatarImg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Aggiunge spazio tra i pulsanti */
 }
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
 
 .paginationBtn {
-    padding: 10px 20px;
-    background-color: var(--button-primary-bg);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 20px;
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out; /* Aggiunge transizione */
+}
+
+.paginationBtn:hover {
+  background-color: #323f8cd2;
+}
+
+.paginationBtn:active {
+  background-color: var(--button-primary-active-bg);
+}
+
+.paginationBtn:disabled {
+  background-color: #ced4da;
+  cursor: not-allowed;
+}
+
+.viewGraphBtn {
+  padding: 8px 16px;
+  background-color: var(--sidebar-button-bg);
+  color: var(--primary-text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.viewGraphBtn:hover {
+  background-color: var(--button-primary-bg);
+  color: white;
+}
+
+.viewGraphBtn:active {
+  background-color: var(--button-primary-active-bg);
+  color: white;
+}
+
+/* Media query per schermi più piccoli */
+@media (max-width: 768px) {
+  .diseaseListContainer {
+    padding: 0 10px;
   }
-  
-  .paginationBtn:hover {
-    background-color: #323f8cd2;
-    border: none;
-    color: white;
+
+  .diseaseSearchInput {
+    width: 90%; /* Più spazio per la search bar su schermi piccoli */
   }
-  
-  .paginationBtn:active {
-    background-color: var(--button-primary-active-bg);
-    border: none;
-    color: white;
+
+  .diseaseListTable th, 
+  .diseaseListTable td {
+    padding: 8px;
   }
-  
-  .paginationBtn:disabled {
-    background-color: #ced4da;
-    cursor: not-allowed;
-  }
-  
-  /*
-  .viewGraphBtn {
+
+  .paginationBtn {
     padding: 8px 16px;
-    background-color: var(--sidebar-button-bg);
-    color: var(--primary-text-color);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
   }
-  
-  .viewGraphBtn:hover {
-    background-color: var(--button-primary-bg);
-    color: white;
+}
+
+@media (max-width: 1200px) {
+  .diseaseListContainer {
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-right: 50px;
   }
-  
-  .viewGraphBtn:active {
-    background-color: var(--button-primary-active-bg);
-    color: white;
-  } */
-  
-  /* Media query per schermi più piccoli */
-  @media (max-width: 768px) {
-    .diseaseListContainer {
-      padding: 0 10px;
-    }
-  
-    .viewGraphBtn {
-      padding: 6px 12px;
-    }
-  }
-  
-  @media (max-width: 1200px) {
-    .diseaseListContainer {
-      width: calc(100% - 100px);
-      margin-left: 50px;
-      margin-right: 50px;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .diseaseListContainer {
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      padding: 0 10px;
-    }
-  
-    .diseaseListTable th, .diseaseListTable td {
-      padding: 8px;
-    }
-  
-    .pagination {
-      width: 150px;
-    }
-  }
+}

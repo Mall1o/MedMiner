@@ -1,151 +1,157 @@
-.diseaseDetailsContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: var(--box-background-color);
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-    max-width: 100%;
-    overflow: hidden;
+.diseaseDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: var(--box-background-color);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  max-width: 100%;
+  width: 100%; /* Assicura che il contenitore occupi tutta la larghezza */
+  overflow: hidden;
+  margin: 0 auto;
 }
 
 .diseaseSearchInput {
-    width: 60%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255);
-    border-radius: 25px;
-    background-color: rgba(255, 255, 255);
-    color: #333;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+  width: 60%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Opacità per maggiore leggibilità */
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.9); /* Leggera trasparenza */
+  color: #333;
+  text-align: center;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.diseaseSearchInput:focus {
+  border-color: var(--button-primary-bg); /* Cambia il colore del bordo quando è attivo */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi un'ombra più evidente */
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.95); /* Maggiore opacità al focus */
 }
 
 .diseaseDetailsTable {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .diseaseDetailsTable thead {
-    background-color: rgba(147, 147, 147,0.5)
+  background-color: rgba(147, 147, 147, 0.5);
 }
 
 .diseaseDetailsTable th,
 .diseaseDetailsTable td {
-    padding: 12px;
-    text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    color: var(--primary-text-color);
+  padding: 12px;
+  text-align: center; /* Centra il testo */
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--primary-text-color);
 }
 
 .diseaseDetailsTable tr:hover {
-    background-color: rgba(96, 97, 98, 0.2);
-    cursor: pointer;
-}
-
-.avatarImg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+  background-color: rgba(96, 97, 98, 0.2);
+  cursor: pointer;
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Aggiunge spazio tra i pulsanti */
 }
 
+.viewGraphBtn {
+  padding: 10px 20px;
+  background-color: var(--sidebar-button-bg);
+  color: var(--primary-text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
 
+.viewGraphBtn:hover {
+  color: white;
+  background-color: var(--button-primary-bg);
+}
+
+.viewGraphBtn:active {
+  background-color: var(--button-primary-active-bg);
+}
 .paginationBtn {
-    padding: 10px 20px;
-    background-color: var(--button-primary-bg);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .paginationBtn:hover {
-    background-color: #323f8cd2;
-    border: none;
-    color: white;
-  }
-  
-  .paginationBtn:active {
-    background-color: var(--button-primary-active-bg);
-    border: none;
-    color: white;
-  }
-  
-  .paginationBtn:disabled {
-    background-color: #ced4da;
-    cursor: not-allowed;
-  }
-  
-  .backButton {
-    background-color: #fff; /* Sfondo bianco */
-    color: #333; /* Colore della freccia */
-    border: 2px solid #333; /* Aggiungere un bordo sottile */
-    border-radius: 50%; /* Arrotonda completamente il bottone */
-    width: 40px; /* Dimensioni ridotte */
-    height: 40px; 
-    font-size: 10px; /* Dimensione della freccia */
-    display: flex; /* Centra la freccia */
-    align-items: center; /* Allinea verticalmente la freccia */
-    justify-content: center; /* Allinea orizzontalmente la freccia */
-    left: 10px; /* Vicino al bordo sinistro */
-    top: 10px; /* Vicino al bordo superiore */
-    cursor: pointer; /* Cambia il cursore al passaggio */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi un'ombra morbida */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transizione per hover */
+  padding: 10px 20px;
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.paginationBtn:hover {
+  background-color: #323f8cd2;
+}
+
+.paginationBtn:active {
+  background-color: var(--button-primary-active-bg);
+}
+
+.paginationBtn:disabled {
+  background-color: #ced4da;
+  cursor: not-allowed;
+}
+
+.backButton {
+  background-color: #fff;
+  color: #333;
+  border: 2px solid #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px; 
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ombra morbida */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transizione su hover */
 }
 
 .backButton:hover {
-    background-color: #f0f0f0; /* Colore di sfondo leggermente più scuro al passaggio */
-    transform: scale(1.1); /* Ingrandisci leggermente al passaggio */
+  background-color: #f0f0f0;
+  transform: scale(1.1); /* Ingrandimento leggero al passaggio */
 }
 
+@media (max-width: 768px) {
+  .diseaseSearchInput {
+    width: 90%; /* Larghezza maggiore su schermi piccoli */
+    padding: 10px 15px;
+  }
 
-  
-  /* Media query per schermi più piccoli */
-  @media (max-width: 768px) {
-    .diseaseDetailsContainer {
-      padding: 0 10px;
-    }
-  
-    .viewGraphBtn {
-      padding: 6px 12px;
-    }
+  .diseaseDetailsContainer {
+    padding: 0 10px;
   }
-  
-  @media (max-width: 1200px) {
-    .diseaseDetailsContainer {
-      width: calc(100% - 100px);
-      margin-left: 50px;
-      margin-right: 50px;
-    }
+
+  .diseaseDetailsTable th,
+  .diseaseDetailsTable td {
+    padding: 8px;
   }
-  
-  @media (max-width: 768px) {
-    .diseaseDetailsContainer {
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-      padding: 0 10px;
-    }
-  
-    .diseaseDetailsTable th, .diseaseDetailsTable td {
-      padding: 8px;
-    }
-  
-    .pagination {
-      width: 150px;
-    }
+
+  .pagination {
+    width: 100%;
+    justify-content: space-around; /* Distribuzione dei pulsanti */
   }
+}
+
+@media (max-width: 1200px) {
+  .diseaseDetailsContainer {
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}

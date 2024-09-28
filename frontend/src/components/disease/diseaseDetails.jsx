@@ -6,13 +6,13 @@ import styles from './diseaseDetails.module.css';
 const DiseaseDetails = () => {
     const { gruppo } = useParams();  // Estrai il parametro 'gruppo' dall'URL
     const [diseases, setDiseases] = useState([]);
-    const[searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');  // Stato per il termine di ricerca
     const [currentPage, setCurrentPage] = useState(1);
-    const [diseasesPerPage] = useState(7);  // Fissa il numero di malattie per pagina
+    const [diseasesPerPage] = useState(5);  // Fissa il numero di malattie per pagina
     const navigate = useNavigate();
 
     const handleShowGraph = (disease) => {
-        navigate(`/graph/${'disease'}/${disease.codice}`);
+        navigate(`/graph/disease/${disease.codice}`);
     };
 
     const goBack = () => {
@@ -29,14 +29,19 @@ const DiseaseDetails = () => {
         fetchDiseases();
     }, [gruppo]);
 
+    // Funzione per filtrare le malattie in base al termine di ricerca
     const filteredDiseases = diseases.filter((disease) => {
-        return disease && disease.codice && disease.descrizione;
+        return (
+            (disease.codice && disease.codice.toLowerCase().includes(searchTerm.toLowerCase())) || 
+            (disease.descrizione && disease.descrizione.toLowerCase().includes(searchTerm.toLowerCase()))
+        );
     });
+
     // Logica per la paginazione
     const indexOfLastDisease = currentPage * diseasesPerPage;
     const indexOfFirstDisease = indexOfLastDisease - diseasesPerPage;
-    const currentDiseases = diseases.slice(indexOfFirstDisease, indexOfLastDisease);
-    const totalPages = Math.ceil(diseases.length / diseasesPerPage);
+    const currentDiseases = filteredDiseases.slice(indexOfFirstDisease, indexOfLastDisease);  // Applica la paginazione ai risultati filtrati
+    const totalPages = Math.ceil(filteredDiseases.length / diseasesPerPage);
 
     const paginateNext = () => {
         if (currentPage < totalPages) {
@@ -56,35 +61,49 @@ const DiseaseDetails = () => {
                 Back
             </button>
             <h1>Malattie del Gruppo: {gruppo}</h1>
+
+            {/* Barra di ricerca */}
+            <input
+                type="text"
+                placeholder="Cerca per codice ICD9-CM..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={styles.diseaseSearchInput}
+            />
+
             <table className={styles.diseaseDetailsTable}>
                 <thead>
                     <tr>
                         <th></th>
                         <th>Codice Malattia</th>
-                        <th>Descrizione</th>
+                        <th>Visualizza Grafo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {currentDiseases.map((disease, index) => (
-                        <tr key={index}>
-                            <td>🏥</td>
-                            <td>{disease.codice}</td>
-                            <td>{disease.descrizione}</td>
-                            <td>
-                                <button onClick={() => handleShowGraph(disease)}>
-                                    Visualizza Grafo
-                                </button>
-                            </td>
+                    {currentDiseases.length > 0 ? (
+                        currentDiseases.map((disease, index) => (
+                            <tr key={index}>
+                                <td>🦠</td>
+                                <td>{disease.codice}</td>
+                                <td>
+                                    <button onClick={() => handleShowGraph(disease)} className={styles.viewGraphBtn}>
+                                        Apri
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="3" style={{ textAlign: 'center' }}>Nessun risultato trovato</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
 
             {/* Paginazione */}
-            <div className={styles.paginationContainer}>
-                <button onClick={paginatePrev} disabled={currentPage === 1}>Prev</button>
-                <span>Pagina {currentPage} di {totalPages}</span>
-                <button onClick={paginateNext} disabled={currentPage === totalPages}>Next</button>
+            <div className={styles.pagination}>
+                <button onClick={paginatePrev} disabled={currentPage === 1} className={styles.paginationBtn}>Indietro</button>
+                <button onClick={paginateNext} disabled={currentPage === totalPages} className={styles.paginationBtn}>Avanti</button>
             </div>
         </div>
     );

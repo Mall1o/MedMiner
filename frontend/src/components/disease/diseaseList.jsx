@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UtilsDataServices from '../../services/utilsDataService';
 import styles from './diseaseList.module.css';
-import defaultAvatar from '../../assets/user_icon.png';
 
 const DiseaseList = () => {
     const [diseasesGroup, setDiseasesGroup] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [diseasesPerPage] = useState(7);
+    const [diseasesPerPage] = useState(8);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,8 +20,12 @@ const DiseaseList = () => {
         fetchDiseasesGroup();
     }, []);
 
-    const filteredDiseases = diseasesGroup.filter((diseases) => {
-        return diseases && diseases.gruppo && diseases.descrizione;
+    // Filtra le malattie in base al termine di ricerca
+    const filteredDiseases = diseasesGroup.filter((disease) => {
+        return (
+            disease.gruppo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            disease.descrizione.toLowerCase().includes(searchTerm.toLowerCase())
+        );
     });
 
     const indexOfLastDisease = currentPage * diseasesPerPage;
@@ -44,14 +47,14 @@ const DiseaseList = () => {
     };
 
     const handleShowGroup = (disease) => {
-        navigate(`/diseases/${disease.gruppo}`); // Reindirizza alla pagina del grafo
+        navigate(`/diseases/${disease.gruppo}`);
     };
 
     return (
         <div className={styles.diseaseListContainer}>
             <input
                 type="text"
-                placeholder="Search disease..."
+                placeholder="Ricerca malattie per gruppo o descrizione..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className={styles.diseaseSearchInput}
@@ -61,29 +64,41 @@ const DiseaseList = () => {
                     <tr>
                         <th>Gruppo</th>
                         <th>Descrizione</th>
-                        <th>Visualizza Malattie</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {currentDiseases.map((diseasesGroup, index) => (
+                    {currentDiseases.map((disease, index) => (
                         <tr key={index}>
-                            <td>{diseasesGroup.gruppo}</td>
-                            <td>{diseasesGroup.descrizione}</td>
+                            <td>{disease.gruppo}</td>
+                            <td>{disease.descrizione}</td>
                             <td>
-                                <button onClick={() => handleShowGroup(diseasesGroup)}>
-                                
+                                <button 
+                                    className={styles.viewGraphBtn}
+                                    onClick={() => handleShowGroup(disease)}
+                                >
                                     Visualizza Malattie
                                 </button>
                             </td>
-
-
                         </tr>
                     ))}
                 </tbody>
             </table>
             <div className={styles.paginationContainer}>
-                <button onClick={paginatePrev} disabled={currentPage === 1}>Prev</button>
-                <button onClick={paginateNext} disabled={currentPage === totalPages}>Next</button>
+                <button 
+                    className={styles.paginationBtn} 
+                    onClick={paginatePrev} 
+                    disabled={currentPage === 1}
+                >
+                    Avanti
+                </button>
+                <button 
+                    className={styles.paginationBtn} 
+                    onClick={paginateNext} 
+                    disabled={currentPage === totalPages}
+                >
+                    Indietro
+                </button>
             </div>
         </div>
     );

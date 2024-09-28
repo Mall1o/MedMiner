@@ -3,42 +3,51 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
   background-color: var(--box-background-color);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   max-width: 100%;
+  width: 100%; /* Assicura che prenda tutta la larghezza */
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .patientSearchInput {
   width: 60%;
-  padding: 10px;
+  padding: 12px 20px;
   margin-bottom: 20px;
-  border: 1px solid rgba(255, 255, 255);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 25px;
-  background-color: rgba(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.9);
   color: #333;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.patientSearchInput:focus {
+  border-color: var(--button-primary-bg);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .patientListTable {
   width: 100%;
   border-collapse: collapse;
+  text-align: center; /* Centra il contenuto */
 }
 
 .patientListTable thead {
-  background-color: rgba(147, 147, 147,0.5)
+  background-color: rgba(147, 147, 147, 0.5);
 }
 
 .patientListTable th,
 .patientListTable td {
   padding: 12px;
-  text-align: left;
   font-size: 14px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   color: var(--primary-text-color);
@@ -58,9 +67,9 @@
 
 .pagination {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 20px;
-  width: 200px;
+  gap: 10px; /* Aggiunge spazio tra i pulsanti */
 }
 
 .paginationBtn {
@@ -70,18 +79,15 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .paginationBtn:hover {
   background-color: #323f8cd2;
-  border: none;
-  color: white;
 }
 
 .paginationBtn:active {
   background-color: var(--button-primary-active-bg);
-  border: none;
-  color: white;
 }
 
 .paginationBtn:disabled {
@@ -96,6 +102,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .viewGraphBtn:hover {
@@ -105,7 +112,6 @@
 
 .viewGraphBtn:active {
   background-color: var(--button-primary-active-bg);
-  color: white;
 }
 
 /* Media query per schermi più piccoli */
@@ -114,8 +120,19 @@
     padding: 0 10px;
   }
 
-  .viewGraphBtn {
-    padding: 6px 12px;
+  .patientSearchInput {
+    width: 90%; /* Larghezza maggiore su schermi piccoli */
+    padding: 10px 15px;
+  }
+
+  .patientListTable th,
+  .patientListTable td {
+    padding: 8px;
+  }
+
+  .pagination {
+    width: 100%;
+    justify-content: space-around; /* Distribuzione dei pulsanti */
   }
 }
 
@@ -124,22 +141,5 @@
     width: calc(100% - 100px);
     margin-left: 50px;
     margin-right: 50px;
-  }
-}
-
-@media (max-width: 768px) {
-  .patientListContainer {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0 10px;
-  }
-
-  .patientListTable th, .patientListTable td {
-    padding: 8px;
-  }
-
-  .pagination {
-    width: 150px;
   }
 }

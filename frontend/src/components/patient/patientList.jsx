@@ -22,9 +22,32 @@ const PatientList = () => {
   }, []);
 
   const filteredPatients = patients.filter((patient) => {
-    return patient && patient.codice_fiscale_assistito && 
-           patient.codice_fiscale_assistito.toLowerCase().includes(searchTerm.toLowerCase());
+    const search = searchTerm.toLowerCase(); // Converte il termine di ricerca in lowercase per evitare problemi con maiuscole/minuscole
+  
+    // Filtra per codice fiscale assistito (se esiste)
+    const matchesCodiceFiscale = patient.codice_fiscale_assistito 
+      ? patient.codice_fiscale_assistito.toLowerCase().includes(search)
+      : false;
+  
+    // Filtra per anno di nascita (converti l'anno in stringa per confrontarlo)
+    const matchesAnnoNascita = patient.anno_nascita 
+      ? patient.anno_nascita.toString().includes(search) 
+      : false;
+  
+    // Filtra per sesso (usa toUpperCase per il confronto del sesso)
+    const matchesSesso = patient.sesso 
+      ? patient.sesso.toUpperCase().includes(search.toUpperCase()) 
+      : false;
+  
+    // Filtra per CAP (se esiste)
+    const matchesCap = patient.cap_residenza
+      ? patient.cap_residenza.toString().includes(search) 
+      : false;
+  
+    // Ritorna vero se uno di questi campi corrisponde al termine di ricerca
+    return matchesCodiceFiscale || matchesAnnoNascita || matchesSesso || matchesCap;
   });
+  
 
   const indexOfLastPatient = currentPage * patientsPerPage;
   const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
@@ -52,9 +75,11 @@ const PatientList = () => {
     <div className={styles.patientListContainer}>
       <input
         type="text"
-        placeholder="Search user..."
+        placeholder="Ricerca paziente per codice fiscale, anno di nascita, CAP o sesso"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        onFocus={() => setPlaceholderVisible(false)}  // Nascondi il placeholder quando c'è il focus
+        onBlur={() => setPlaceholderVisible(searchTerm === "")}  // Mostra il placeholder solo se il campo è vuoto
         className={styles.patientSearchInput}
       />
       <table className={styles.patientListTable}>
@@ -80,7 +105,7 @@ const PatientList = () => {
               <td>{patient.sesso}</td>
               <td>
                 <button onClick={() => handleShowGraph(patient)} className={styles.viewGraphBtn}>
-                  Visualizza Grafo
+                  Apri
                 </button>
               </td>
             </tr>
