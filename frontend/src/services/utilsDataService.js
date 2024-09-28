@@ -195,6 +195,26 @@ class UtilsDataServices {
             return [];
         }
     }
+
+    async switchDb(dbName) {
+        try {
+            const response = await fetch('http://localhost:5000/switch-db', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ dbName }),
+            });
+            if (!response.ok) {
+                throw new Error('Errore durante lo switch del database');
+            }
+            const data = await response.json();
+            return data.message;
+        } catch (error) {
+            console.error('Errore durante lo switch del database:', error);
+            return null;
+        }
+    }
 }
 
 export default UtilsDataServices;

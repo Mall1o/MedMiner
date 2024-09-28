@@ -26,8 +26,19 @@ const LoadCsvPage = () => {
         setFile(e.target.files[0]);
     };
 
-    const handleDbNameChange = (e) => {
-        setDbName(e.target.value);
+    const handleDbNameChange = async (e) => {
+        const selectedDbName = e.target.value;
+        setDbName(selectedDbName);
+        
+        if (selectedDbName) {
+            try {
+                const switchMessage = await utilsDataServices.switchDb(selectedDbName);
+                if (!switchMessage) throw new Error('Errore durante lo switch del database.');
+                setMessage(`Database cambiato con successo: ${switchMessage}`);
+            } catch (error) {
+                setMessage(error.message);
+            }
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -92,7 +103,7 @@ const LoadCsvPage = () => {
                     <label htmlFor="existingDatabases">Database Esistenti:</label>
                     <select
                         id="existingDatabases"
-                        onChange={(e) => setDbName(e.target.value)}
+                        onChange={handleDbNameChange}
                         className={styles.input}
                         value={dbName}
                     >

@@ -149,3 +149,16 @@ def get_db_list():
     db_list = service.get_db_list()
     
     return jsonify(db_list), 200
+
+@utils_bp.route('/switch-db', methods=['POST'])
+def switch_database():
+    data = request.json
+    db_name = data.get('dbName')
+    
+    if not db_name:
+        return jsonify({'error': 'Missing database name'}), 400
+
+    service = UtilsService(neo4j_db.driver)
+    service.switch_database(db_name)
+    
+    return jsonify({'message': f"Database '{db_name}' attivato con successo"}), 200
