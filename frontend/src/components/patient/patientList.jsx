@@ -62,7 +62,8 @@ const PatientList = () => {
           <tr>
             <th></th>
             <th>Codice Fiscale</th>
-            <th>Età prima diagnosi</th>
+            <th>Anno nascita</th>
+            <th>Cap Residenza</th>
             <th>Sesso</th>
             <th>Visualizza Grafo</th>
           </tr>
@@ -74,7 +75,8 @@ const PatientList = () => {
                 <img src={defaultAvatar} className={styles.avatarImg} alt="avatar" />
               </td>
               <td>{patient.codice_fiscale_assistito}</td>
-              <td>{patient.eta_prima_diagnosi}</td>
+              <td>{patient.anno_nascita}</td>
+              <td>{patient.cap_residenza}</td>
               <td>{patient.sesso}</td>
               <td>
                 <button onClick={() => handleShowGraph(patient)} className={styles.viewGraphBtn}>
