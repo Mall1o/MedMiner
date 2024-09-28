@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import GraphComponent from '../../components/graph/GraphComponent';
 import { fetchPatientGraphData, fetchPrescriptionGraphData, fetchDiseaseGraphData } from '../../services/graphDataService';
 import UtilsDataServices from '../../services/utilsDataService';
@@ -20,7 +20,11 @@ const GraphPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [betweennessData, setBetweennessData] = useState(null); // Dati di betweenness caricati
   const [dateRange, setDateRange] = useState({ min: 2000, max: 2024 }); // Stato per il range di date
+  const navigate = useNavigate();
 
+  const goBack = () => {
+    navigate(-1); // Naviga indietro di una pagina
+  };
 
   useEffect(() => {
     const fetchGraphData = async () => {
@@ -132,6 +136,9 @@ const GraphPage = () => {
 
   return (
     <div className={styles.graphPageContainer}>
+      <button onClick={goBack} className={styles.backButton}>
+          Back
+      </button>
       {graphData ? (
         <div className={styles.graphContainer}>
           <GraphComponent

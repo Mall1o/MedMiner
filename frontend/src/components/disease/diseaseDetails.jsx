@@ -15,6 +15,10 @@ const DiseaseDetails = () => {
         navigate(`/graph/${'disease'}/${disease.codice}`);
     };
 
+    const goBack = () => {
+        navigate(-1); // Naviga indietro di una pagina
+    };
+
     useEffect(() => {
         const fetchDiseases = async () => {
             const utilsService = new UtilsDataServices();
@@ -48,10 +52,14 @@ const DiseaseDetails = () => {
 
     return (
         <div className={styles.diseaseDetailsContainer}>
+            <button onClick={goBack} className={styles.backButton}>
+                Back
+            </button>
             <h1>Malattie del Gruppo: {gruppo}</h1>
             <table className={styles.diseaseDetailsTable}>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Codice Malattia</th>
                         <th>Descrizione</th>
                     </tr>
@@ -59,6 +67,7 @@ const DiseaseDetails = () => {
                 <tbody>
                     {currentDiseases.map((disease, index) => (
                         <tr key={index}>
+                            <td>🏥</td>
                             <td>{disease.codice}</td>
                             <td>{disease.descrizione}</td>
                             <td>

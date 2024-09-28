@@ -6,7 +6,7 @@ import { useDetailsPanel } from '../../context/DetailsPanelContext';
 const DetailsSection = ({ data, isNode, isEdge }) => {
   // Filtra solo le chiavi rilevanti senza 'id', 'start_id', 'end_id'
   const filteredKeys = Object.keys(data).filter(
-    key => key !== 'id' && key !== 'start_id' && key !== 'end_id' 
+    key => key !== 'id' && key !== 'start_id' && key !== 'end_id' && key !== 'size'
   );
 
   // Funzione per formattare le chiavi: rimuove i trattini bassi e mette in maiuscolo la prima lettera di ogni parola
@@ -30,7 +30,6 @@ const DetailsSection = ({ data, isNode, isEdge }) => {
           // Se la chiave è 'properties', visualizziamo solo i dettagli interni
           if (key === 'properties') {
             return Object.entries(value)
-              // Filtra 'data_ultima_associazione' dalle subkey
               .filter(([subKey]) => subKey !== 'data_ultima_associazione' && subKey !== 'count')
               .map(([subKey, subValue]) => (
                 <p key={subKey}>
