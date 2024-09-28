@@ -67,9 +67,7 @@ const PrescriptionList = () => {
                 <tbody>
                     {currentPrescriptions.map((prescription) => (
                         <tr key={prescription.codice} >
-                            <td>
-                                <img src={defaultAvatar} alt="pillola icon" className={styles.avatarImg} />
-                            </td>
+                            <td>💊</td>
                             <td>{prescription.codice}</td>
                             <td>
                                  <button onClick={() => handleShowGraph(prescription)} className={styles.viewGraphBtn}>
