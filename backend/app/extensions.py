@@ -6,7 +6,7 @@ class Neo4jDB:
         self.uri = None  # Memorizziamo l'URI
         self.user = None
         self.password = None
-        self.database_name = "tesi1"
+        self.database_name = "comorbidity"
 
     def init_app(self, app, database_name=None):
         self.uri = app.config['NEO4J_URI']
