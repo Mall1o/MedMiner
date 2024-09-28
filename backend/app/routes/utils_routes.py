@@ -80,7 +80,6 @@ def get_disease_group():
     
     service = UtilsService(neo4j_db.driver)
     disease_group = service.get_disease_group(group_name)
-    print(disease_group)
     return jsonify(disease_group), 200
 
 @utils_bp.route('/create-database', methods=['POST'])

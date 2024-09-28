@@ -1,4 +1,4 @@
-/* Stili di base per la home */
+/* Modifica la larghezza del contenitore centrale */
 .homeContainer {
   display: flex;
   flex-direction: column;
@@ -12,24 +12,22 @@
   border-radius: 15px;
   box-shadow: 0 4px 6px var(--box-shadow-color); /* Ombra leggera */
   transition: all 0.3s ease-in-out;
-  max-width: 100%; /* Prende tutto lo spazio disponibile */
+  width: 92%; /* Assicura che prenda tutto lo spazio disponibile */
+  max-width: 1200px; /* Limita la larghezza massima */
   overflow: hidden; /* Nasconde eventuali overflow */
-  margin-left: 10px !important; /* Disabilita temporaneamente il margine sinistro */
-  margin-top: 25px;
+  margin: 0 auto; /* Centra il contenitore */
 }
 
 /* Quando la sidebar è aperta */
 .homeSidebarOpen {
-  width: calc(100% - 30px); /* Lascia spazio per la sidebar e margini */
-  margin-right: 20px;
-  margin-left: 10px;
+  width: 100%; /* Assicura che prenda il 100% dello spazio disponibile */
+  margin: 0 auto; /* Centra il contenitore */
 }
 
 /* Quando la sidebar è chiusa */
 .homeSidebarClosed {
-  width: calc(100% - 40px); /* Margini di 80px a sinistra e destra */
-  margin-left: 20px;
-  margin-right: 20px;
+  width: 100%; /* Prende il 100% dello spazio disponibile */
+  margin: 0 auto; /* Centra il contenitore */
 }
 
 /* Per schermi più piccoli, adattiamo i margini */

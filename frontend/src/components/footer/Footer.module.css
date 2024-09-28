@@ -5,7 +5,7 @@
   border-radius: 15px;
   margin: 20px 0;
   max-width: 1440px;
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
   transition: margin-left 0.3s ease;
   display: flex;
@@ -46,7 +46,7 @@
 .footerIcons {
   display: flex;
   justify-content: flex-end;
-  gap: 15px;
+  gap: 12px;
   color: var(--primary-text-color);
 }
 

@@ -369,6 +369,56 @@ class UtilsModel:
                         r.data_ultima_associazione = data_ultima_associazione
             ON MATCH SET r.count = r.count + 1,
                         r.data_ultima_associazione = data_ultima_associazione
+            """,
+            f"""
+                //creazione etichette
+                LOAD CSV WITH HEADERS FROM 'file:///dataset_pulito_definitivo.csv' AS row
+                WITH DISTINCT row.ICD9_CM AS codice_malattia
+                WHERE codice_malattia IS NOT NULL
+                MERGE (m:Malattia {{codice: codice_malattia}})
+
+                // Aggiungere etichetta in base al range di codice ICD-9-CM
+                WITH m, toFloat(m.codice) AS codice_num
+                CALL {{
+                WITH m, codice_num
+                CALL apoc.create.addLabels(m, [
+                    CASE 
+                    WHEN codice_num >= 0.0 AND codice_num <= 0.9 THEN 'ND'
+                    WHEN codice_num >= 1.0 AND codice_num <= 139.9 THEN 'INFE'
+                    WHEN codice_num >= 140.0 AND codice_num <= 239.9 THEN 'NEOP'
+                    WHEN codice_num >= 240.0 AND codice_num <= 279.9 THEN 'META'
+                    WHEN codice_num >= 280.0 AND codice_num <= 289.9 THEN 'BLD'
+                    WHEN codice_num >= 290.0 AND codice_num <= 319.9 THEN 'MENT'
+                    WHEN codice_num >= 320.0 AND codice_num <= 359.9 THEN 'NERV'
+                    WHEN codice_num >= 360.0 AND codice_num <= 389.9 THEN 'SENS'
+                    WHEN codice_num >= 390.0 AND codice_num <= 459.9 THEN 'CIRC'
+                    WHEN codice_num >= 460.0 AND codice_num <= 519.9 THEN 'RESP'
+                    WHEN codice_num >= 520.0 AND codice_num <= 579.9 THEN 'DIGE'
+                    WHEN codice_num >= 580.0 AND codice_num <= 629.9 THEN 'GEN'
+                    WHEN codice_num >= 630.0 AND codice_num <= 679.9 THEN 'PREG'
+                    WHEN codice_num >= 680.0 AND codice_num <= 709.9 THEN 'PELLE'
+                    WHEN codice_num >= 710.0 AND codice_num <= 739.9 THEN 'MUSC'
+                    WHEN codice_num >= 740.0 AND codice_num <= 759.9 THEN 'CONG'
+                    WHEN codice_num >= 760.0 AND codice_num <= 779.9 THEN 'NUOVO'
+                    WHEN codice_num >= 780.0 AND codice_num <= 799.9 THEN 'ILL'
+                    WHEN codice_num >= 800.0 AND codice_num <= 999.9 THEN 'INJ'
+                    ELSE NULL 
+                    END
+                ]) YIELD node
+                RETURN node
+                }}
+
+                // Gestione dei codici che iniziano con 'E' o 'V' per le classificazioni EST e SUPP
+                WITH m
+                CALL apoc.create.addLabels(m, [
+                CASE 
+                    WHEN m.codice STARTS WITH 'E' THEN 'EST'
+                    WHEN m.codice STARTS WITH 'V' THEN 'SUPP'
+                    ELSE NULL
+                END
+                ]) YIELD node
+                RETURN node
+
             """
         ]
 
