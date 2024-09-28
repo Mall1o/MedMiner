@@ -1,8 +1,7 @@
 import React, { useState, useEffect }from 'react';
 import styles from './Home.module.css';
 import { useHomeData } from './Home.js';
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import Footer from '../../components/footer/Footer.jsx'; // Importa il Footer
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useSidebar } from '../../context/SidebarContext'; // Importa il contesto
 import UtilsDataServices from '../../services/utilsDataService.js';
 
@@ -118,9 +117,6 @@ const Home = () => {
           </section>
         </div>
       </div>
-
-      {/* Footer fuori dal contenitore principale */}
-      <Footer className={styles.footer}/>
     </>
   );
 };

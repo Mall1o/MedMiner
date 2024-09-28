@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import ReactCardCarousel from 'react-card-carousel';
 import styles from './WelcomePage.module.css';
 import logo from '../../assets/newLogo.png';
+import Footer from '../../components/footer/Footer.jsx'; // Importa il Footer
 
 const WelcomePage = () => {
   const navigate = useNavigate();
@@ -68,6 +69,8 @@ const WelcomePage = () => {
           </ReactCardCarousel>
         </div>
       </div>
+      {/* Footer fuori dal contenitore principale */}
+      <Footer className={styles.footer}/>
     </div>
   );
 };

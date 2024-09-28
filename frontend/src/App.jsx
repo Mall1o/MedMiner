@@ -12,17 +12,13 @@ import LoadCsvPage from './pages/LoadCsvPage/LoadCsvPage.jsx'; // Pagina per car
 import styles from './App.module.css';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
 import { DetailsPanelProvider } from './context/DetailsPanelContext';
-import ScrollToTop from './hooks/ScrollToTop';
-import { useScrollToTop } from './hooks/use-scroll-to-top';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 const App = () => {
-  useScrollToTop(); // Hook per tornare in cima alla pagina
-  return (
+    return (
     <ErrorBoundary>
       <SidebarProvider>
         <DetailsPanelProvider>
-          <ScrollToTop />
           <MainLayout />
         </DetailsPanelProvider>
       </SidebarProvider>
@@ -33,8 +29,6 @@ const App = () => {
 const MainLayout = () => {
   const { isSidebarOpen } = useSidebar(); // Ottieni lo stato della sidebar dal contesto
   const location = useLocation(); // Hook per rilevare i cambiamenti di rotta
-
-  // Verifica se la pagina corrente è la homepage "/"
   const isHomePage = location.pathname === '/';
 
   return (
