@@ -1,24 +1,30 @@
 .sliderContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Assicurati che l'allineamento sia verticale */
   align-items: center;
   justify-content: center;
   padding: 20px;
   background-color: var(--box-background-color); /* Colore di sfondo */
   border-radius: 15px;
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-  max-width: 600px;
+  max-width: 100px; /* Imposta una larghezza per lo slider verticale */
   margin: 20px auto;
   font-family: 'Roboto', sans-serif;
   position: relative;
-  transition: transform 0.3s ease; /* Transizione fluida */
-  z-index: 10; /* Slider ha una priorità più bassa */
+  transition: transform 0.3s ease;
+  z-index: 10;
+  height: 50vh;
 }
 
 .panelOpen {
   transform: translateX(150px); /* Sposta lo slider a destra quando il pannello è aperto */
+  transition: transform 0.3s ease;
 }
 
+.PanelClose {
+  transform: translateX(0); /* Riporta lo slider nella posizione iniziale */
+  transition: transform 0.3s ease;
+}
 .sliderLabel {
   margin-bottom: 10px;
   color: #333; /* Colore scuro per il testo */

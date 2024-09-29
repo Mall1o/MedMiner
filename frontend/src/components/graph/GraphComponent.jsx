@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { initializeNetwork } from './GraphComponentLogic';
 import { useDetailsPanel } from '../../context/DetailsPanelContext';
 import styles from './GraphComponent.module.css';
+import legendIcon from '../../assets/legend.png';
 
 const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {
   const networkRef = useRef(null);
@@ -135,9 +136,11 @@ const GraphComponent = ({ data, onNodeClick, onEdgeClick }) => {
         <button onClick={zoomIn} className={styles.zoomButton}>+</button>
         <button onClick={zoomOut} className={styles.zoomButton}>-</button>
       </div>
-      <div className={styles.legendIcon} onClick={toggleLegend}>
-        ℹ️
-      </div>
+      {!isPanelOpen && (
+        <div className={styles.legendIcon} onClick={toggleLegend}>
+          <img src={legendIcon} className={styles.iconImg} alt="Legenda" />
+        </div>
+      )}
       {isLegendVisible && (
         <div className={styles.legendPopup}>
           <h3>Legenda</h3>

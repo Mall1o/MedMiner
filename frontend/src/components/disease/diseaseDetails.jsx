@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import UtilsDataServices from '../../services/utilsDataService';
 import styles from './diseaseDetails.module.css';
+import defaultAvatar from '../../assets/malattia_avatar.png';
 
 const DiseaseDetails = () => {
     const { gruppo } = useParams();  // Estrai il parametro 'gruppo' dall'URL
@@ -83,7 +84,9 @@ const DiseaseDetails = () => {
                     {currentDiseases.length > 0 ? (
                         currentDiseases.map((disease, index) => (
                             <tr key={index}>
-                                <td>🦠</td>
+                                <td>
+                                    <img src={defaultAvatar} className={styles.avatarImg} alt="avatar" />
+                                </td>
                                 <td>{disease.codice}</td>
                                 <td>
                                     <button onClick={() => handleShowGraph(disease)} className={styles.viewGraphBtn}>

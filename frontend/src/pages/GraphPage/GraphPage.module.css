@@ -7,18 +7,17 @@
     padding: 0;
   }
 
-  .graphPage {
-    flex-grow: 1;
+  .pageContent {
+    display: flex;
+    flex-direction: row; /* Allinea slider, grafo e pannello in fila */
     width: 100%;
     height: calc(100vh - 20px);
-    padding: 0;
-    margin-bottom: 20px;
   }
 
   .graphContainer {
     flex-grow: 3;
-    width: 95%;
-    height: 80%;
+    width: 70%; /* Occupa il 70% dello spazio disponibile */
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,9 +27,16 @@
   }
 
   .sliderContainer {
-    margin-top: 20px; /* Aggiungi uno spazio tra il grafo e lo slider */
-    width: 95%;    /* Assicurati che lo slider non prenda tutta la larghezza */
-    align-self: center; /* Centra lo slider */
+    width: 60px; /* Dimensione più ridotta per lo slider verticale */
+    height: 97%; /* Occupa l'intera altezza */
+    margin-right: 20px; /* Spazio tra lo slider e il grafico */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Orientamento verticale */
+    padding: 20px;
+    z-index: 10;
+    transition: transform 0.3s ease;
   }
 
   .backButton {

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UtilsDataServices from '../../services/utilsDataService';
 import styles from './prescriptionList.module.css';
+import defaultAvatar from '../../assets/prescrizione_avatar.png';
 
 const PrescriptionList = () => {
     const [prescriptions, setPrescriptions] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1); 
-    const [prescriptionsPerPage] = useState(8); // Numero fisso di prescrizioni per pagina
+    const [prescriptionsPerPage] = useState(6); // Numero fisso di prescrizioni per pagina
     const navigate = useNavigate();
 
     // Effettua la fetch delle prescrizioni dal servizio API
@@ -77,7 +78,9 @@ const PrescriptionList = () => {
                 <tbody>
                     {currentPrescriptions.map((prescription) => (
                         <tr key={prescription.codice}>
-                            <td>💊</td>
+                            <td>
+                                <img src={defaultAvatar} alt="avatar" className={styles.avatarImg} />
+                            </td>
                             <td>{prescription.codice}</td>
                             <td>
                                 <button 

@@ -106,8 +106,14 @@ def load_csv_to_neo4j():
 
     service = UtilsService(neo4j_db.driver)
     result = service.load_csv_to_neo4j(file_path, db_name)
-    
-    return jsonify(result), 200
+
+    # Se il risultato contiene un messaggio di errore, restituisce 500
+    if "Errore" in result:
+        return jsonify({'message': result}), 500
+
+    # Se il risultato è positivo, restituisce 200 con un messaggio di successo
+    return jsonify({'message': result}), 200
+
 
 @utils_bp.route('/upload-file', methods=['POST'])
 def upload_file():

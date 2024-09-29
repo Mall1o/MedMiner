@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UtilsDataServices from '../../services/utilsDataService';
 import styles from './diseaseList.module.css';
+import defaultAvatar from '../../assets/group_avatar.jpg';
 
 const DiseaseList = () => {
     const [diseasesGroup, setDiseasesGroup] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [diseasesPerPage] = useState(8);
+    const [diseasesPerPage] = useState(6);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -62,14 +63,18 @@ const DiseaseList = () => {
             <table className={styles.diseaseListTable}>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Gruppo</th>
                         <th>Descrizione</th>
-                        <th></th>
+                        <th>Lista Malattie</th>
                     </tr>
                 </thead>
                 <tbody>
                     {currentDiseases.map((disease, index) => (
                         <tr key={index}>
+                            <td>
+                                <img src={defaultAvatar} className={styles.avatarImg} alt="avatar" />
+                            </td>
                             <td>{disease.gruppo}</td>
                             <td>{disease.descrizione}</td>
                             <td>
@@ -77,7 +82,7 @@ const DiseaseList = () => {
                                     className={styles.viewGraphBtn}
                                     onClick={() => handleShowGroup(disease)}
                                 >
-                                    Visualizza Malattie
+                                    Visualizza
                                 </button>
                             </td>
                         </tr>
@@ -90,14 +95,14 @@ const DiseaseList = () => {
                     onClick={paginatePrev} 
                     disabled={currentPage === 1}
                 >
-                    Avanti
+                    Indietro
                 </button>
                 <button 
                     className={styles.paginationBtn} 
                     onClick={paginateNext} 
                     disabled={currentPage === totalPages}
                 >
-                    Indietro
+                    Avanti
                 </button>
             </div>
         </div>

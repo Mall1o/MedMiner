@@ -114,8 +114,17 @@ const PatientList = () => {
       </table>
 
       <div className={styles.pagination}>
-        <button onClick={paginatePrev} disabled={currentPage === 1} className={styles.paginationBtn}>Indietro</button>
-        <button onClick={paginateNext} disabled={currentPage === totalPages} className={styles.paginationBtn}>Avanti</button>
+          <button onClick={paginatePrev} 
+          disabled={currentPage === 1} 
+          className={styles.paginationBtn}>
+            Indietro
+          </button>
+        <button 
+          onClick={paginateNext} 
+          disabled={currentPage === totalPages} 
+          className={styles.paginationBtn}>
+            Avanti
+        </button>
       </div>
     </div>
   );

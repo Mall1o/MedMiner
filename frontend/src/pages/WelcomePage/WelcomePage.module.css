@@ -76,6 +76,7 @@
 .card:hover {
   transform: scale(1.05); /* Ingrandisce leggermente al passaggio del mouse */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .card h3 {
@@ -104,8 +105,8 @@
 }
 
 .scrollButton {
-  background-color: var(--button-primary-bg);
-  color: white;
+  background-color: var(--sidebar-button-bg);
+  color: var(--text-primary);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -115,7 +116,13 @@
 }
 
 .scrollButton:hover {
-  background-color: var(--button-primary-hover);
+  color: white;
+  background-color: var(--button-primary-hover-bg);
+}
+
+.scrollButton:active {
+  color: white;
+  background-color: var(--button-primary-active-bg);
 }
 
 .hiddenButton {

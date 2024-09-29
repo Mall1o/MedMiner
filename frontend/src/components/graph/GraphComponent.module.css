@@ -47,9 +47,8 @@
 
 .zoomControls {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 40px;
+  left: 20px; /* Cambia qui per spostarli in basso a sinistra */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +59,7 @@
   color: black;
   border: none;
   border-radius: 50%;
-  width: 50px; /* Dimensioni aumentate */
+  width: 50px;
   height: 50px;
   font-size: 20px;
   display: flex;
@@ -68,7 +67,7 @@
   align-items: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 10px; /* Aggiunta di margine per separare i pulsanti */
+  margin: 10px;
 }
 
 .zoomButton:hover {
@@ -83,13 +82,20 @@
 
 .legendPopup {
   position: absolute;
-  top: 50px;
-  right: 20px;
+  top: 20px; /* Posiziona in alto */
+  right: 20px; /* Posiziona a destra */
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 10px;
   z-index: 100;
+}
+
+.iconImg{
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  margin-top: 25px;
 }
 
 .legendPopup h3 {

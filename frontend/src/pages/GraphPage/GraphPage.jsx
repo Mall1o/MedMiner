@@ -7,8 +7,8 @@ import Loader from '../../components/Loader';
 import styles from './GraphPage.module.css';
 import DetailsPanel from '../../components/detailsPanel/DetailPanel';
 import SliderComponent from '../../components/slider/SliderComponent';
-import GraphFilter from '../../utils/GraphFilter';  // Importa la classe di utilità per il filtraggio
-import GraphMetrics from '../../utils/GraphMetrics';  // Importa la classe di utilità per le metriche
+import GraphFilter from '../../utils/GraphFilter';
+import GraphMetrics from '../../utils/GraphMetrics';
 
 const GraphPage = () => {
   const { codice, tipo } = useParams();
@@ -18,13 +18,14 @@ const GraphPage = () => {
   const [originalGraphData, setOriginalGraphData] = useState(null);
   const [betweennessApplied, setBetweennessApplied] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [betweennessData, setBetweennessData] = useState(null); // Dati di betweenness caricati
-  const [dateRange, setDateRange] = useState({ min: 2000, max: 2024 }); // Stato per il range di date
+  const [betweennessData, setBetweennessData] = useState(null); 
+  const [dateRange, setDateRange] = useState({ min: 2000, max: 2024 });
   const navigate = useNavigate();
 
-  const goBack = () => {
+  //logica di back
+  /*const goBack = () => {
     navigate(-1); // Naviga indietro di una pagina
-  };
+  };*/
 
   useEffect(() => {
     const fetchGraphData = async () => {
@@ -41,7 +42,7 @@ const GraphPage = () => {
       setGraphData(data);
       setOriginalGraphData(data);
 
-      // Trova la data minima e massima dinamicamente senza salvare tutte le date
+      // Trova la data minima e massima dinamicamente
       let minDate = Infinity;
       let maxDate = -Infinity;
 
@@ -54,18 +55,15 @@ const GraphPage = () => {
         }
 
         if (year) {
-          // Aggiorna il min e max dinamicamente
           if (year < minDate) minDate = year;
           if (year > maxDate) maxDate = year;
         }
       });
 
-      // Se nessuna data valida è trovata, imposta i valori di default
       if (minDate === Infinity) minDate = 2000;
       if (maxDate === -Infinity) maxDate = 2024;
 
       setDateRange({ min: minDate, max: maxDate });
-
       setLoading(false);
     };
 
@@ -88,10 +86,8 @@ const GraphPage = () => {
 
   const handleDateChange = async (selectedDate) => {
     setSelectedDate(selectedDate);
-
     let filteredGraph = GraphFilter.filterGraphByDate(originalGraphData, selectedDate);
-    
-    // Se la betweenness è applicata, riapplica la betweenness ai dati filtrati
+
     if (betweennessApplied && betweennessData) {
       const updatedNodes = await GraphMetrics.applyBetweenness(filteredGraph, betweennessData);
       filteredGraph = {
@@ -108,7 +104,7 @@ const GraphPage = () => {
       if (!betweennessApplied) {
         const utilsService = new UtilsDataServices();
         const betweennessData = await utilsService.getBetweenessMalattia();
-        setBetweennessData(betweennessData); // Salva i dati di betweenness per uso futuro
+        setBetweennessData(betweennessData);
 
         const updatedNodes = await GraphMetrics.applyBetweenness(graphData, betweennessData);
 
@@ -136,32 +132,31 @@ const GraphPage = () => {
 
   return (
     <div className={styles.graphPageContainer}>
-      <button onClick={goBack} className={styles.backButton}>
-          Back
-      </button>
-      {graphData ? (
+      <div className={styles.pageContent}>
+        {tipo === 'paziente' && (
+          <div className={styles.sliderContainer}>
+            <SliderComponent onDateChange={handleDateChange} minDate={dateRange.min} maxDate={dateRange.max} />
+          </div>
+        )}
         <div className={styles.graphContainer}>
-          <GraphComponent
-            data={graphData}
-            onNodeClick={handleNodeClick}
-            onEdgeClick={handleEdgeClick}
+          {graphData ? (
+            <GraphComponent
+              data={graphData}
+              onNodeClick={handleNodeClick}
+              onEdgeClick={handleEdgeClick}
+            />
+          ) : (
+            <p>Impossibile caricare i dati del grafo.</p>
+          )}
+        </div>
+        <div className={styles.detailsPanel}>
+          <DetailsPanel
+            details={selectedDetails}
+            applyBetweenness={applyBetweenness}
+            isBetweennessApplied={betweennessApplied}
           />
         </div>
-      ) : (
-        <p>Impossibile caricare i dati del grafo.</p>
-      )}
-      <div className={styles.detailsPanel}>
-        <DetailsPanel
-          details={selectedDetails}
-          applyBetweenness={applyBetweenness}
-          isBetweennessApplied={betweennessApplied}
-        />
       </div>
-      {tipo === 'paziente' && (
-        <div className={styles.sliderContainer}>
-          <SliderComponent onDateChange={handleDateChange} minDate={dateRange.min} maxDate={dateRange.max}/>
-        </div>
-      )}
     </div>
   );
 };
