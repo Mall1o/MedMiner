@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styles from './LoadCsvPage.module.css';
 import UtilsDataServices from '../../services/utilsDataService';
+import Loader from '../../components/Loader';
 
 const LoadCsvPage = () => {
     const utilsDataServices = new UtilsDataServices();
     const [file, setFile] = useState(null);
-    const [dbName, setDbName] = useState('');
+    const [newDbName, setNewDbName] = useState('');  // Cambiato nome per chiarire
+    const [selectedDb, setSelectedDb] = useState('');  // Usato per la selezione dei database esistenti
     const [message, setMessage] = useState('');
     const [databases, setDatabases] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchDatabases = async () => {
@@ -26,9 +29,15 @@ const LoadCsvPage = () => {
         setFile(e.target.files[0]);
     };
 
-    const handleDbNameChange = async (e) => {
+    // Funzione per gestire il cambiamento del nome di un nuovo database
+    const handleNewDbNameChange = (e) => {
+        setNewDbName(e.target.value);
+    };
+
+    // Funzione per gestire la selezione di un database esistente
+    const handleSelectDbChange = async (e) => {
         const selectedDbName = e.target.value;
-        setDbName(selectedDbName);
+        setSelectedDb(selectedDbName);
         
         if (selectedDbName) {
             try {
@@ -43,42 +52,50 @@ const LoadCsvPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!file || !dbName) {
+        if (!file || !newDbName) {
             setMessage('Per favore, inserisci sia un file CSV che il nome del database.');
             return;
         }
+
+        setLoading(true);
 
         try {
             const filePath = await utilsDataServices.uploadFile(file);
             if (!filePath) throw new Error('Errore durante il caricamento del file CSV.');
 
-            const dbCreationMessage = await utilsDataServices.createDatabase(dbName);
+            const dbCreationMessage = await utilsDataServices.createDatabase(newDbName);
             if (!dbCreationMessage) throw new Error('Errore durante la creazione del database.');
 
-            const csvLoadMessage = await utilsDataServices.loadCsvToDatabase(dbName, filePath);
+            const csvLoadMessage = await utilsDataServices.loadCsvToDatabase(newDbName, filePath);
             if (!csvLoadMessage) throw new Error('Errore durante il caricamento del file CSV nel database.');
 
             setMessage('Caricamento del file CSV e creazione del database avvenuti con successo.');
         } catch (error) {
             setMessage(error.message);
+        } finally { 
+            setLoading(false);
         }
     };
 
     return (
         <div className={styles.container}>
+            {loading ? (
+                <Loader />  // Mostra il loader durante il caricamento
+            ) : (
+                <>
             <h1>Gestisci i Database</h1>
             
-            {/* Sezione per il caricamento di un nuovo CSV */}
+            {/* Sezione per creare un nuovo database e caricare un CSV */}
             <div className={styles.section}>
-                <h2>Carica un nuovo file CSV</h2>
+                <h2>Carica un nuovo file CSV e crea un database</h2>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.formGroup}>
-                        <label htmlFor="dbName">Nome del Database:</label>
+                        <label htmlFor="newDbName">Nome del Nuovo Database:</label>
                         <input 
                             type="text"
-                            id="dbName"
-                            value={dbName}
-                            onChange={handleDbNameChange}
+                            id="newDbName"
+                            value={newDbName}
+                            onChange={handleNewDbNameChange}  // Funzione per gestire il nuovo database
                             className={styles.input}
                         />
                     </div>
@@ -95,6 +112,8 @@ const LoadCsvPage = () => {
                     <button type="submit" className={styles.button}>Carica CSV</button>
                 </form>
             </div>
+            
+            {message && <p className={styles.message}>{message}</p>}
 
             {/* Sezione per la selezione di un database esistente */}
             <div className={styles.section}>
@@ -103,9 +122,9 @@ const LoadCsvPage = () => {
                     <label htmlFor="existingDatabases">Database Esistenti:</label>
                     <select
                         id="existingDatabases"
-                        onChange={handleDbNameChange}
+                        onChange={handleSelectDbChange}  // Funzione per selezionare un database esistente
                         className={styles.input}
-                        value={dbName}
+                        value={selectedDb}
                     >
                         <option value="">-- Seleziona un database --</option>
                         {databases.map((db) => (
@@ -116,8 +135,8 @@ const LoadCsvPage = () => {
                     </select>
                 </div>
             </div>
-            
-            {message && <p className={styles.message}>{message}</p>}
+            </>
+        )}
         </div>
     );
 };

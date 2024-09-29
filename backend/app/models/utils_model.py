@@ -145,7 +145,7 @@ class UtilsModel:
                 """)
 
             # Droppa la proiezione
-            session.run("CALL gds.graph.drop('malattiaGraph')")
+            session.run("CALL gds.graph.drop('malattiaGraph', false) YIELD graphName")
             
             records = list(result)
             

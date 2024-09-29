@@ -14,7 +14,7 @@ h1 {
 }
 
 .section {
-    margin-bottom: 40px; /* Distanza tra le sezioni */
+    margin-bottom: 35px; /* Distanza tra le sezioni */
     background-color: #f9f9f9; /* Colore di sfondo leggermente diverso per separare visivamente le sezioni */
     padding: 20px;
     border-radius: 10px;
@@ -23,11 +23,11 @@ h1 {
 
 h2 {
     color: #555;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .formGroup {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 label {
