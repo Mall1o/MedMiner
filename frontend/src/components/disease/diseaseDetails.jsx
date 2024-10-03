@@ -58,9 +58,9 @@ const DiseaseDetails = () => {
 
     return (
         <div className={styles.diseaseDetailsContainer}>
-            <button onClick={goBack} className={styles.backButton}>
-                Back
-            </button>
+            {/*<button onClick={goBack} className={styles.backButton}>
+            ⬅
+            </button> */}
             <h1>Malattie del Gruppo: {gruppo}</h1>
 
             {/* Barra di ricerca */}

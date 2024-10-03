@@ -8,6 +8,7 @@
 .mainContent {
   flex-grow: 1;
   height: 100vh;
+  padding-right: 50px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -17,7 +18,8 @@
   flex-grow: 1;
   padding: 20px;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: none, hidden;
+  overflow-x: none;
 }
 
 .contentWrapper::-webkit-scrollbar {
@@ -48,14 +50,3 @@
   flex-direction: column;
 }
 
-.contentWrapper {
-  flex-grow: 1;
-  padding: 20px;
-  height: 100%;
-  overflow-y: auto;
-}
-
-.contentWrapper::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}

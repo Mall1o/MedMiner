@@ -13,6 +13,7 @@ import styles from './App.module.css';
 import { SidebarProvider, useSidebar } from './context/SidebarContext';
 import { DetailsPanelProvider } from './context/DetailsPanelContext';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import ModuloIA from './pages/ModuloIA/ModuloIA.jsx'; // Pagina del modulo di Intelligenza Artificiale
 
 const App = () => {
     return (
@@ -45,6 +46,7 @@ const MainLayout = () => {
             <Route path="/diseases_group" element={<DiseasePage />} /> {/* Lista delle malattie */}
             <Route path="/diseases/:gruppo" element={<DiseaseDetails />} />
             <Route path="/load-csv" element={<LoadCsvPage />} /> {/* Pagina per caricare il CSV */}
+            <Route path="/modulo-ia" element={<ModuloIA />} /> {/* Pagina del modulo di Intelligenza Artificiale */}
           </Routes>
         </div>
       </div>

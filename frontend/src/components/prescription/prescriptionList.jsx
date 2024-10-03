@@ -94,22 +94,20 @@ const PrescriptionList = () => {
                 </tbody>
             </table>
 
-            {/* Paginazione */}
-            <div className={styles.paginationContainer}>
-                <button 
-                    onClick={paginatePrev} 
-                    className={styles.paginationBtn} 
-                    disabled={currentPage === 1}>
-                    Indietro
+            <div className={styles.pagination}>
+                <button onClick={paginatePrev} 
+                disabled={currentPage === 1} 
+                className={styles.paginationBtn}>
+                Indietro
                 </button>
                 <button 
-                    onClick={paginateNext} 
-                    className={styles.paginationBtn} 
-                    disabled={currentPage === totalPages}>
-                    Avanti
+                onClick={paginateNext} 
+                disabled={currentPage === totalPages} 
+                className={styles.paginationBtn}>
+                Avanti
                 </button>
+              </div>
             </div>
-        </div>
     );
 }
 

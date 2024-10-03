@@ -1,10 +1,11 @@
+// PatientList.jsx
 import React, { useEffect, useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import UtilsDataServices from '../../services/utilsDataService';
 import styles from './PatientList.module.css';
 import defaultAvatar from '../../assets/user_icon.png';
 
-const PatientList = () => {
+const PatientList = ({ mode }) => {
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,32 +23,21 @@ const PatientList = () => {
   }, []);
 
   const filteredPatients = patients.filter((patient) => {
-    const search = searchTerm.toLowerCase(); // Converte il termine di ricerca in lowercase per evitare problemi con maiuscole/minuscole
-  
-    // Filtra per codice fiscale assistito (se esiste)
+    const search = searchTerm.toLowerCase();
     const matchesCodiceFiscale = patient.codice_fiscale_assistito 
       ? patient.codice_fiscale_assistito.toLowerCase().includes(search)
       : false;
-  
-    // Filtra per anno di nascita (converti l'anno in stringa per confrontarlo)
     const matchesAnnoNascita = patient.anno_nascita 
       ? patient.anno_nascita.toString().includes(search) 
       : false;
-  
-    // Filtra per sesso (usa toUpperCase per il confronto del sesso)
     const matchesSesso = patient.sesso 
       ? patient.sesso.toUpperCase().includes(search.toUpperCase()) 
       : false;
-  
-    // Filtra per CAP (se esiste)
     const matchesCap = patient.cap_residenza
       ? patient.cap_residenza.toString().includes(search) 
       : false;
-  
-    // Ritorna vero se uno di questi campi corrisponde al termine di ricerca
     return matchesCodiceFiscale || matchesAnnoNascita || matchesSesso || matchesCap;
   });
-  
 
   const indexOfLastPatient = currentPage * patientsPerPage;
   const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
@@ -68,7 +58,13 @@ const PatientList = () => {
   };
 
   const handleShowGraph = (patient) => {
-    navigate(`/graph/${'paziente'}/${patient.codice_fiscale_assistito}`); // Reindirizza alla pagina del grafo
+    navigate(`/graph/paziente/${patient.codice_fiscale_assistito}`);
+  };
+
+  const handleCalculateProbability = (patient) => {
+    // Implementa la logica per chiamare il modulo di intelligenza artificiale
+    console.log(`Calcolo della probabilità per il paziente ${patient.codice_fiscale_assistito}`);
+    // Qui potrai aggiungere la chiamata al modulo IA
   };
 
   return (
@@ -78,8 +74,6 @@ const PatientList = () => {
         placeholder="Ricerca paziente per codice fiscale, anno di nascita, CAP o sesso"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        onFocus={() => setPlaceholderVisible(false)}  // Nascondi il placeholder quando c'è il focus
-        onBlur={() => setPlaceholderVisible(searchTerm === "")}  // Mostra il placeholder solo se il campo è vuoto
         className={styles.patientSearchInput}
       />
       <table className={styles.patientListTable}>
@@ -90,7 +84,7 @@ const PatientList = () => {
             <th>Anno nascita</th>
             <th>Cap Residenza</th>
             <th>Sesso</th>
-            <th>Visualizza Grafo</th>
+            <th>{mode === 'patient' ? 'Visualizza Grafo' : 'Calcola Probabilità'}</th>
           </tr>
         </thead>
         <tbody>
@@ -104,9 +98,15 @@ const PatientList = () => {
               <td>{patient.cap_residenza}</td>
               <td>{patient.sesso}</td>
               <td>
-                <button onClick={() => handleShowGraph(patient)} className={styles.viewGraphBtn}>
-                  Apri
-                </button>
+                {mode === 'patient' ? (
+                  <button onClick={() => handleShowGraph(patient)} className={styles.viewGraphBtn}>
+                    Apri
+                  </button>
+                ) : (
+                  <button onClick={() => handleCalculateProbability(patient)} className={styles.calculateProbabilityBtn}>
+                    Calcola
+                  </button>
+                )}
               </td>
             </tr>
           ))}
@@ -114,16 +114,16 @@ const PatientList = () => {
       </table>
 
       <div className={styles.pagination}>
-          <button onClick={paginatePrev} 
-          disabled={currentPage === 1} 
-          className={styles.paginationBtn}>
-            Indietro
-          </button>
+        <button onClick={paginatePrev} 
+        disabled={currentPage === 1} 
+        className={styles.paginationBtn}>
+          Indietro
+        </button>
         <button 
           onClick={paginateNext} 
           disabled={currentPage === totalPages} 
           className={styles.paginationBtn}>
-            Avanti
+          Avanti
         </button>
       </div>
     </div>

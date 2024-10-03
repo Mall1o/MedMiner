@@ -162,12 +162,3 @@
     font-size: 16px; /* Riduce la dimensione del testo per schermi piccoli */
   }
 }
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
-  position: relative;
-  bottom: 0;
-}

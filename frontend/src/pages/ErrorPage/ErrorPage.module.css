@@ -34,16 +34,33 @@
   }
   
   .homeLink {
-    color: #0056b3;
+    color: white;
+    background-color: var(--button-primary-bg); /* Colore del pulsante */
+    padding: 10px 20px;
     text-decoration: none;
     font-weight: bold;
-    border-bottom: 2px solid transparent;
+    border: 1px solid transparent;
+    border-radius: 8px; /* Arrotondamento leggero */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
   }
   
   .homeLink:hover {
-    border-bottom: 2px solid #0056b3;
+    background-color: #323f8cd2; /* Colore hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+    border-bottom: none; /* Rimuove il border-bottom durante l'hover */
   }
   
+  .homeLink:active {
+    transform: scale(0.96); /* Leggero effetto di pressione */
+    background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  }
+  
+  /* Rimuove il focus outline per i link "pulsanti" */
+  .homeLink:focus {
+    outline: none; /* Rimuove il bordo focus */
+  }
+
   .errorImage {
     margin-top: 20px;
     width: 150px;

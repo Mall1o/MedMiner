@@ -65,66 +65,64 @@
   gap: 10px; /* Aggiunge spazio tra i pulsanti */
 }
 
+/* Pulsante Visualizza Grafo */
 .viewGraphBtn {
-  padding: 10px 20px;
-  background-color: var(--sidebar-button-bg);
+  padding: 8px 16px; /* Più sottile */
+  background-color: var(--sidebar-button-bg); /* Colore originario */
   color: var(--primary-text-color);
-  border: none;
-  border-radius: 5px;
+  border: 1px solid transparent; /* Bordi più sottili */
+  border-radius: 8px; /* Arrotondamento sottile */
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }
 
 .viewGraphBtn:hover {
+  background-color: var(--button-primary-bg); /* Cambia colore solo su hover */
   color: white;
-  background-color: var(--button-primary-bg);
 }
 
 .viewGraphBtn:active {
-  background-color: var(--button-primary-active-bg);
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombra durante il clic */
+  border: 1px solid transparent; /* Nessun bordo scuro al clic */
 }
+
+/* Pulsanti per la paginazione */
 .paginationBtn {
   padding: 10px 20px;
   background-color: var(--button-primary-bg);
   color: white;
-  border: none;
-  border-radius: 5px;
+  border: 2px solid transparent; /* Nessun bordo visibile */
+  border-radius: 8px; /* Arrotondamento leggero */
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }
 
 .paginationBtn:hover {
   background-color: #323f8cd2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
 }
 
 .paginationBtn:active {
-  background-color: var(--button-primary-active-bg);
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombra durante il clic */
+  border: 2px solid transparent; /* Mantiene il bordo trasparente */
 }
 
 .paginationBtn:disabled {
-  background-color: #ced4da;
+  background-color: #ced4da; /* Colore per pulsante disabilitato */
   cursor: not-allowed;
+  box-shadow: none; /* Nessuna ombra per i pulsanti disabilitati */
+  transform: none; /* Nessun effetto clic su pulsanti disabilitati */
 }
 
-.backButton {
-  background-color: #fff;
-  color: #333;
-  border: 2px solid #333;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px; 
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ombra morbida */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transizione su hover */
-}
-
-.backButton:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.1); /* Ingrandimento leggero al passaggio */
+/* Rimuove il focus outline per tutti i pulsanti */
+.paginationBtn:focus, .viewGraphBtn:focus, .calculateProbabilityBtn:focus {
+  outline: none; /* Rimuove il bordo focus */
 }
 
 .avatarImg {

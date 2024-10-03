@@ -1,10 +1,12 @@
-import PatientList from '../../components/patient/patientList'; // Importa il componente per la lista dei pazienti
+// PatientPage.jsx
+import React from 'react';
+import PatientList from '../../components/patient/patientList'; // Assicurati del percorso corretto
 import styles from './PatientPage.module.css';
 
 const PatientPage = () => {
   return (
     <div className={styles.patientPageContainer}>
-      <PatientList /> {/* Mostra la lista dei pazienti */}
+      <PatientList mode="patient" /> {/* Passa il mode "patient" */}
     </div>
   );
 };

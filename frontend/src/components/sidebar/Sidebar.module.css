@@ -48,6 +48,7 @@
   transform: translateX(0);
 }
 
+/* Pulsante per il toggle della sidebar */
 .sidebarToggle {
   position: absolute;
   top: 20px;
@@ -60,19 +61,19 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra più pronunciata */
-  transition: background 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra pronunciata */
+  transition: background 0.3s ease, transform 0.2s ease;
   color: white;
 }
 
 .sidebarToggle:hover {
-  background: var(--link-hover-color); /* Cambia colore al passaggio del mouse con il colore del link */
-  color: white;
-  transform: scale(1.1);
+  background: var(--link-hover-color); /* Colore hover del pulsante */
+  transform: scale(1.1); /* Leggero ingrandimento al passaggio */
 }
 
 .sidebarToggle:active {
-  transform: scale(0.95); /* Effetto click */
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background: var(--button-primary-active-bg);
 }
 
 .sidebarMenu {
@@ -93,36 +94,37 @@
   justify-content: center;
 }
 
+/* Pulsanti per il menu della sidebar */
 .sidebarMenuItem a {
   display: block;
   text-decoration: none;
   padding: 15px 30px;
-  background-color: var(--sidebar-button-bg); /* Sfondo bianco per i menu item */
-  border-radius: 15px;
+  background-color: var(--sidebar-button-bg); /* Sfondo del pulsante */
+  border-radius: 8px; /* Arrotondamento leggero */
   color: var(--primary-text-color); /* Colore del testo */
   font-weight: 500;
   width: 100%;
   text-align: center;
   max-width: 220px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }
 
 .sidebarMenuItem a:hover {
-  background-color: var(--button-primary-bg); /* Colore hover del pulsante */
+  background-color: var(--button-primary-bg); /* Colore hover */
   color: var(--text-hover-color); /* Testo chiaro durante l'hover */
-  transform: translateY(-2px); /* Effetto sollevato durante l'hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra al passaggio del mouse */
+  transform: translateY(-2px); /* Sollevamento al passaggio */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
 }
 
 .sidebarMenuItem a:active {
-  background-color: var(--button-primary-hover-bg); /* Colore quando attivato */
-  transform: translateY(0); /* Rimuove l'effetto sollevato quando cliccato */
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-hover-bg); /* Colore attivo */
 }
 
-.sidebarMenuItem a.active {
-  background-color: var(--sidebar-background-color); /* Colore blu scuro per l'item attivo */
-  font-weight: 600;
-  color: var(--sidebar-text-color); /* Colore chiaro per l'item attivo */
+/* Rimuove il focus outline per tutti i pulsanti */
+.sidebarToggle:focus, .sidebarMenuItem a:focus {
+  outline: none; /* Rimuove il bordo focus */
 }
 
 /* Media Queries */

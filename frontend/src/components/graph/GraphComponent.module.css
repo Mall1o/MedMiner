@@ -54,11 +54,12 @@
   align-items: center;
 }
 
+/* Pulsanti per lo zoom */
 .zoomButton {
   background-color: var(--button-zoom-bg);
   color: black;
-  border: none;
-  border-radius: 50%;
+  border: 1px solid transparent; /* Rimuove il bordo visibile */
+  border-radius: 50%; /* Pulsante arrotondato */
   width: 50px;
   height: 50px;
   font-size: 20px;
@@ -66,8 +67,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
 }
 
 .zoomButton:hover {
@@ -76,8 +78,14 @@
 }
 
 .zoomButton:active {
+  transform: scale(0.96); /* Effetto di pressione */
   background-color: var(--button-primary-active-bg);
   color: white;
+}
+
+/* Rimuove il focus outline per tutti i pulsanti */
+.zoomButton:focus {
+  outline: none; /* Rimuove il bordo focus */
 }
 
 .legendPopup {

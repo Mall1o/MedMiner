@@ -147,6 +147,43 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Stile per le barre di scorrimento */
+::-webkit-scrollbar {
+  width: 8px; /* Imposta la larghezza della barra di scorrimento */
+  height: 8px; /* Imposta l'altezza della barra di scorrimento (orizzontale) */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Sfondo trasparente per il track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(50, 64, 140, 0.5); /* Colore del pollice della barra di scorrimento con trasparenza */
+  border-radius: 10px; /* Arrotondamento del pollice */
+  border: 2px solid transparent; /* Spazio attorno al pollice per un effetto pulito */
+  background-clip: content-box; /* Clip del bordo per mantenere lo stile arrotondato */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(50, 64, 140, 0.8); /* Colore del pollice della barra di scorrimento quando è in hover */
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent; /* Sfondo trasparente per l'angolo tra le barre di scorrimento */
+}
+
+/* Stile per Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(50, 64, 140, 0.5) transparent;
+}
+
+/* Stile per hover in Firefox */
+*::-moz-scrollbar-thumb:hover {
+  background-color: rgba(50, 64, 140, 0.8);
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--primary-text-color); /* Testo in modalità chiara */
