@@ -53,25 +53,76 @@
 .detailsSection,
 .metricsSection {
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.metricsSection button {
-  margin-right: 10px;
-  background-color: var(--sidebar-button-bg);
-  color: var(--text-secondary-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border: none;
+.customDropdown {
+  position: relative;
+}
+
+.dropdownButton {
+  width: 100%;
   padding: 10px;
-  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.dropdownMenu {
+  position: absolute;
+  bottom: 100%; /* Fa sì che il menu si apra verso l'alto */
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+}
+
+.dropdownMenu li {
+  padding: 10px;
   cursor: pointer;
 }
 
-.metricsSection button:hover {
-  background-color: var(--button-primary-bg);
-  color: white;
+.dropdownMenu li:hover {
+  background-color: #f0f0f0;
 }
 
-.metricsSection button:active {
-  background-color: var(--button-primary-active-bg);
-  color: white;
+.resetButton {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
 }
+
+.metricDescription {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #666;
+}
+
+.metricButton {
+  background-color: #007bff; /* Colore di sfondo blu */
+  color: white; /* Colore del testo bianco */
+  border: none; /* Rimuovi il bordo */
+  padding: 10px 20px; /* Spaziatura interna del pulsante */
+  border-radius: 5px; /* Angoli arrotondati */
+  cursor: pointer; /* Cambia il cursore al passaggio */
+  transition: background-color 0.3s ease; /* Aggiunge una transizione per il background */
+}
+
+.metricButton:hover {
+  background-color: #0056b3; /* Colore di sfondo più scuro al passaggio */
+}
+
+.metricButton:focus {
+  outline: none; /* Rimuovi il contorno del focus */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Ombra per indicare il focus */
+}
+

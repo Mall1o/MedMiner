@@ -132,10 +132,10 @@
 }
 
 .colorBoxDisease {
-  background-color: #4caf50; /* Colore per le malattie */
+  background-color: #007bff ; /* Colore per le malattie */
 }
 
 .colorBoxPrescription {
-  background-color: #007bff; /* Colore per le prescrizioni */
+  background-color: #4caf50; /* Colore per le prescrizioni */
 }
 

@@ -32,6 +32,15 @@ class UtilsService:
     def get_betweenness_malattia(self):
         return self.model.get_betweenness_malattia() 
     
+    def get_closeness_centrality_malattia(self):
+        return self.model.get_closeness_centrality_malattia()
+    
+    def get_page_rank_malattia(self):
+        return self.model.get_page_rank_malattia()
+    
+    def get_kcore_malattia(self):
+        return self.model.get_kcore_malattia()
+    
     def get_disease_group_list(self):
         return self.model.get_disease_group_list()
     

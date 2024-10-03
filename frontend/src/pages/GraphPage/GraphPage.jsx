@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import GraphComponent from '../../components/graph/GraphComponent';
 import { fetchPatientGraphData, fetchPrescriptionGraphData, fetchDiseaseGraphData } from '../../services/graphDataService';
 import UtilsDataServices from '../../services/utilsDataService';
@@ -9,9 +9,11 @@ import DetailsPanel from '../../components/detailsPanel/DetailPanel';
 import SliderComponent from '../../components/slider/SliderComponent';
 import GraphFilter from '../../utils/GraphFilter';
 import GraphMetrics from '../../utils/GraphMetrics';
+import { DetailsPanelContext } from '../../context/DetailsPanelContext';  // Usa il contesto corretto
 
 const GraphPage = () => {
   const { codice, tipo } = useParams();
+  const { isPanelOpen } = useContext(DetailsPanelContext);  // Ottieni lo stato del pannello
   const [graphData, setGraphData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedDetails, setSelectedDetails] = useState(null);
@@ -20,17 +22,30 @@ const GraphPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [betweennessData, setBetweennessData] = useState(null); 
   const [dateRange, setDateRange] = useState({ min: 2000, max: 2024 });
-  const navigate = useNavigate();
+  const [closenessData, setClosenessData] = useState(null);
+  const [closenessApplied, setClosenessApplied] = useState(false);
+  const [pageRankData, setPageRankData] = useState(null);
+  const [pageRankApplied, setPageRankApplied] = useState(false);
+  const [kCoreData, setKCoreData] = useState(null);
+  const [kCoreApplied, setKCoreApplied] = useState(false);
 
-  //logica di back
-  /*const goBack = () => {
-    navigate(-1); // Naviga indietro di una pagina
-  };*/
+  // Funzione per ripristinare il grafo allo stato iniziale
+  const resetGraphToOriginal = () => {
+    if (selectedDate) {
+      const filteredGraph = GraphFilter.filterGraphByDate(originalGraphData, selectedDate);
+      setGraphData(filteredGraph);
+    } else {
+      setGraphData(originalGraphData);
+    }
+    setBetweennessApplied(false);
+    setClosenessApplied(false);
+    setPageRankApplied(false);
+    setKCoreApplied(false);
+  };
 
   useEffect(() => {
     const fetchGraphData = async () => {
       let data;
-
       if (tipo === 'paziente') {
         data = await fetchPatientGraphData(codice);
       } else if (tipo === 'prescrizione') {
@@ -96,10 +111,35 @@ const GraphPage = () => {
       };
     }
 
+    if (closenessApplied && closenessData) {
+      const updatedNodes = await GraphMetrics.applyCloseness(filteredGraph, closenessData);
+      filteredGraph = {
+        ...filteredGraph,
+        nodes: updatedNodes,
+      };
+    }
+
+    if (pageRankApplied && pageRankData) {
+      const updatedNodes = await GraphMetrics.applyPageRank(filteredGraph, pageRankData);
+      filteredGraph = {
+        ...filteredGraph,
+        nodes: updatedNodes,
+      };
+    }
+
+    if (kCoreApplied && kCoreData) {
+      const updatedNodes = await GraphMetrics.applyKcore(filteredGraph, kCoreData);
+      filteredGraph = {
+        ...filteredGraph,
+        nodes: updatedNodes,
+      };
+    }
+
     setGraphData(filteredGraph);
   };
 
   const applyBetweenness = async () => {
+    resetGraphToOriginal();
     try {
       if (!betweennessApplied) {
         const utilsService = new UtilsDataServices();
@@ -107,19 +147,71 @@ const GraphPage = () => {
         setBetweennessData(betweennessData);
 
         const updatedNodes = await GraphMetrics.applyBetweenness(graphData, betweennessData);
-
         setGraphData({
           ...graphData,
           nodes: updatedNodes,
         });
         setBetweennessApplied(true);
-      } else {
-        let restoredData = originalGraphData;
-        if (selectedDate) {
-          restoredData = GraphFilter.filterGraphByDate(originalGraphData, selectedDate);
-        }
-        setGraphData(restoredData);
-        setBetweennessApplied(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const applyCloseness = async () => {
+    resetGraphToOriginal();
+    try {
+      if (!closenessApplied) {
+        const utilsService = new UtilsDataServices();
+        const closenessData = await utilsService.getClosenessMalattia();
+        setClosenessData(closenessData);
+
+        const updatedNodes = await GraphMetrics.applyCloseness(graphData, closenessData);
+        setGraphData({
+          ...graphData,
+          nodes: updatedNodes,
+        });
+        setClosenessApplied(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const applyKcore = async () => {
+    resetGraphToOriginal();
+    try {
+      if (!kCoreApplied) {
+        const utilsService = new UtilsDataServices();
+        const kCoreData = await utilsService.getKcoreMalattia();
+        setKCoreData(kCoreData);
+
+        const updatedNodes = await GraphMetrics.applyKcore(graphData, kCoreData);
+        setGraphData({
+          ...graphData,
+          nodes: updatedNodes,
+        });
+        setKCoreApplied(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const applyPageRank = async () => {
+    resetGraphToOriginal();
+    try {
+      if (!pageRankApplied) {
+        const utilsService = new UtilsDataServices();
+        const pageRankData = await utilsService.getPageRankMalattia();
+        setPageRankData(pageRankData);
+
+        const updatedNodes = await GraphMetrics.applyPageRank(graphData, pageRankData);
+        setGraphData({
+          ...graphData,
+          nodes: updatedNodes,
+        });
+        setPageRankApplied(true);
       }
     } catch (error) {
       console.error(error);
@@ -135,7 +227,7 @@ const GraphPage = () => {
       <div className={styles.pageContent}>
         {tipo === 'paziente' && (
           <div className={styles.sliderContainer}>
-            <SliderComponent onDateChange={handleDateChange} minDate={dateRange.min} maxDate={dateRange.max} />
+            <SliderComponent onDateChange={handleDateChange} minDate={dateRange.min} maxDate={dateRange.max} isDetailsPanelOpen={isPanelOpen} />
           </div>
         )}
         <div className={styles.graphContainer}>
@@ -154,6 +246,13 @@ const GraphPage = () => {
             details={selectedDetails}
             applyBetweenness={applyBetweenness}
             isBetweennessApplied={betweennessApplied}
+            applyCloseness={applyCloseness}
+            isClosenessApplied={closenessApplied}
+            applyPageRank={applyPageRank}
+            isPageRankApplied={pageRankApplied}
+            applyKcore={applyKcore}
+            isKCoreApplied={kCoreApplied}
+            clearMetrics={resetGraphToOriginal}  // Pulsante per resettare le metriche
           />
         </div>
       </div>

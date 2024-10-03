@@ -160,7 +160,129 @@ class UtilsModel:
                 return risultati
             else:
                 return "Nessun risultato trovato."
+    
+    def get_closeness_centrality_malattia(self):
+        with self.driver.session() as session:
+            # Proietta il grafo
+            session.run("""
+                CALL gds.graph.project(
+                'malattie_comorbidita',  // Nome del grafo proiettato
+                'Malattia',              // Consideriamo solo i nodi Malattia
+                {
+                    ASSOCIATA_A: {
+                    type: 'ASSOCIATA_A',  // Relazione tra malattie
+                    orientation: 'UNDIRECTED',
+                    properties: 'count'   // Usa 'count' come peso per la relazione
+                    }
+                }
+                )
+                """)
+            # Qui calcoliamo la closeness centrality delle malattie
+            result = session.run("""
+                CALL gds.closeness.stream('malattie_comorbidita', {
+                relationshipTypes: ['ASSOCIATA_A']   // Usa la relazione ASSOCIATA_A come collegamento tra i nodi
+                })
+                YIELD nodeId, score
+                WITH gds.util.asNode(nodeId) AS m, score AS centrality
+                RETURN m.codice AS codice, centrality
+                ORDER BY centrality DESC
+                """)
+            # Droppa la proiezione
+            session.run("CALL gds.graph.drop('malattie_comorbidita', false) YIELD graphName")
+            records = list(result)
             
+            if records:
+                risultati = []
+                for record in records:
+                    malattia_info = {
+                        "icd9cm": record['codice'],
+                        "closeness_centrality": record['centrality']
+                    }
+                    risultati.append(malattia_info)
+                return risultati
+            else:
+                return "Nessun risultato trovato."
+            
+    def get_page_rank_malattia(self):
+        with self.driver.session() as session:
+            # Proietta il grafo
+            session.run("""
+                CALL gds.graph.project(
+                'malattie_comorbidita',  // Nome del grafo proiettato
+                'Malattia',              // Consideriamo solo i nodi Malattia
+                {
+                    ASSOCIATA_A: {
+                    type: 'ASSOCIATA_A',  // Relazione tra malattie
+                    orientation: 'UNDIRECTED',
+                    properties: 'count'   // Usa 'count' come peso per la relazione
+                    }
+                }
+                )
+                """)
+            # Qui calcoliamo pagerank delle malattie
+            result = session.run("""
+                CALL gds.pageRank.stream('malattie_comorbidita', { relationshipWeightProperty: 'count' })
+                YIELD nodeId, score
+                WITH gds.util.asNode(nodeId) AS node, score
+                RETURN node.codice as codice, score
+                ORDER BY score DESC
+                """)
+            # Droppa la proiezione
+            session.run("CALL gds.graph.drop('malattie_comorbidita', false) YIELD graphName")
+            records = list(result)
+            
+            if records:
+                risultati = []
+                for record in records:
+                    malattia_info = {
+                        "icd9cm": record['codice'],
+                        "score": record['score']
+                    }
+                    risultati.append(malattia_info)
+                return risultati
+            else:
+                return "Nessun risultato trovato."
+
+    def get_kcore_malattia(self):
+        with self.driver.session() as session:
+            # Proietta il grafo
+            session.run("""
+                CALL gds.graph.project(
+                'malattie_comorbidita',  // Nome del grafo proiettato
+                'Malattia',              // Consideriamo solo i nodi Malattia
+                {
+                    ASSOCIATA_A: {
+                    type: 'ASSOCIATA_A',  // Relazione tra malattie
+                    orientation: 'UNDIRECTED',
+                    properties: 'count'   // Usa 'count' come peso per la relazione
+                    }
+                }
+                )
+                """)
+            # Qui calcoliamo la closeness centrality delle malattie
+            result = session.run("""
+                CALL gds.kcore.stream('malattie_comorbidita')
+                YIELD nodeId, coreValue
+                WITH gds.util.asNode(nodeId) AS node, coreValue
+                RETURN node.codice AS codice, coreValue
+                ORDER BY coreValue DESC
+                """)
+            # Droppa la proiezione
+            session.run("CALL gds.graph.drop('malattie_comorbidita', false) YIELD graphName")
+            records = list(result)
+            
+            if records:
+                risultati = []
+                for record in records:
+                    malattia_info = {
+                        "icd9cm": record['codice'],
+                        "core_value": record['coreValue']
+                    }
+                    risultati.append(malattia_info)
+                return risultati
+            else:
+                return "Nessun risultato trovato."
+                       
     def get_disease_group_list(self):
         with self.driver.session() as session:
             query = """

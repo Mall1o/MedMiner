@@ -58,6 +58,27 @@ def get_betweenness_disease():
     
     return jsonify(result), 200
 
+@utils_bp.route('/closeness/disease', methods=['GET'])
+def get_closeness_disease():
+    service = UtilsService(neo4j_db.driver)
+    result = service.get_closeness_centrality_malattia()
+    
+    return jsonify(result), 200
+
+@utils_bp.route('/page-rank/disease', methods=['GET'])
+def get_page_rank_disease():
+    service = UtilsService(neo4j_db.driver)
+    result = service.get_page_rank_malattia()
+    
+    return jsonify(result), 200
+
+@utils_bp.route('/kcore/disease', methods=['GET'])
+def get_kcore_disease():
+    service = UtilsService(neo4j_db.driver)
+    result = service.get_kcore_malattia()
+    
+    return jsonify(result), 200
+
 @utils_bp.route('/prescriptions', methods=['GET'])
 def get_prescription_list():
     service = UtilsService(neo4j_db.driver)

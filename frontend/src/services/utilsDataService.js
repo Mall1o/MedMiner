@@ -91,6 +91,48 @@ class UtilsDataServices {
         }
     }
 
+    async getClosenessMalattia() {
+        try {
+            const response = await fetch(`http://localhost:5000/closeness/disease`);
+            if (!response.ok) {
+                throw new Error('Errore nel recupero della lista closeness centrality');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+
+    async getPageRankMalattia() {
+        try {
+            const response = await fetch(`http://localhost:5000/page-rank/disease`);
+            if (!response.ok) {
+                throw new Error('Errore nel recupero della lista page rank');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+
+    async getKcoreMalattia() {
+        try {
+            const response = await fetch(`http://localhost:5000/kcore/disease`);
+            if (!response.ok) {
+                throw new Error('Errore nel recupero della lista k-core');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    }
+
     async getDegreeGroupMalattia() {
         try {
             const response = await fetch(`http://localhost:5000/degree-centrality/disese`);

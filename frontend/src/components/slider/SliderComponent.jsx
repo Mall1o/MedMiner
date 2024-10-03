@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from '@mui/material/Slider';
 import { Box, Typography } from '@mui/material';
 import styles from './sliderComponent.module.css'; // Importa il tuo modulo CSS
@@ -12,10 +12,11 @@ const SliderComponent = ({ onDateChange, minDate, maxDate, isDetailsPanelOpen })
       onDateChange(newValue);
     }
   };
+  
 
   return (
     <Box className={`${styles.sliderContainer} ${isDetailsPanelOpen ? styles.panelOpen : ''}`}>
-      <Typography className={styles.sliderLabel}></Typography>
+      <Typography className={styles.sliderLabel}>Anno: {value}</Typography>
       <Slider
         value={value}
         onChange={handleSliderChange}
@@ -23,30 +24,42 @@ const SliderComponent = ({ onDateChange, minDate, maxDate, isDetailsPanelOpen })
         max={maxDate}
         step={1}
         marks={[
-          { value: minDate, label: `${minDate}` },
-          { value: maxDate, label: `${maxDate}` },
+          { value: minDate, label: <span className={styles.markLabel}>{minDate}</span> },
+          { value: maxDate, label: <span className={styles.markLabel}>{maxDate}</span> },
         ]}
-        valueLabelDisplay="auto"  // L'etichetta appare automaticamente con hover o active
-        orientation="vertical"
-        valueLabelFormat={(value) => `${value}`}  // Formattazione dell'etichetta
+        valueLabelDisplay="auto"
+        orientation="horizontal"
+        valueLabelFormat={(value) => `${value}`}
         sx={{
           '& .MuiSlider-valueLabel': {
-            display: 'none',  // Nascondi di default
+            display: 'none',
           },
           '&:hover .MuiSlider-valueLabel, & .MuiSlider-thumb.Mui-active .MuiSlider-valueLabel': {
-            display: 'block',  // Mostra su hover o active
-            width: 'auto',  // Lascia che l'etichetta si espanda automaticamente
-            minWidth: '50px',  // Imposta una larghezza minima
-            textAlign: 'center',  // Centra il testo
-            left: 'calc(100% + 15px)',  // Sposta l'etichetta a destra rispetto al pollice
-            transform: 'none',  // Rimuove eventuali trasformazioni
-            backgroundColor: '#333', // Sfondo scuro
-            color: '#fff', // Testo bianco
-            padding: '4px 8px',  // Aggiungi padding per dare più spazio
-            borderRadius: '5px',  // Arrotonda gli angoli per un look più gradevole
+            display: 'block',
+            width: 'auto',
+            minWidth: '50px',
+            textAlign: 'center',
+            left: 'calc(100% - 15px)',
+            transform: 'none',
+            backgroundColor: '#777777',
+            color: '#fff',
+            padding: '4px 8px',
+            borderRadius: '5px',
+            '&:before': {
+              content: "''",
+              position: 'absolute',
+              width: '0',
+              height: '0',
+              borderStyle: 'solid',
+              borderWidth: '0px 0px 0 0px',
+              borderColor: '#777777 transparent transparent transparent',
+              top: '100%',
+              left: '50%',
+              transform: 'translateX(-50%) rotate(180deg)',
+            }
           },
           '& .MuiSlider-thumb': {
-            backgroundColor: '#3b82f6',
+            backgroundColor: '#ebe5e5',
             border: '2px solid #3b82f6',
             width: '20px',
             height: '20px',
@@ -60,12 +73,12 @@ const SliderComponent = ({ onDateChange, minDate, maxDate, isDetailsPanelOpen })
             },
           },
           '& .MuiSlider-track': {
-            backgroundColor: '#3b82f6',
-            width: '6px',
+            backgroundColor: '#ebe5e5',
+            height: '6px',
           },
           '& .MuiSlider-rail': {
             backgroundColor: '#d1d5db',
-            width: '6px',
+            height: '6px',
           },
         }}
       />
