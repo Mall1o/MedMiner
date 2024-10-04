@@ -22,14 +22,14 @@
 }
 
 .sidebarLogo img {
-  width: 80px;
+  width: 100px;
   height: auto;
   transition: width 0.3s ease;
-  filter: grayscale(100%);
   transition: filter 0.3s ease;
 }
 .sidebarLogo :hover {
-  filter: grayscale(0%); /* Ritorna al colore originale al passaggio del mouse */
+  transform: scale(1.1);
+  opacity: 0.8;
 }
 
 .appName {

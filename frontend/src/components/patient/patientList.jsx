@@ -5,7 +5,7 @@ import UtilsDataServices from '../../services/utilsDataService';
 import styles from './PatientList.module.css';
 import defaultAvatar from '../../assets/user_icon.png';
 
-const PatientList = ({ mode }) => {
+const PatientList = ({ mode, onAnalysisResult}) => {
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,9 +62,9 @@ const PatientList = ({ mode }) => {
   };
 
   const handleCalculateProbability = (patient) => {
-    // Implementa la logica per chiamare il modulo di intelligenza artificiale
-    console.log(`Calcolo della probabilità per il paziente ${patient.codice_fiscale_assistito}`);
-    // Qui potrai aggiungere la chiamata al modulo IA
+    // Implementa la chiamata al modulo IA
+    const result = null; /* chiamata al modulo IA con il paziente */
+    onAnalysisResult(result);
   };
 
   return (

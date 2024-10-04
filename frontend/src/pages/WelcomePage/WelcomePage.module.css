@@ -19,7 +19,7 @@
 }
 
 .fullPageLogo {
-  width: 300px;
+  width: 350px;
   height: auto;
 }
 
@@ -71,11 +71,11 @@
   width: 60px;
   height: 65px;
   margin-bottom: 10px; /* Distanza tra il logo e il pulsante */
-  filter: grayscale(100%);
   transition: filter 0.3s ease;
 }
 .logoCard:hover {
-  filter: grayscale(0%); /* Ritorna al colore originale al passaggio del mouse */
+  transform: scale(1.1);
+  opacity: 0.8;
 }
 .card:hover {
   transform: scale(1.05); /* Ingrandisce leggermente al passaggio del mouse */
