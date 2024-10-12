@@ -1,0 +1,164 @@
+/* Modifica la larghezza del contenitore centrale */
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--box-background-color); /* Sfondo bianco */
+  border-radius: 15px;
+  box-shadow: 0 4px 6px var(--box-shadow-color); /* Ombra leggera */
+  transition: all 0.3s ease-in-out;
+  width: 92%; /* Assicura che prenda tutto lo spazio disponibile */
+  max-width: 1200px; /* Limita la larghezza massima */
+  overflow: hidden; /* Nasconde eventuali overflow */
+  margin: 0 auto; /* Centra il contenitore */
+}
+
+/* Quando la sidebar è aperta */
+.homeSidebarOpen {
+  width: 100%; /* Assicura che prenda il 100% dello spazio disponibile */
+  margin: 0 auto; /* Centra il contenitore */
+}
+
+/* Quando la sidebar è chiusa */
+.homeSidebarClosed {
+  width: 100%; /* Prende il 100% dello spazio disponibile */
+  margin: 0 auto; /* Centra il contenitore */
+}
+
+/* Per schermi più piccoli, adattiamo i margini */
+@media (max-width: 1200px) {
+  .homeContainer {
+    width: calc(100% - 100px); /* Riduce i margini laterali */
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+/* Per schermi ancora più piccoli, margini minimi */
+@media (max-width: 768px) {
+  .homeContainer {
+    width: 100%; /* Prende tutto lo spazio disponibile */
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 10px; /* Aggiunge un padding per evitare contenuti attaccati ai bordi */
+  }
+}
+
+.homeHeader {
+  text-align: center;
+  padding: 10px;
+}
+
+.homeContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-grow: 1;
+  gap: 20px;
+}
+
+.homeStats {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  gap: 25px;
+  flex-wrap: wrap; /* Permette di far rientrare le cards */
+}
+
+.statCard {
+  background-color: var(--stat-background-color); /* Usa il grigio tendente al blu */
+  color: var(--primary-text-color); /* Testo scuro */
+  padding: 10px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 16px;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+  width: 180px;
+  height: 130px;
+  box-shadow: 0px 4px 6px var(--box-shadow-color); /* Ombra leggera */
+}
+
+.statCard:hover {
+  background-color: var(--box-hover-background-color);
+  color: white;
+  transform: translateY(-5px);
+}
+
+.graphContainer {
+  justify-content: center;
+  flex: 1 1 45%;
+  max-width: 550px;
+  max-height: 350px;
+  background-color: var(--stat-background-color); /* Usa il grigio tendente al blu */
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px var(--box-shadow-color); /* Ombra leggera */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 20px;
+}
+
+.graphContainer h4 {
+  color: var(--primary-text-color); /* Testo scuro */
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+
+/* Stile per i grafici */
+.homeGraphs {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  gap: 25px;
+  flex-wrap: wrap; /* Si adatta su più righe se necessario */
+}
+
+/* Grafico a torta più grande */
+.pieChartContainer .rechartsPie {
+  transform: scale(1.5); /* Aumenta la dimensione del grafico a torta */
+}
+
+/* Per schermi più piccoli, adattiamo la dimensione dei contenitori */
+@media (max-width: 768px) {
+  .homeStats {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 0;
+  }
+
+  .statCard {
+    width: 160px;
+    height: 120px; /* Riduce la dimensione delle schede */
+  }
+
+  .homeGraphs {
+    flex-direction: column;
+  }
+
+  .graphContainer {
+    flex: 1 1 100%;
+    max-width: 100%;
+    max-height: 250px; /* Riduce l'altezza per schermi piccoli */
+  }
+
+  .graphContainer h4 {
+    font-size: 16px; /* Riduce la dimensione del testo per schermi piccoli */
+  }
+}

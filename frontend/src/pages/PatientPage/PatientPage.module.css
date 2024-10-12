@@ -1,0 +1,8 @@
+.patientPageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 89vh; /* Assicurati che il contenitore occupi tutta l'altezza */
+}

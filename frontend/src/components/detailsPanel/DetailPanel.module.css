@@ -1,0 +1,178 @@
+.detailsPanel {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  bottom: 20px;
+  height: auto;
+  width: 300px; /* Larghezza fissa per il pannello */
+  background-color: var(--box-background-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out;
+}
+
+.panelOpen {
+  transform: translateX(0); /* Aperto, visibile */
+}
+
+.panelClosed {
+  transform: translateX(100%); /* Chiuso, fuori schermo */
+}
+
+.panelToggle {
+  position: absolute;
+  top: 20px;
+  left: -25px;
+  background: var(--sidebar-background-color);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
+  color: white;
+}
+
+.panelToggle:hover {
+  background: var(--link-hover-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.panelToggle:active {
+  transform: scale(0.95);
+}
+
+.detailsSection,
+.metricsSection {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.customDropdown {
+  position: relative;
+}
+
+.dropdownButton {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.dropdownMenu {
+  position: absolute;
+  bottom: 100%; /* Fa sì che il menu si apra verso l'alto */
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+}
+
+.dropdownMenu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdownMenu li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Pulsante per il dropdown */
+.dropdownButton {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px; /* Arrotondamento sottile */
+  border: 1px solid transparent; /* Rimuove il bordo visibile */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--button-primary-bg);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.dropdownButton:hover {
+  background-color: #323f8cd2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+}
+
+.dropdownButton:focus {
+  outline: none; /* Rimuove il focus outline */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Ombra per indicare il focus */
+}
+
+/* Pulsante per resettare */
+.resetButton {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 8px; /* Arrotondamento sottile */
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.resetButton:hover {
+  background-color: #e0e0e0;
+}
+
+.resetButton:focus {
+  outline: none; /* Rimuove il focus outline */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Ombra per indicare il focus */
+}
+
+/* Pulsante per metriche */
+.metricButton {
+  background-color: #007bff; /* Colore di sfondo blu */
+  color: white; /* Colore del testo bianco */
+  border: none; /* Rimuovi il bordo */
+  padding: 10px 20px; /* Spaziatura interna del pulsante */
+  border-radius: 8px; /* Arrotondamento sottile */
+  cursor: pointer; /* Cambia il cursore al passaggio */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Aggiunge una transizione per il background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.metricButton:hover {
+  background-color: #0056b3; /* Colore di sfondo più scuro al passaggio */
+}
+
+.metricButton:active {
+  transform: scale(0.96); /* Effetto di pressione */
+  background-color: #0056b3;
+}
+
+.metricButton:focus {
+  outline: none; /* Rimuove il focus outline */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Ombra per indicare il focus */
+}
+
+/* Rimuove il focus outline per tutti i pulsanti */
+.dropdownButton:focus, .resetButton:focus, .metricButton:focus {
+  outline: none; /* Rimuove il bordo focus */
+}
+
+
+.metricDescription {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #666;
+}
+
+
+

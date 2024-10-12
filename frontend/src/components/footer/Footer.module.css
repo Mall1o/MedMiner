@@ -1,0 +1,118 @@
+.footerContainer {
+  background-color: var(--sidebar-background-color); 
+  padding: 10px 20px;
+  box-shadow: none;
+  border-radius: 15px;
+  margin: 20px 0;
+  max-width: 1440px;
+  width: 90%;
+  box-sizing: border-box;
+  transition: margin-left 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Quando la sidebar è aperta */
+.footerSidebarOpen {
+  margin-right: 20px;
+}
+
+/* Quando la sidebar è chiusa */
+.footerSidebarClosed {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+/* Sezione contenente il testo */
+.footerText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: var(--sidebar-text-color);
+}
+
+.footerToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* Sezione contenente le icone */
+.footerIcons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  color: var(--primary-text-color);
+}
+
+.footerIcon {
+  transition: transform 0.3s ease;
+}
+
+.footerIcon:hover {
+  transform: scale(1.1);
+}
+
+.footerButton {
+  border-radius: 20px;
+  padding: 6px 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Effetto ombra leggero */
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.footerButton:hover {
+  background-color: var(--link-color); /* Cambia il colore al hover */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--link-color); /* Colore hover del pulsante con colore del link */
+  transform: translateY(-2px);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .footerContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .footerText {
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .footerIcons {
+    justify-content: center;
+  }
+
+  .footerIcon {
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerContainer {
+    padding: 15px;
+    margin: 5px 0;
+  }
+
+  .footerToolbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .footerText {
+    margin-bottom: 10px;
+  }
+
+  .footerIcon {
+    margin: 5px;
+  }
+}

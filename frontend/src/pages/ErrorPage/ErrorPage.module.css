@@ -1,0 +1,68 @@
+.errorContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F5F5F5; /* Sfondo leggero */
+    text-align: center;
+  }
+  
+  .errorContent {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .errorCode {
+    font-size: 96px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .errorMessage {
+    font-size: 24px;
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .errorDescription {
+    font-size: 18px;
+    color: #888;
+  }
+  
+  .homeLink {
+    color: white;
+    background-color: var(--button-primary-bg); /* Colore del pulsante */
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid transparent;
+    border-radius: 8px; /* Arrotondamento leggero */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  }
+  
+  .homeLink:hover {
+    background-color: #323f8cd2; /* Colore hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+    border-bottom: none; /* Rimuove il border-bottom durante l'hover */
+  }
+  
+  .homeLink:active {
+    transform: scale(0.96); /* Leggero effetto di pressione */
+    background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  }
+  
+  /* Rimuove il focus outline per i link "pulsanti" */
+  .homeLink:focus {
+    outline: none; /* Rimuove il bordo focus */
+  }
+
+  .errorImage {
+    margin-top: 20px;
+    width: 150px;
+  }
+  

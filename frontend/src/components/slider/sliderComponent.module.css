@@ -1,0 +1,44 @@
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
+  transition: transform 0.3s ease;
+  z-index: 10;
+  height: auto;
+}
+
+.panelOpen {
+  transform: translateX(-150px); /* Sposta di 10px a sinistra */
+}
+
+.markLabel {
+  color: white; /* Colore bianco per le etichette */
+  font-weight: bold;
+}
+
+.sliderLabel {
+  margin-bottom: 0 auto;
+  color: white;
+  font-weight: bold;
+}
+
+.PanelClose {
+  transform: translateX(0); /* Riporta lo slider nella posizione iniziale */
+  transition: transform 0.3s ease;
+}
+
+.slider {
+    width: 100%; /* Lo slider occupa tutta la larghezza */
+    height: auto;
+}
+
+@media (max-width: 768px) {
+  .sliderContainer {
+    width: 90%;
+    padding: 15px;
+  }
+}

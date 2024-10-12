@@ -1,0 +1,200 @@
+:root {
+  --background-color: #003366; /* Bianco per lo sfondo principale */
+  --sidebarbackground-color: #ebe5e5; /* Grigio scuro per la sidebar */
+  --primary-text-color: #333333; /* Testo principale scuro */
+  --secondary-text-color: #777777; /* Testo secondario grigio medio */
+  --link-color: #32408c; /* Blu scuro per i link */
+  --link-hover-color: #32408c; /* Verde acqua per hover link */
+  --text-hover-color: white;
+  /* Riquadri (Box) */
+  --box-background-color: #ebe5e5; /* Grigio chiaro per i riquadri */
+  --box-border-color: #E0E0E0; /* Bordo dei riquadri */
+  --box-hover-border-color: #CCCCCC; /* Grigio per hover riquadri */
+  --box-hover-background-color: #32408c; /* Grigio ancora più chiaro per hover */
+  --box-shadow-color: rgba(0, 0, 0, 0.2); /* Ombra leggera */
+  --stat-background-color: #ffffff; /* Grigio chiaro tendente al blu per schede e grafici */
+  
+  /* Pulsanti */
+  --sidebar-button-bg: white; /* Blu scuro per i pulsanti della navbar */
+  --button-primary-bg: #32408c; /* Verde acqua per i pulsanti principali */
+  --button-primary-hover-bg: #323f8cd2; /* Hover per pulsanti principali */
+  --button-primary-active-bg: #4e63d7; /* Hover per pulsanti principali */
+  --button-zoom-bg: white;
+  /*--button-zoom-hover-bg: #91f0d5;
+  --button-zoom-active-bg: #4e63d7;*/
+
+  /* Testo nella sidebar */
+  --sidebar-text-color: #333333; /* Colore chiaro per il testo nella sidebar */
+
+  /* Colore attivo per i link */
+  --link-active-bg: #003366; /* Blu scuro per il link attivo */
+  
+  /* Colori per i grafici */
+  --chart-color-1: #2CC1AE; /* Verde acqua per i grafici */
+  --chart-color-2: #007BFF; /* Blu per i grafici */
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--primary-text-color); /* Usa il colore del testo principale */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/font/Montserrat-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/font/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/font/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  height: 100%; /* Mantenuto per il layout corretto */
+  background-color: var(--background-color); /* Usa il bianco di sfondo */
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%; /* Aggiunto per garantire che anche la larghezza sia al 100% */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: var(--link-color); /* Colore link principale */
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: var(--link-hover-color); /* Colore hover link */
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; /* Usa SemiBold */
+  color: var(--primary-text-color); /* Colore testo principale */
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Usa Light */
+}
+
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--button-primary-bg); /* Colore pulsante principale */
+  color: var(--primary-text-color); /* Colore testo pulsante */
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:hover {
+  border-color: var(--button-primary-hover-bg); /* Colore hover pulsante */
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Stile per le barre di scorrimento */
+::-webkit-scrollbar {
+  width: 8px; /* Imposta la larghezza della barra di scorrimento */
+  height: 8px; /* Imposta l'altezza della barra di scorrimento (orizzontale) */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Sfondo trasparente per il track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(50, 64, 140, 0.5); /* Colore del pollice della barra di scorrimento con trasparenza */
+  border-radius: 10px; /* Arrotondamento del pollice */
+  border: 2px solid transparent; /* Spazio attorno al pollice per un effetto pulito */
+  background-clip: content-box; /* Clip del bordo per mantenere lo stile arrotondato */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(50, 64, 140, 0.8); /* Colore del pollice della barra di scorrimento quando è in hover */
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent; /* Sfondo trasparente per l'angolo tra le barre di scorrimento */
+}
+
+/* Stile per Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(50, 64, 140, 0.5) transparent;
+}
+
+/* Stile per hover in Firefox */
+*::-moz-scrollbar-thumb:hover {
+  background-color: rgba(50, 64, 140, 0.8);
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--primary-text-color); /* Testo in modalità chiara */
+    background-color: var(--background-color); /* Sfondo bianco */
+  }
+
+  a:hover {
+    color: var(--link-hover-color); /* Colore hover link in modalità chiara */
+  }
+
+  button {
+    background-color: var(--button-primary-bg); /* Pulsante in modalità chiara */
+  }
+}

@@ -1,0 +1,174 @@
+.sidebar {
+  position: fixed;
+  top: 20px;
+  left: 10px;
+  bottom: 20px;
+  height: auto;
+  width: 250px;
+  background-color: var(--sidebarbackground-color); 
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 15px;
+}
+
+
+.sidebarLogo {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sidebarLogo img {
+  width: 100px;
+  height: auto;
+  transition: width 0.3s ease;
+  transition: filter 0.3s ease;
+}
+.sidebarLogo :hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.appName {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  color: var(--sidebar-text-color); /* Colore chiaro per il nome dell'app */
+  margin-top: 8px;
+  text-align: center;
+}
+
+.sidebarClosed {
+  transform: translateX(-100%);
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+/* Pulsante per il toggle della sidebar */
+.sidebarToggle {
+  position: absolute;
+  top: 20px;
+  right: -25px;
+  background: var(--sidebar-background-color);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombra pronunciata */
+  transition: background 0.3s ease, transform 0.2s ease;
+  color: white;
+}
+
+.sidebarToggle:hover {
+  background: var(--link-hover-color); /* Colore hover del pulsante */
+  transform: scale(1.1); /* Leggero ingrandimento al passaggio */
+}
+
+.sidebarToggle:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background: var(--button-primary-active-bg);
+}
+
+.sidebarMenu {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebarMenuItem {
+  width: 100%;
+  margin: 10px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+/* Pulsanti per il menu della sidebar */
+.sidebarMenuItem a {
+  display: block;
+  text-decoration: none;
+  padding: 15px 30px;
+  background-color: var(--sidebar-button-bg); /* Sfondo del pulsante */
+  border-radius: 8px; /* Arrotondamento leggero */
+  color: var(--primary-text-color); /* Colore del testo */
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  max-width: 220px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.sidebarMenuItem a:hover {
+  background-color: var(--button-primary-bg); /* Colore hover */
+  color: var(--text-hover-color); /* Testo chiaro durante l'hover */
+  transform: translateY(-2px); /* Sollevamento al passaggio */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+}
+
+.sidebarMenuItem a:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-hover-bg); /* Colore attivo */
+}
+
+/* Rimuove il focus outline per tutti i pulsanti */
+.sidebarToggle:focus, .sidebarMenuItem a:focus {
+  outline: none; /* Rimuove il bordo focus */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebarLogo img {
+    width: 70px;
+  }
+
+  .appName {
+    font-size: 1.1rem;
+  }
+
+  .sidebarMenuItem a {
+    padding: 12px 20px;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebarLogo img {
+    width: 60px;
+  }
+
+  .appName {
+    font-size: 1rem;
+  }
+
+  .sidebarMenuItem a {
+    padding: 10px 15px;
+    max-width: 150px;
+  }
+}
+
+/* Main content */
+.mainContent {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.mainContentExpanded {
+  margin-left: 0;
+}

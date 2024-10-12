@@ -1,0 +1,187 @@
+
+.welcomeContainer {
+  padding-left: 80px;
+}
+
+.fullPageHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Occupare tutto lo spazio disponibile all'interno */
+  padding-bottom: 50px;
+}
+
+.title {
+  font-size: 6rem;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.fullPageLogo {
+  width: 350px;
+  height: auto;
+}
+
+/* Stile del carosello */
+.carouselContainer {
+  width: 95%; /* Occupare l'intera larghezza del container */
+  height: 350px; /* Altezza definita per garantire uniformità */
+  border: none;
+  padding: 0 20px;
+  margin: 0 auto;
+  margin-top: 50px;
+  opacity: 0; /* Inizia nascosto */
+  transform: translateY(50px); /* Posizione iniziale di scivolamento */
+  transition: opacity 1s ease, transform 1s ease; /* Transizione fluida */
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0); /* Scivola verso l'alto */
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(50px); /* Posizione nascosta verso il basso */
+}
+
+/* Stile per il contenitore delle card */
+.ReactCardCarousel {
+  width: 100%;
+  height: 100%; /* Stessa altezza del container */
+}
+
+/* Stile delle card */
+.card {
+  display: flex;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  height: 250px;
+  width: 400px;
+  transition: transform 0.3s ease;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.logoCard {
+  width: 60px;
+  height: 65px;
+  margin-bottom: 10px; /* Distanza tra il logo e il pulsante */
+  transition: filter 0.3s ease;
+}
+.logoCard:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+.card:hover {
+  transform: scale(1.05); /* Ingrandisce leggermente al passaggio del mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* Pulsanti all'interno delle card */
+.card button {
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: 1px solid transparent; /* Rimuove il bordo visibile */
+  padding: 10px 20px;
+  border-radius: 8px; /* Arrotondamento leggero */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.card button:hover {
+  background-color: var(--button-primary-hover-bg); /* Colore hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+}
+
+.card button:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+}
+
+/* Pulsante di scorrimento */
+.scrollButton {
+  background-color: var(--sidebar-button-bg);
+  color: var(--text-primary);
+  border: 1px solid transparent; /* Rimuove il bordo visibile */
+  padding: 10px 20px;
+  border-radius: 8px; /* Arrotondamento leggero */
+  cursor: pointer;
+  margin-top: 20px;
+  transition: opacity 0.5s ease, transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.scrollButton:hover {
+  color: white;
+  background-color: var(--button-primary-hover-bg); /* Colore hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+}
+
+.scrollButton:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+}
+
+.hiddenButton {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+/* Link del carosello */
+.carouselLink {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: 1px solid transparent; /* Rimuove il bordo visibile */
+  padding: 10px 20px;
+  border-radius: 8px; /* Arrotondamento leggero */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  text-decoration: none;
+}
+
+.carouselLink:hover {
+  background-color: var(--button-primary-hover-bg); /* Colore hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+}
+
+.carouselLink:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+}
+
+/* Rimuove il focus outline per tutti i pulsanti */
+.card button:focus, .scrollButton:focus, .carouselLink:focus {
+  outline: none; /* Rimuove il bordo focus */
+}
+
+.carouselLink:first-of-type {
+  left: 10px; /* Posizioniamo il link a sinistra */
+}
+
+.carouselLink:last-of-type {
+  right: 10px; /* Posizioniamo il link a destra */
+}

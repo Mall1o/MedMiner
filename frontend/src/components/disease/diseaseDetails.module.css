@@ -1,0 +1,162 @@
+.diseaseDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: var(--box-background-color);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  max-width: 100%;
+  width: 100%; /* Assicura che il contenitore occupi tutta la larghezza */
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.diseaseSearchInput {
+  width: 60%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Opacità per maggiore leggibilità */
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.9); /* Leggera trasparenza */
+  color: #333;
+  text-align: center;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.diseaseSearchInput:focus {
+  border-color: var(--button-primary-bg); /* Cambia il colore del bordo quando è attivo */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Aggiungi un'ombra più evidente */
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.95); /* Maggiore opacità al focus */
+}
+
+.diseaseDetailsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.diseaseDetailsTable thead {
+  background-color: rgba(147, 147, 147, 0.5);
+}
+
+.diseaseDetailsTable th,
+.diseaseDetailsTable td {
+  padding: 12px;
+  text-align: center; /* Centra il testo */
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--primary-text-color);
+}
+
+.diseaseDetailsTable tr:hover {
+  background-color: rgba(96, 97, 98, 0.2);
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Aggiunge spazio tra i pulsanti */
+}
+
+/* Pulsante Visualizza Grafo */
+.viewGraphBtn {
+  padding: 8px 16px; /* Più sottile */
+  background-color: var(--sidebar-button-bg); /* Colore originario */
+  color: var(--primary-text-color);
+  border: 1px solid transparent; /* Bordi più sottili */
+  border-radius: 8px; /* Arrotondamento sottile */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.viewGraphBtn:hover {
+  background-color: var(--button-primary-bg); /* Cambia colore solo su hover */
+  color: white;
+}
+
+.viewGraphBtn:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombra durante il clic */
+  border: 1px solid transparent; /* Nessun bordo scuro al clic */
+}
+
+/* Pulsanti per la paginazione */
+.paginationBtn {
+  padding: 10px 20px;
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: 2px solid transparent; /* Nessun bordo visibile */
+  border-radius: 8px; /* Arrotondamento leggero */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.paginationBtn:hover {
+  background-color: #323f8cd2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+}
+
+.paginationBtn:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombra durante il clic */
+  border: 2px solid transparent; /* Mantiene il bordo trasparente */
+}
+
+.paginationBtn:disabled {
+  background-color: #ced4da; /* Colore per pulsante disabilitato */
+  cursor: not-allowed;
+  box-shadow: none; /* Nessuna ombra per i pulsanti disabilitati */
+  transform: none; /* Nessun effetto clic su pulsanti disabilitati */
+}
+
+/* Rimuove il focus outline per tutti i pulsanti */
+.paginationBtn:focus, .viewGraphBtn:focus, .calculateProbabilityBtn:focus {
+  outline: none; /* Rimuove il bordo focus */
+}
+
+.avatarImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .diseaseSearchInput {
+    width: 90%; /* Larghezza maggiore su schermi piccoli */
+    padding: 10px 15px;
+  }
+
+  .diseaseDetailsContainer {
+    padding: 0 10px;
+  }
+
+  .diseaseDetailsTable th,
+  .diseaseDetailsTable td {
+    padding: 8px;
+  }
+
+  .pagination {
+    width: 100%;
+    justify-content: space-around; /* Distribuzione dei pulsanti */
+  }
+}
+
+@media (max-width: 1200px) {
+  .diseaseDetailsContainer {
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}

@@ -1,0 +1,138 @@
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Centra tutto il contenuto all'interno della pagina */
+.warning {
+    text-align: center;
+}
+
+ul {
+    text-align: left;
+    list-style-type: disc;
+    margin: 20px auto;
+    padding-left: 20px;
+    max-width: 500px;
+}
+
+/* Pulsante di accettazione */
+.acceptButton {
+    padding: 12px 24px;
+    background-color: var(--button-primary-bg);
+    color: white;
+    border: 1px solid transparent; /* Rimuove il bordo visibile */
+    border-radius: 8px; /* Arrotondamento leggero */
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  }
+  
+  .acceptButton:hover {
+    background-color: var(--button-primary-hover-bg); /* Colore hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+  }
+  
+  .acceptButton:active {
+    transform: scale(0.96); /* Leggero effetto di pressione */
+    background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  }
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.section {
+    margin-bottom: 35px; /* Distanza tra le sezioni */
+    background-color: #f9f9f9; /* Colore di sfondo leggermente diverso per separare visivamente le sezioni */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #555;
+    margin-bottom: 0px;
+}
+
+.formGroup {
+    margin-bottom: 0px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Pulsante generico */
+.button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--button-primary-bg);
+    color: white;
+    border: 1px solid transparent; /* Rimuove il bordo visibile */
+    border-radius: 8px; /* Arrotondamento leggero */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+  }
+  
+  .button:hover {
+    background-color: var(--button-primary-hover-bg); /* Colore hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+  }
+  
+  .button:active {
+    transform: scale(0.96); /* Leggero effetto di pressione */
+    background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  }
+  
+  /* Rimuove il focus outline per tutti i pulsanti */
+  .acceptButton:focus, .button:focus {
+    outline: none; /* Rimuove il bordo focus */
+  }
+
+.message {
+    font-size: 1.1rem;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+}

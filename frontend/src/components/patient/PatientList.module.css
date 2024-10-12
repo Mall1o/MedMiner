@@ -1,0 +1,217 @@
+.patientListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--box-background-color);
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
+  max-width: 100%;
+  width: 100%; /* Assicura che prenda tutta la larghezza */
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.patientListTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center; /* Centra il contenuto */
+}
+
+.patientListTable thead {
+  background-color: rgba(147, 147, 147, 0.5);
+}
+
+.patientListTable th,
+.patientListTable td {
+  padding: 12px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--primary-text-color);
+}
+
+.patientListTable tr:hover {
+  background-color: rgba(96, 97, 98, 0.2);
+  cursor: pointer;
+}
+
+.avatarImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Aggiunge spazio tra i pulsanti */
+}
+
+/* Pulsanti per la paginazione */
+.paginationBtn {
+  padding: 10px 20px;
+  background-color: var(--button-primary-bg);
+  color: white;
+  border: 2px solid transparent; /* Nessun bordo visibile */
+  border-radius: 8px; /* Arrotondamento leggero */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.paginationBtn:hover {
+  background-color: #323f8cd2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombra maggiore su hover */
+}
+
+.paginationBtn:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombra durante il clic */
+  border: 2px solid transparent; /* Mantiene il bordo trasparente */
+}
+
+.paginationBtn:disabled {
+  background-color: #ced4da; /* Colore per pulsante disabilitato */
+  cursor: not-allowed;
+  box-shadow: none; /* Nessuna ombra per i pulsanti disabilitati */
+  transform: none; /* Nessun effetto clic su pulsanti disabilitati */
+}
+
+/* Pulsante Visualizza Grafo */
+.viewGraphBtn {
+  padding: 8px 16px; /* Più sottile */
+  background-color: var(--sidebar-button-bg); /* Colore originario */
+  color: var(--primary-text-color);
+  border: 1px solid transparent; /* Bordi più sottili */
+  border-radius: 8px; /* Arrotondamento sottile */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.viewGraphBtn:hover {
+  background-color: var(--button-primary-bg); /* Cambia colore solo su hover */
+  color: white;
+}
+
+.viewGraphBtn:active {
+  transform: scale(0.96); /* Leggero effetto di pressione */
+  background-color: var(--button-primary-active-bg); /* Colore attivo al clic */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombra durante il clic */
+  border: 1px solid transparent; /* Mantiene il bordo sottile */
+}
+
+/* Pulsante Calcola Probabilità */
+.calculateProbabilityBtn {
+  background-color: #28a745;
+  color: #fff;
+  border: 1px solid transparent; /* Nessun bordo visibile */
+  padding: 10px 16px;
+  border-radius: 10px; /* Arrotondamento sottile */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+.calculateProbabilityBtn:hover {
+  background-color: #218838;
+  transform: scale(1.05); /* Effetto di sollevamento su hover */
+}
+
+.calculateProbabilityBtn:active {
+  transform: scale(0.96); /* Effetto di pressione */
+  background-color: #1e7e34;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombra durante il clic */
+}
+
+/* Pulsante di ricerca */
+.patientSearchInput {
+  width: 60%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 30px; /* Arrotondamento maggiore */
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  text-align: center;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ombra morbida */
+}
+
+.patientSearchInput:focus {
+  border-color: var(--button-primary-bg); /* Cambia colore al focus */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ombra più forte al focus */
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.95); /* Maggiore opacità al focus */
+}
+
+/* Rimuove il focus outline per tutti i pulsanti */
+.paginationBtn:focus, .viewGraphBtn:focus, .calculateProbabilityBtn:focus {
+  outline: none; /* Rimuove il bordo focus */
+}
+
+/* Media query per schermi più piccoli */
+@media (max-width: 768px) {
+  .patientListContainer {
+    padding: 0 10px;
+  }
+
+  .patientSearchInput {
+    width: 90%; /* Larghezza maggiore su schermi piccoli */
+    padding: 10px 15px;
+  }
+
+  .patientListTable th,
+  .patientListTable td {
+    padding: 8px;
+  }
+
+  .pagination {
+    width: 100%;
+    justify-content: space-around; /* Distribuzione dei pulsanti */
+  }
+}
+
+@media (max-width: 1200px) {
+  .patientListContainer {
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+/* Nascondi la colonna Cap Residenza a schermi più piccoli */
+@media (max-width: 1024px) {
+  .patientListTable th:nth-child(4),
+  .patientListTable td:nth-child(4) {
+    display: none; /* Nasconde la colonna Cap Residenza */
+  }
+}
+
+/* Nascondi la colonna Sesso a schermi ancora più piccoli */
+@media (max-width: 900px) {
+  .patientListTable th:nth-child(5),
+  .patientListTable td:nth-child(5) {
+    display: none; /* Nasconde la colonna Sesso */
+  }
+}
+
+/* Nascondi la colonna Avatar a schermi più piccoli */
+@media (max-width: 768px) {
+  .patientListTable th:nth-child(1),
+  .patientListTable td:nth-child(1) {
+    display: none; /* Nasconde l'avatar */
+  }
+}
+
+/* Nascondi la colonna Anno di Nascita a schermi ancora più piccoli */
+@media (max-width: 600px) {
+  .patientListTable th:nth-child(3),
+  .patientListTable td:nth-child(3) {
+    display: none; /* Nasconde la colonna Anno di Nascita */
+  }
+}
