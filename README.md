@@ -23,9 +23,8 @@ Alongside the MedMiner project, a separate artificial intelligence study has bee
 The project is organized as follows:
 ```
 MedMiner/
-│
-├── medminer/            # Study of machine learning models for comorbidity prediction
-│   └── AI_Study/        # Scripts and models developed separately using PyTorch Geometric
+│           # Study of machine learning models for comorbidity prediction
+|── AI_Study/        # Scripts and models developed separately using PyTorch Geometric
 │
 ├── backend/             # Backend server implementation (Python, Flask, Neo4j)
 │
