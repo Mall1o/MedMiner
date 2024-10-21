@@ -2,9 +2,19 @@
 
 ## Introduction
 
-**MedMiner** is a platform designed to assist doctors in analyzing medical records, with a focus on patient comorbidities. Using graph-based representations, MedMiner provides a clear and intuitive visualization of the relationships between patients, diseases, and prescriptions, enabling a comprehensive view of connections between various medical conditions. This graph representation helps identify relevant disease associations, aiding doctors in exploring comorbidity patterns and potentially improving clinical management.
+MedMiner is a platform designed to assist doctors in analyzing medical records, with a focus on patient comorbidities. Using graph-based representations, MedMiner provides a clear and intuitive visualization of the relationships between patients, diseases, and prescriptions, enabling a comprehensive view of connections between various medical conditions. This graph representation helps identify relevant disease associations, aiding doctors in exploring comorbidity patterns and potentially improving clinical management.
 
-The project leverages **Social Network Analysis (SNA)** techniques to analyze health networks, applying metrics such as centrality, clustering, and other connectivity measures to identify key diseases in comorbidity networks.
+The project leverages Social Network Analysis (SNA) techniques to analyze health networks, applying metrics such as centrality, clustering, and other connectivity measures to identify key diseases in comorbidity networks.
+
+## Key Features
+
+- **Clinical Graph Visualization**: Provides a visual representation of relationships between patients, diseases, and prescriptions, with the ability to explore the details of each node and edge in the graph.
+- **SNA Metrics Application**: Offers essential network analysis metrics, such as betweenness, closeness, and k-core, crucial for analyzing comorbidities and identifying central or highly connected diseases.
+- **Interactivity and Temporal Analysis**: Enables dynamic data analysis over time, allowing the observation of how comorbidities evolve for each patient.
+- **Custom Database Management and Loading**: Allows users to dynamically upload and switch databases using structured CSV files, providing flexibility in managing different data sets.
+
+In addition to its primary focus on comorbidity analysis, MedMiner is designed to be flexible and extendable for other medical studies. The platform includes a carousel on the welcome page, which currently showcases the ComorGraph module. This space is customizable, allowing users to add other study modules as needed, expanding the range of analyses that can be performed.
+
 
 ### Separate AI Study
 
