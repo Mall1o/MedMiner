@@ -16,7 +16,6 @@ The backend of **MedMiner** serves as the core engine for the platform, handling
 
 - **Flask**: A lightweight Python web framework for building RESTful APIs.
 - **Neo4j**: A graph database used to model relationships between patients, diseases, and prescriptions.
-- **Flask-CORS**: Flask extension to handle Cross-Origin Resource Sharing (CORS), which was utilized to enable the application to interact securely between different domains.
 
 ## Folder Structure
 
@@ -45,8 +44,10 @@ To set up and run the backend locally, follow these steps:
 1. **Clone the repository**:
 
    ```
+
    git clone https://github.com/Mall1o/medminer-backend.git
-   cd medminer-backend
+
+cd medminer-backend
    ```
 
 2. **Create and activate a virtual environment** (optional but recommended):

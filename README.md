@@ -1,5 +1,3 @@
-# MedMiner
-
 ## Introduction
 
 MedMiner is a platform designed to assist doctors in analyzing medical records, with a focus on patient comorbidities. Using graph-based representations, MedMiner provides a clear and intuitive visualization of the relationships between patients, diseases, and prescriptions, enabling a comprehensive view of connections between various medical conditions. This graph representation helps identify relevant disease associations, aiding doctors in exploring comorbidity patterns and potentially improving clinical management.
