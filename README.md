@@ -47,4 +47,3 @@ MedMiner/
 ## Separate Guides
 
 Detailed instructions for dependency installation and configuration will be provided in separate README files located in the `backend` and `frontend` directories.
-=======
