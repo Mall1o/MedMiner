@@ -16,6 +16,8 @@ The backend of **MedMiner** serves as the core engine for the platform, handling
 
 - **Flask**: A lightweight Python web framework for building RESTful APIs.
 - **Neo4j**: A graph database used to model relationships between patients, diseases, and prescriptions.
+- **Py2neo**: A Python library for interacting with Neo4j, providing an easy way to execute queries and fetch data.
+- **Python**: The backend logic is written in Python, responsible for data processing, API routing, and communication with the graph database.
 
 ## Folder Structure
 
@@ -44,10 +46,8 @@ To set up and run the backend locally, follow these steps:
 1. **Clone the repository**:
 
    ```
-
-   git clone https://github.com/Mall1o/medminer-backend.git
-
-cd medminer-backend
+   git clone https://github.com/your-repo/medminer-backend.git
+   cd medminer-backend
    ```
 
 2. **Create and activate a virtual environment** (optional but recommended):
